@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OptionsComponent } from './options/options.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { GameComponent } from './game/game.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { OptionsComponent } from './options/options.component';
     declarations: [
         AppComponent,
         DashboardComponent,
-        OptionsComponent
+        OptionsComponent,
+        GameComponent,
+        ScoreboardComponent
     ],
     providers: [],
     entryComponents: [

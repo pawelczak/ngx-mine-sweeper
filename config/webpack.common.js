@@ -12,8 +12,7 @@ module.exports = {
     entry: {
         'polyfills': './src/polyfills.browser.ts',
         'vendor': [
-            './src/vendor.browser.ts',
-            './node_modules/bootstrap/dist/css/bootstrap.min.css'
+            './src/vendor.browser.ts'
         ],
         'main': './src/main.browser.ts'
     },
@@ -55,6 +54,16 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                exclude: /\.ngx.scss$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    // 'postcss-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.ngx.scss$/,
                 loaders: [
                     'to-string-loader',
                     'css-loader',

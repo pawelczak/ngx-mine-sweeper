@@ -15,3 +15,5 @@ import 'rxjs';
 // import 'jquery';
 import 'lodash';
 
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'assets/stylesheets/theme.scss';
