@@ -47,6 +47,8 @@
     "@angular/platform-browser-dynamic": "2.4.0",
     "@angular/platform-server": "2.4.0",
     "@angular/router": "3.4.1",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.1",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.7",
     "core-js": "^2.2.0",
