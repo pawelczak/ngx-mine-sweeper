@@ -1,8 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { Score } from './score';
-import { RESET_SCORES } from './actions';
+import { Score } from '../score';
+import { ScoreService } from '../score.service';
 
 @Component({
     selector: 'scoreboard',
@@ -13,8 +12,8 @@ export class ScoreboardComponent implements OnDestroy {
     scores: Array<Score> = [];
     private subscription: any;
 
-    constructor(private store: Store<any>) {
-        this.subscription = this.store.select('scores')
+    constructor(private scoreService: ScoreService) {
+        this.subscription = this.scoreService.getScores()
                     .subscribe((scores: Array<Score>) => {
                         this.scores = scores;
                     });
@@ -25,7 +24,7 @@ export class ScoreboardComponent implements OnDestroy {
     }
 
     resetScores(): void {
-        this.store.dispatch({type: RESET_SCORES});
+        this.scoreService.resetScores();
     }
 
 }
