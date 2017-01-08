@@ -19,7 +19,7 @@ export class ScoreService {
     }
 
     getScores(): Observable<Array<Score>> {
-        return this.store.select('scores');
+        return this.store.select('scoreReducer');
     }
 
     addScore(score: Score): void {

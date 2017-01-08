@@ -7,17 +7,19 @@ const defaultState: Array<Score> = [
     new Score('John Doe', '--:--', 'easy')
 ];
 
-export const scores = (state: Array<Score> = defaultState, action: any) => {
+export const scoreReducer = (state: Array<Score> = defaultState, action: {type?: string, payload?: any} = {}) => {
 
     switch(action.type) {
 
         case INIT_SCORES:
-            return [...action.payload];
+            return [
+                ...action.payload
+            ];
 
         case ADD_SCORE:
             return [
                 ...state,
-                Object.assign({}, action.payload)
+                action.payload
             ];
 
         case RESET_SCORES:

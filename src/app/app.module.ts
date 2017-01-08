@@ -11,7 +11,7 @@ import { ScoreService } from './scoreboard/score.service';
 import { ScoreRepository } from './scoreboard/score.repository';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component/scoreboard.component';
 import { options } from './options/options';
-import { scores } from './scoreboard/scores';
+import { scoreReducer } from './scoreboard/score.reducer';
 
 
 
@@ -28,7 +28,7 @@ import { scores } from './scoreboard/scores';
         ScoreboardComponent
     ],
     providers: [
-        provideStore({ options, scores }),
+        provideStore({ options, scoreReducer }),
         ScoreRepository,
         ScoreService
     ],
