@@ -9,6 +9,7 @@ import { OptionsComponent } from './options/options.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { GameComponent } from './game/game.component';
 import { options } from './options/options';
+import { scores } from './scoreboard/scores';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { options } from './options/options';
         ScoreboardComponent
     ],
     providers: [
-        provideStore({ options })
+        provideStore({ options, scores })
     ],
     entryComponents: [
         AppComponent
