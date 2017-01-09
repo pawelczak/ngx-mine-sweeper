@@ -12,7 +12,7 @@ import { ScoreRepository } from './scoreboard/score.repository';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component/scoreboard.component';
 import { options } from './options/options';
 import { scoreReducer } from './scoreboard/score.reducer';
-
+import { gameReducer } from './game/game.reducer';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { scoreReducer } from './scoreboard/score.reducer';
         ScoreboardComponent
     ],
     providers: [
-        provideStore({ options, scoreReducer }),
+        provideStore({ options, scoreReducer, gameReducer}),
         ScoreRepository,
         ScoreService
     ],
