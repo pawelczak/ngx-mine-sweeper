@@ -13,6 +13,11 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component/scoreboar
 import { options } from './options/options';
 import { scoreReducer } from './scoreboard/score.reducer';
 import { gameReducer } from './game/game.reducer';
+import { BoardComponent } from './game/board.component/board.component';
+import { BoardFieldComponent } from './game/board.component/board-field.component/board-field.component';
+import { InfoComponent } from './game/info/info.component/info.component';
+import { TimerService } from './game/info/timer.service';
+import { GameService } from './game/game.service';
 
 
 @NgModule({
@@ -25,12 +30,17 @@ import { gameReducer } from './game/game.reducer';
         DashboardComponent,
         OptionsComponent,
         GameComponent,
+        BoardComponent,
+        BoardFieldComponent,
+        InfoComponent,
         ScoreboardComponent
     ],
     providers: [
         provideStore({ options, scoreReducer, gameReducer}),
         ScoreRepository,
-        ScoreService
+        ScoreService,
+        GameService,
+        TimerService
     ],
     entryComponents: [
         AppComponent,

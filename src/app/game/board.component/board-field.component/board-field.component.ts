@@ -4,7 +4,7 @@ import { BoardField } from '../../board-field';
 
 @Component({
     selector: 'board-field',
-    templateUrl: './board-field.component.ts'
+    templateUrl: './board-field.component.html'
 })
 export class BoardFieldComponent {
 
