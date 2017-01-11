@@ -1,10 +1,8 @@
-export const options = (state: any = {language: 'en'}, action: any) => {
-    switch (action.type) {
+export class Options {
 
-        case 'CHANGE_LANGUAGE':
-            return Object.assign({}, state, {language: action.payload});
+    language: string;
 
-        default:
-            return state;
+    constructor(language: string) {
+        this.language = language;
     }
-};
+}

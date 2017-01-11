@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { TimerService } from '../timer.service';
 
@@ -6,7 +7,7 @@ import { TimerService } from '../timer.service';
     selector: 'info',
     templateUrl: './info.component.html'
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnDestroy {
 
 
     @Input()
@@ -14,16 +15,25 @@ export class InfoComponent implements OnInit {
 
     time: string;
 
+    private timerSubscription: Subscription;
+
     constructor(private timerService: TimerService) {}
 
     ngOnInit() {
         this.timerService.start();
-        this.timerService
-            .getTime()
-            .subscribe((seconds: number) => {
-                this.time = this.formatTime(seconds);
-            });
+
+        this.timerSubscription =
+                this.timerService
+                    .getTime()
+                    .subscribe((seconds: number) => {
+                        this.time = this.formatTime(seconds);
+                    });
     }
+
+    ngOnDestroy() {
+        this.timerSubscription.unsubscribe();
+    }
+
 
     private formatTime(seconds: number): string {
 

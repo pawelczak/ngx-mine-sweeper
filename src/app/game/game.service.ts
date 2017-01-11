@@ -10,6 +10,6 @@ export class GameService {
     constructor(private store: Store<any>) {}
 
     getGame(): Observable<Game> {
-        return this.store.select('gameReducer');
+        return this.store.select('game');
     }
 }

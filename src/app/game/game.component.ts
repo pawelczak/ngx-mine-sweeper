@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
-import { ADD_SCORE } from '../scoreboard/actions';
 import { Score } from '../scoreboard/score';
 import { ScoreService } from '../scoreboard/score.service';
 import { BoardField } from './board-field';
 import { GameService } from './game.service';
 import { Game } from './game';
+import { OptionsStore } from '../options/options.store';
+import { Options } from '../options/options';
+
 
 @Component({
     selector: 'game',
     templateUrl: './game.component.html'
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
     fields: Array<BoardField> = [];
 
@@ -20,22 +22,37 @@ export class GameComponent implements OnInit {
 
     mines: number = 0;
 
-    constructor(private store: Store<any>,
-                private scoreService: ScoreService,
-                private gameService: GameService) {
+    private options: Options;
 
-    }
+    private gameSubscriptions: Subscription;
+    private optionsSubscriptions: Subscription;
+
+    constructor(private scoreService: ScoreService,
+                private gameService: GameService,
+                private optionsStore: OptionsStore) {}
 
     ngOnInit() {
-        this.store.dispatch({type: ADD_SCORE, payload: new Score('Jane Gray', '3:49', 'easy')});
 
-        this.gameService
-            .getGame()
-            .subscribe((game: Game) => {
-                this.fields = game.fields;
-                this.boardReady = game.boardReady;
-                this.mines = game.countMines();
-            });
+        this.gameSubscriptions =
+            this.gameService
+                .getGame()
+                .subscribe((game: Game) => {
+                    this.fields = game.fields;
+                    this.boardReady = game.boardReady;
+                    this.mines = game.countMines();
+                });
+
+        this.optionsSubscriptions =
+            this.optionsStore
+                .getOptions()
+                .subscribe((options: Options) => {
+                    this.options = options;
+                });
+    }
+
+    ngOnDestroy() {
+        this.gameSubscriptions.unsubscribe();
+        this.optionsSubscriptions.unsubscribe();
     }
 
     addScore(): void {

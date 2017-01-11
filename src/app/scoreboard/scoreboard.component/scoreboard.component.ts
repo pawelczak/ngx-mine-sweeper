@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
 import { ScoreService } from '../score.service';
@@ -10,13 +11,15 @@ import { ScoreService } from '../score.service';
 export class ScoreboardComponent implements OnDestroy {
 
     scores: Array<Score> = [];
-    private subscription: any;
+
+    private subscription: Subscription;
 
     constructor(private scoreService: ScoreService) {
-        this.subscription = this.scoreService.getScores()
-                    .subscribe((scores: Array<Score>) => {
-                        this.scores = scores;
-                    });
+        this.subscription = this.scoreService
+                                .getScores()
+                                .subscribe((scores: Array<Score>) => {
+                                    this.scores = scores;
+                                });
     }
 
     ngOnDestroy() {
