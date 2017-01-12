@@ -8,5 +8,8 @@ import { BoardField } from '../board-field';
 export class BoardComponent {
 
     @Input()
-    fields: Array<BoardField> = [];
+    fields: Array<BoardField>;
+
+    @Input()
+    size: any;
 }

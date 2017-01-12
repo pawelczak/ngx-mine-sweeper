@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OptionsComponent } from './options/options.component/options.component';
-import { GameComponent } from './game/game.component';
+import { GameComponent } from './game/game.component/game.component';
 import { ScoreService } from './scoreboard/score.service';
 import { ScoreRepository } from './scoreboard/score.repository';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component/scoreboard.component';

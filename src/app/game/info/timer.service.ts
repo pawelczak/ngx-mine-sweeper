@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import Timer = NodeJS.Timer;
+
 
 @Injectable()
 export class TimerService {
 
     private seconds: number = 0;
     private timer$: Subject<number> = new BehaviorSubject(this.seconds);
-    private subscription: any;
+    private subscription: Timer;
 
 
     getTime(): Observable<number> {

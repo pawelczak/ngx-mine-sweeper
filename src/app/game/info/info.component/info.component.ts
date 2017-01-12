@@ -31,6 +31,7 @@ export class InfoComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.timerService.stop();
         this.timerSubscription.unsubscribe();
     }
 

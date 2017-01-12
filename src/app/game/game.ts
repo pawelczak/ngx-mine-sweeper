@@ -8,6 +8,13 @@ export class Game {
 
     finished: boolean = false;
 
+    boardSize: {
+        rows: number,
+        cols: number
+    } = {
+        rows: 0,
+        cols: 0
+    };
 
     countMines(): number {
         return this.fields

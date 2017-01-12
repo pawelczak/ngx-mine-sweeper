@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Score } from '../scoreboard/score';
-import { ScoreService } from '../scoreboard/score.service';
-import { BoardField } from './board-field';
-import { GameService } from './game.service';
-import { Game } from './game';
-import { OptionsStore } from '../options/options.store';
-import { Options } from '../options/options';
+import { Score } from '../../scoreboard/score';
+import { ScoreService } from '../../scoreboard/score.service';
+import { BoardField } from '../board-field';
+import { GameService } from '../game.service';
+import { Game } from '../game';
+import { OptionsStore } from '../../options/options.store';
+import { Options } from '../../options/options';
 
 
 @Component({
@@ -17,6 +17,8 @@ import { Options } from '../options/options';
 export class GameComponent implements OnInit, OnDestroy {
 
     fields: Array<BoardField> = [];
+
+    boardSize: any;
 
     boardReady: boolean;
 
@@ -29,15 +31,14 @@ export class GameComponent implements OnInit, OnDestroy {
 
     constructor(private scoreService: ScoreService,
                 private gameService: GameService,
-                private optionsStore: OptionsStore) {}
-
-    ngOnInit() {
+                private optionsStore: OptionsStore) {
 
         this.gameSubscriptions =
             this.gameService
                 .getGame()
                 .subscribe((game: Game) => {
                     this.fields = game.fields;
+                    this.boardSize = game.boardSize;
                     this.boardReady = game.boardReady;
                     this.mines = game.countMines();
                 });
@@ -48,6 +49,13 @@ export class GameComponent implements OnInit, OnDestroy {
                 .subscribe((options: Options) => {
                     this.options = options;
                 });
+
+        this.gameService.initBoard();
+    }
+
+    ngOnInit() {
+
+
     }
 
     ngOnDestroy() {
@@ -57,6 +65,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     addScore(): void {
         this.scoreService.addScore(new Score('Johny Tester', '12:34', 'easy'));
+    }
+
+    finishGame(): void {
+        this.gameService.finishGame();
     }
 
 }

@@ -8,7 +8,15 @@ export const gameReducer = (state: Game = defaultState, action: any = {}) => {
     switch(action.type) {
 
         case GAME_INIT_BOARD:
-            return state;
+
+            const board = {
+                boardSize: action.payload.size,
+                fields: action.payload.fields
+            };
+
+            let game = new Game();
+
+            return Object.assign(game, state, board);
 
         case GAME_MARK_MINE:
             return state;
