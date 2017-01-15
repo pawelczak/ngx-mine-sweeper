@@ -1,13 +1,13 @@
 <p>Board</p>
 
 
-<div *ngFor="let row of size.rows; let rowIndex = index" class="row">
+<div *ngFor="let field of fields; let rowIndex = index" >
 
-    <div *ngFor="let col of size.cols; let colIndex = index" class="">
 
-        <div class="board-field">
-            {{fields[rowIndex * colIndex - 1].status}}
-        </div>
+
+    <div class="board-field">
+        {{fields[rowIndex * colIndex - 1].status}}
     </div>
+
 
 </div>
