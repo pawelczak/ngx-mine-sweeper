@@ -1,13 +1,13 @@
 <p>Board</p>
 
+<div *ngIf="isReady()" class="board">
 
-<div *ngFor="let field of fields; let rowIndex = index" >
+    <board-field *ngFor="let field of fields; let fieldIndex = index"
+                 [field]="field" >
 
-
-
-    <div class="board-field">
-        {{fields[rowIndex * colIndex - 1].status}}
-    </div>
-
+        <div *ngIf="fieldIndex % 8 == 7" class="clearfix"></div>
+    </board-field>
 
 </div>
+
+

@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../../scoreboard/score';
 import { ScoreService } from '../../scoreboard/score.service';
-import { BoardField } from '../board-field';
 import { GameService } from '../game.service';
 import { Game } from '../game';
 import { OptionsStore } from '../../options/options.store';
@@ -16,7 +15,7 @@ import { Options } from '../../options/options';
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-    fields: Array<BoardField> = [];
+    fields: any = [];
 
     boardSize: any;
 
@@ -49,13 +48,10 @@ export class GameComponent implements OnInit, OnDestroy {
                 .subscribe((options: Options) => {
                     this.options = options;
                 });
-
-        this.gameService.initBoard();
     }
 
     ngOnInit() {
-
-
+        this.initBoard();
     }
 
     ngOnDestroy() {
@@ -69,6 +65,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     finishGame(): void {
         this.gameService.finishGame();
+    }
+
+    initBoard(): void {
+        this.gameService.initBoard();
     }
 
 }

@@ -1,0 +1,11 @@
+<div class="field" >
+    <span *ngIf="field.isMine()">
+        M
+    </span>
+
+    <span *ngIf="field.isEmpty()" >
+        {{field.getMines()}}
+    </span>
+
+</div>
+<ng-content></ng-content>

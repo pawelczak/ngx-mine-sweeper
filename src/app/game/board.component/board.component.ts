@@ -8,8 +8,15 @@ import { BoardField } from '../board-field';
 export class BoardComponent {
 
     @Input()
-    fields: Array<BoardField>;
+    fields: any;
 
     @Input()
     size: any;
+
+    @Input()
+    ready: boolean;
+
+    isReady(): boolean {
+        return this.ready;
+    }
 }

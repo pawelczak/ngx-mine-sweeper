@@ -1,8 +1,10 @@
 <h1>Game</h1>
 
-<board [fields]="fields" [size]="boardSize" ></board>
+<board [fields]="fields" [size]="boardSize" [ready]="boardReady" ></board>
 
 <info [mines]="mines"></info>
+
+<button (click)="initBoard()" >Init Board</button>
 
 <button (click)="addScore()" >Add Score</button>
 
