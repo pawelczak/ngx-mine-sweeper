@@ -67,11 +67,6 @@ export class Game {
                     }, 0);
     }
 
-    private addMineAtField(field: BoardField): void {
-        field.addMineCount();
-    }
-
-
     private updateMineCounts(): void {
 
         for (let i = 0, length = this.fields.length; i < length; i += 1) {

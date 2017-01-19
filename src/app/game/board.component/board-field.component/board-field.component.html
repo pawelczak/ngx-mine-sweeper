@@ -1,10 +1,19 @@
-<div class="field" >
-    <span *ngIf="field.isMine()">
+<div (click)="reveal()" class="field" >
+
+    <span *ngIf="showEmpty()">
+
+    </span>
+
+    <span *ngIf="showMine()">
         M
     </span>
 
-    <span *ngIf="field.isEmpty()" >
+    <span *ngIf="showMinesCount()" >
         {{field.getMines()}}
+    </span>
+
+    <span *ngIf="showMarked()" >
+        L
     </span>
 
 </div>
