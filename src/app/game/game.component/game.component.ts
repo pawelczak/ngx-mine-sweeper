@@ -7,6 +7,7 @@ import { GameService } from '../game.service';
 import { Game } from '../game';
 import { OptionsStore } from '../../options/options.store';
 import { Options } from '../../options/options';
+import { BoardField } from '../board-field';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { Options } from '../../options/options';
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-    fields: any = [];
+    fields: Array<BoardField> = [];
 
     boardSize: any;
 

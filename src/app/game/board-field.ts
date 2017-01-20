@@ -3,7 +3,7 @@ import { BoardFieldStatus } from './board-field-status';
 export class BoardField {
     marked: boolean = false;
     status: BoardFieldStatus;
-    mines: number = 0;
+    minesCounter: number = 0;
     revelead: boolean = true;
 
 
@@ -19,20 +19,20 @@ export class BoardField {
         return this.status === BoardFieldStatus.EMPTY;
     }
 
-    getMines(): number {
-        return this.mines;
+    getMinesCounter(): number {
+        return this.minesCounter;
     }
 
     hasMines(): boolean {
-        return this.mines !== 0;
+        return this.minesCounter !== 0;
     }
 
     putMine(): void {
         this.status = BoardFieldStatus.MINE;
     }
 
-    addMineCount(): void {
-        this.mines += 1;
+    incMinesCounter(): void {
+        this.minesCounter += 1;
     }
 
     revel(): void {

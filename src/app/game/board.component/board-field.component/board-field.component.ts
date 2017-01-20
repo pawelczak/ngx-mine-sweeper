@@ -38,7 +38,7 @@ export class BoardFieldComponent {
         return this.field.isMine() && this.field.isRevelead();
     }
 
-    showMinesCount(): boolean {
+    showMinesCounter(): boolean {
         return this.field.hasMines() && this.field.isRevelead();
         // return this.field.isMine() && this.field.isRevelead();
     }

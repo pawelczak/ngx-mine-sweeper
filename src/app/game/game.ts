@@ -74,39 +74,39 @@ export class Game {
             if (this.fields[i].isMine()) {
 
                 if (i - 1 > 0 && !this.fields[i - 1].isMine()) {
-                    this.fields[i - 1].addMineCount();
+                    this.fields[i - 1].incMinesCounter();
                 }
 
                 if (i + 1 > 0 && !this.fields[i + 1].isMine()) {
-                    this.fields[i + 1].addMineCount();
+                    this.fields[i + 1].incMinesCounter();
                 }
 
                 let topRowIndex = i - this.boardSize.cols;
 
                 if (topRowIndex - 1 > 0 && !this.fields[topRowIndex - 1].isMine()) {
-                    this.fields[topRowIndex - 1].addMineCount();
+                    this.fields[topRowIndex - 1].incMinesCounter();
                 }
 
                 if (topRowIndex > 0 && !this.fields[topRowIndex].isMine()) {
-                    this.fields[topRowIndex].addMineCount();
+                    this.fields[topRowIndex].incMinesCounter();
                 }
 
                 if (topRowIndex + 1 > 0 && topRowIndex + 1 < length && !this.fields[topRowIndex + 1].isMine()) {
-                    this.fields[topRowIndex + 1].addMineCount();
+                    this.fields[topRowIndex + 1].incMinesCounter();
                 }
 
                 let bottomRowIndex = i + this.boardSize.cols;
 
                 if (bottomRowIndex - 1 > 0 && bottomRowIndex - 1 < length && !this.fields[bottomRowIndex - 1].isMine()) {
-                    this.fields[bottomRowIndex - 1].addMineCount();
+                    this.fields[bottomRowIndex - 1].incMinesCounter();
                 }
 
                 if (bottomRowIndex < length &&!this.fields[bottomRowIndex].isMine()) {
-                    this.fields[bottomRowIndex].addMineCount();
+                    this.fields[bottomRowIndex].incMinesCounter();
                 }
 
                 if (bottomRowIndex + 1 < length && !this.fields[bottomRowIndex + 1].isMine()) {
-                    this.fields[bottomRowIndex + 1].addMineCount();
+                    this.fields[bottomRowIndex + 1].incMinesCounter();
                 }
             }
 

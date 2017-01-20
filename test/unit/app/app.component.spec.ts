@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from '../../../src/app/app.component';
 
 
-describe('AppComponent', () => {
+xdescribe('AppComponent', () => {
 
     @Component({
         selector: 'empty',
@@ -41,7 +41,7 @@ describe('AppComponent', () => {
             });
     });
 
-    xit ('should have navigation & footer', () => {
+    it ('should have navigation & footer', () => {
 
         // given
         const fixture = TestBed.createComponent(AppComponent),
