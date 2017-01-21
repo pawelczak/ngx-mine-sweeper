@@ -53,7 +53,7 @@ export class Game {
             }
         }
 
-        this.updateMineCounts();
+        this.updateMinesCounters();
         this.boardReady = true;
     }
 
@@ -67,49 +67,29 @@ export class Game {
                     }, 0);
     }
 
-    private updateMineCounts(): void {
+    private updateMinesCounters(): void {
 
         for (let i = 0, length = this.fields.length; i < length; i += 1) {
 
             if (this.fields[i].isMine()) {
+                this.checkAndIncMineCounter(i - 1);
+                this.checkAndIncMineCounter(i + 1);
 
-                if (i - 1 > 0 && !this.fields[i - 1].isMine()) {
-                    this.fields[i - 1].incMinesCounter();
-                }
+                this.checkAndIncMineCounter(i - 1 - this.boardSize.cols);
+                this.checkAndIncMineCounter(i - this.boardSize.cols);
+                this.checkAndIncMineCounter(i + 1 - this.boardSize.cols);
 
-                if (i + 1 > 0 && !this.fields[i + 1].isMine()) {
-                    this.fields[i + 1].incMinesCounter();
-                }
-
-                let topRowIndex = i - this.boardSize.cols;
-
-                if (topRowIndex - 1 > 0 && !this.fields[topRowIndex - 1].isMine()) {
-                    this.fields[topRowIndex - 1].incMinesCounter();
-                }
-
-                if (topRowIndex > 0 && !this.fields[topRowIndex].isMine()) {
-                    this.fields[topRowIndex].incMinesCounter();
-                }
-
-                if (topRowIndex + 1 > 0 && topRowIndex + 1 < length && !this.fields[topRowIndex + 1].isMine()) {
-                    this.fields[topRowIndex + 1].incMinesCounter();
-                }
-
-                let bottomRowIndex = i + this.boardSize.cols;
-
-                if (bottomRowIndex - 1 > 0 && bottomRowIndex - 1 < length && !this.fields[bottomRowIndex - 1].isMine()) {
-                    this.fields[bottomRowIndex - 1].incMinesCounter();
-                }
-
-                if (bottomRowIndex < length &&!this.fields[bottomRowIndex].isMine()) {
-                    this.fields[bottomRowIndex].incMinesCounter();
-                }
-
-                if (bottomRowIndex + 1 < length && !this.fields[bottomRowIndex + 1].isMine()) {
-                    this.fields[bottomRowIndex + 1].incMinesCounter();
-                }
+                this.checkAndIncMineCounter(i - 1 + this.boardSize.cols);
+                this.checkAndIncMineCounter(i + this.boardSize.cols);
+                this.checkAndIncMineCounter(i + 1 + this.boardSize.cols);
             }
 
+        }
+    }
+
+    private checkAndIncMineCounter(position: number): void {
+        if (position >= 0 && position < this.fields.length && !this.fields[position].isMine()) {
+            this.fields[position].incMinesCounter();
         }
     }
 

@@ -19,4 +19,5 @@ export class BoardComponent {
     isReady(): boolean {
         return this.ready;
     }
+
 }

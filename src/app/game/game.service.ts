@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Game } from './game';
-import { GAME_FINISH, GAME_INIT_BOARD } from './actions';
+import { GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD } from './actions';
 
 @Injectable()
 export class GameService {
@@ -23,6 +23,14 @@ export class GameService {
 
                 this.store.dispatch({type: GAME_INIT_BOARD, payload: {size: game.getBoardSize(), fields: game.getFields()}});
             });
+    }
+
+    revealField(position: number): void {
+        this.store.dispatch({type: GAME_REVEAL_FIELD, payload: position});
+    }
+
+    markField(position: number): void {
+        this.store.dispatch({type: GAME_MARK_FIELD, payload: position});
     }
 
     finishGame(): void {

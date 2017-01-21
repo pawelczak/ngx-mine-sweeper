@@ -4,7 +4,7 @@ export class BoardField {
     marked: boolean = false;
     status: BoardFieldStatus;
     minesCounter: number = 0;
-    revelead: boolean = true;
+    revelead: boolean = false;
 
 
     constructor(status: BoardFieldStatus) {
@@ -24,7 +24,7 @@ export class BoardField {
     }
 
     hasMines(): boolean {
-        return this.minesCounter !== 0;
+        return this.minesCounter > 0;
     }
 
     putMine(): void {

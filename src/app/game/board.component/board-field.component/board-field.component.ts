@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { BoardField } from '../../board-field';
 import { GameService } from '../../game.service';
@@ -17,6 +17,10 @@ import { GameService } from '../../game.service';
             text-align: center;
             width: 24px;
         }
+        
+        .empty {
+            color: #333;
+        }
     
     `]
 })
@@ -25,13 +29,15 @@ export class BoardFieldComponent {
     @Input()
     field: BoardField;
 
-    constructor(private gameService: GameService) {}
+    @Input()
+    position: number;
 
-    // TODO refactor this
+
+    constructor(private gameService: GameService) {}
 
 
     showEmpty(): boolean {
-        return !this.field.hasMines() && this.field.isRevelead();
+        return !this.field.isMine() && !this.field.hasMines() && this.field.isRevelead();
     }
 
     showMine(): boolean {
@@ -45,5 +51,13 @@ export class BoardFieldComponent {
 
     showMarked(): boolean {
         return this.field.isMarked();
+    }
+
+    reveal(): void {
+        this.gameService.revealField(this.position);
+    }
+
+    mark(): void {
+        this.gameService.markField(this.position);
     }
 }

@@ -3,7 +3,9 @@
 <div *ngIf="isReady()" class="board">
 
     <board-field *ngFor="let field of fields; let fieldIndex = index"
-                 [field]="field" >
+                 [field]="field"
+                 [position]="fieldIndex"
+                >
 
         <div *ngIf="fieldIndex % 8 == 7" class="clearfix"></div>
     </board-field>
