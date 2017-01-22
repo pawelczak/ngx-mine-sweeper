@@ -26,6 +26,10 @@ export class ScoreboardComponent implements OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    isScoresEmpty(): boolean {
+        return this.scores.length === 0;
+    }
+
     resetScores(): void {
         this.scoreService.resetScores();
     }

@@ -1,6 +1,9 @@
 <h1>Scoreboard</h1>
 
 <ul>
+    <li *ngIf="isScoresEmpty()" >
+        No scores.
+    </li>
     <li *ngFor="let score of scores" >
         {{score.name}} {{score.difficulty}} {{score.time}}
     </li>
