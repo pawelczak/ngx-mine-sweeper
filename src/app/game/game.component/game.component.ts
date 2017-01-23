@@ -5,7 +5,7 @@ import { Score } from '../../scoreboard/score';
 import { ScoreService } from '../../scoreboard/score.service';
 import { GameService } from '../game.service';
 import { Game } from '../game';
-import { OptionsStore } from '../../options/options.store';
+import { OptionsRepository } from '../../options/options.repository';
 import { Options } from '../../options/options';
 import { BoardField } from '../board-field';
 
@@ -31,7 +31,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     constructor(private scoreService: ScoreService,
                 private gameService: GameService,
-                private optionsStore: OptionsStore) {
+                private optionsStore: OptionsRepository) {
 
         this.gameSubscriptions =
             this.gameService

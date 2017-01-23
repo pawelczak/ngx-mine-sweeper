@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { OptionsStore } from '../options.store';
+import { OptionsRepository } from '../options.repository';
 import { Options } from '../options';
 
 
@@ -15,7 +15,7 @@ export class OptionsComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private optionsStore: OptionsStore) {
+    constructor(private optionsStore: OptionsRepository) {
 
         this.subscription = this.optionsStore
                                 .getOptions()

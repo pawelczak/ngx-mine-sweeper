@@ -12,8 +12,6 @@ export class GameFactory {
     static createEmptyBoardGame(boardSize: any): Game {
         let game = new Game(boardSize);
 
-
-
         return game;
     }
 }

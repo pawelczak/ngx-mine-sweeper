@@ -6,7 +6,7 @@ import { Options } from './options';
 import { CHANGE_LANGUAGE } from './actions';
 
 @Injectable()
-export class OptionsStore {
+export class OptionsRepository {
 
     // TODO Store should not be type of any
     constructor(private store: Store<any>) {}
