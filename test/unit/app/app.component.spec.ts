@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from '../../../src/app/app.component';
 
 
-xdescribe('AppComponent', () => {
+describe('AppComponent', () => {
 
     @Component({
         selector: 'empty',
@@ -41,7 +41,7 @@ xdescribe('AppComponent', () => {
             });
     });
 
-    it ('should have navigation & footer', () => {
+    it ('should have router outlet', () => {
 
         // given
         const fixture = TestBed.createComponent(AppComponent),
@@ -51,7 +51,6 @@ xdescribe('AppComponent', () => {
         fixture.detectChanges();
 
         // then
-        expect(element.querySelectorAll('nav').length).toBe(1);
-        expect(element.querySelectorAll('footer').length).toBe(1);
+        expect(element.querySelectorAll('router-outlet').length).toBe(1);
     });
 });
