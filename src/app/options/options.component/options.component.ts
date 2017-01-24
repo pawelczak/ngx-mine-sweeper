@@ -15,9 +15,9 @@ export class OptionsComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private optionsStore: OptionsRepository) {
+    constructor(private optionsRepository: OptionsRepository) {
 
-        this.subscription = this.optionsStore
+        this.subscription = this.optionsRepository
                                 .getOptions()
                                 .subscribe((options: Options) => {
                                     this.options = options;
@@ -29,6 +29,6 @@ export class OptionsComponent implements OnDestroy {
     }
 
     changeLanguage(): void {
-        this.optionsStore.changeLanguage('pl');
+        this.optionsRepository.changeLanguage('pl');
     }
 }
