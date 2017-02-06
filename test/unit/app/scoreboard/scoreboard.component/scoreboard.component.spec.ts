@@ -6,7 +6,6 @@ import { ScoreRepository } from '../../../../../src/app/scoreboard/score.reposit
 import { Score } from '../../../../../src/app/scoreboard/score';
 
 
-
 describe('ScoreboardComponent', () => {
 
     const scores = [
@@ -15,7 +14,7 @@ describe('ScoreboardComponent', () => {
         new Score('Awesome', '23.01.2017', 'easy')
     ];
 
-    class MockScoreService {
+    class MockScoreRepository {
 
         scores$ = new ReplaySubject(1);
 
@@ -40,7 +39,7 @@ describe('ScoreboardComponent', () => {
             .overrideComponent(ScoreboardComponent, {
                 add: {
                     providers: [
-                        {provide: ScoreRepository, useClass: MockScoreService}
+                        {provide: ScoreRepository, useClass: MockScoreRepository}
                     ]
                 }
             });

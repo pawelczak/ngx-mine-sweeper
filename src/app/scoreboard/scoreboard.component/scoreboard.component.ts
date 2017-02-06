@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
@@ -6,7 +6,8 @@ import { ScoreRepository } from '../score.repository';
 
 @Component({
     selector: 'scoreboard',
-    templateUrl: './scoreboard.component.html'
+    templateUrl: './scoreboard.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreboardComponent implements OnDestroy {
 
@@ -14,8 +15,8 @@ export class ScoreboardComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private scoreService: ScoreRepository) {
-        this.subscription = this.scoreService
+    constructor(private scoreRepository: ScoreRepository) {
+        this.subscription = this.scoreRepository
                                 .getScores()
                                 .subscribe((scores: Array<Score>) => {
                                     this.scores = scores;
@@ -31,7 +32,7 @@ export class ScoreboardComponent implements OnDestroy {
     }
 
     resetScores(): void {
-        this.scoreService.resetScores();
+        this.scoreRepository.resetScores();
     }
 
 }

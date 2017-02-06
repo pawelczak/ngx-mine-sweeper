@@ -1,6 +1,7 @@
 import { scoreReducer } from '../../../../src/app/scoreboard/score.reducer';
 import { Score } from '../../../../src/app/scoreboard/score';
 import { ADD_SCORE, RESET_SCORES } from '../../../../src/app/scoreboard/actions';
+import { ScoresStore } from '../../../../src/app/scoreboard/scores-store';
 
 
 describe('scoreReducer - reducer', () => {
@@ -9,10 +10,11 @@ describe('scoreReducer - reducer', () => {
 
         // given
         const score = new Score('Selena Kayle', '00:37', 'easy'),
-            expectedState = Object.assign([], [...scoreReducer(), score]);
+            scoresState: ScoresStore = new ScoresStore([score]),
+            expectedState: ScoresStore = Object.assign(new ScoresStore([]), scoresState);
 
         // when
-        const actualState = scoreReducer(undefined, {type: ADD_SCORE, payload: score});
+        const actualState: ScoresStore = scoreReducer(undefined, {type: ADD_SCORE, payload: score});
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -22,10 +24,10 @@ describe('scoreReducer - reducer', () => {
     it ('should reset state', () => {
 
         // given
-        const expectedState: Array<Score> = [];
+        const expectedState: ScoresStore = new ScoresStore([]);
 
         // when
-        const actualState = scoreReducer(undefined, {type: RESET_SCORES});
+        const actualState: ScoresStore = scoreReducer(undefined, {type: RESET_SCORES});
 
         // then
         expect(actualState).toEqual(expectedState);

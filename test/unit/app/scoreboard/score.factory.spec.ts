@@ -1,5 +1,7 @@
 import { ScoreFactory } from '../../../../src/app/scoreboard/score.factory';
 import { Score } from '../../../../src/app/scoreboard/score';
+
+
 describe('ScoreFactory', () => {
 
 

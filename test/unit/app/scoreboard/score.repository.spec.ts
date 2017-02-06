@@ -6,13 +6,16 @@ import { Score } from '../../../../src/app/scoreboard/score';
 import { ADD_SCORE, RESET_SCORES } from '../../../../src/app/scoreboard/actions';
 
 
-
 describe('ScoreRepository', () => {
 
 
     class MockStore {
 
-        select(): any {}
+        select(): any {
+            return {
+                map: () => {}
+            };
+        }
 
         dispatch(): void {}
     }

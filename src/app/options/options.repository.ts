@@ -4,12 +4,11 @@ import { Observable } from 'rxjs';
 
 import { Options } from './options';
 import { CHANGE_LANGUAGE } from './actions';
-import { OptionsStore } from './options.store';
 
 @Injectable()
 export class OptionsRepository {
 
-    constructor(private store: Store<OptionsStore>) {}
+    constructor(private store: Store<Options>) {}
 
     getOptions(): Observable<Options> {
         return this.store.select('options');

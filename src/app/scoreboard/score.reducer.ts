@@ -1,21 +1,23 @@
 import { ADD_SCORE, RESET_SCORES } from './actions';
+import { ScoresStore } from './scores-store';
+import { ScoresStoreFactory } from './scores-store.factory';
 import { Score } from './score';
-import { ScoreFactory } from './score.factory';
 
-const defaultState: Array<Score> = ScoreFactory.createDefaultReducerData();
+const defaultState: ScoresStore = ScoresStoreFactory.createDefaultReducerData();
 
-export const scoreReducer = (state: Array<Score> = defaultState, action: {type?: string, payload?: any} = {}) => {
+export const scoreReducer = (state: ScoresStore = defaultState, action: {type?: string, payload?: any} = {}) => {
 
     switch(action.type) {
 
         case ADD_SCORE:
-            return [
-                ...state,
-                action.payload
-            ];
+            const newScores: Array<Score> = [<Score>action.payload];
+
+            return Object.assign(ScoresStoreFactory.createEmptyStore(), state, {scores: newScores});
 
         case RESET_SCORES:
-            return [];
+            const emptyScores: Array<Score> = [];
+
+            return Object.assign(ScoresStoreFactory.createEmptyStore(), state, {scores: emptyScores});
 
         default:
             return state;
