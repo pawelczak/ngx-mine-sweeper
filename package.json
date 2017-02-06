@@ -27,6 +27,7 @@
     "start": "npm run server:dev",
     "start:prod": "npm run server:prod",
     "test": "karma start",
+    "test:watch": "karma start --no-single-run --auto-watch",
     "ngc": "ngc -p tsconfig.aot.json --locale=en-US",
     "webpack:aot": "ngc -p tsconfig.aot.json --locale=en-US && webpack --config config/webpack.aot.js",
     "prewebpack:aot": "npm run clean:aot",

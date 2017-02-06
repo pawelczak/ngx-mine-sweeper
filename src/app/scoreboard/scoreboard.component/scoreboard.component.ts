@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
-import { ScoreService } from '../score.service';
+import { ScoreRepository } from '../score.repository';
 
 @Component({
     selector: 'scoreboard',
@@ -14,7 +14,7 @@ export class ScoreboardComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private scoreService: ScoreService) {
+    constructor(private scoreService: ScoreRepository) {
         this.subscription = this.scoreService
                                 .getScores()
                                 .subscribe((scores: Array<Score>) => {

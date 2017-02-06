@@ -1,39 +1,24 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 
 import { Score } from './score';
-
+import { RESET_SCORES, ADD_SCORE } from './actions';
 
 @Injectable()
 export class ScoreRepository {
 
-    private scores: Array<Score> = [];
+    constructor(private store: Store<any>) {}
 
-    private defaultScores: Array<Score> = [
-        new Score('Seth', '01:14', 'easy'),
-        new Score('McLovin', '00:49', 'easy'),
-        new Score('Evan', '00:56', 'easy')
-    ];
-
-    constructor() {
-        this.scores = this.defaultScores;
+    getScores(): Observable<Array<Score>> {
+        return this.store.select('score');
     }
 
-    findAll(): Observable<Array<Score>> {
-
-        return new Observable((observer: Observer<Array<Score>>) => {
-            observer.next(this.scores);
-            observer.complete();
-        });
+    addScore(score: Score): void {
+        this.store.dispatch({type: ADD_SCORE, payload: score});
     }
 
-    saveScore(score: Score): Observable<Array<Score>> {
-        this.scores.push(score);
-        return this.findAll();
-    }
-
-    reset(): void {
-        this.scores = this.defaultScores;
+    resetScores(): void {
+        this.store.dispatch({type: RESET_SCORES});
     }
 }

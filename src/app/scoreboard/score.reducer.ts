@@ -1,20 +1,12 @@
-import { ADD_SCORE, RESET_SCORES, INIT_SCORES } from './actions';
+import { ADD_SCORE, RESET_SCORES } from './actions';
 import { Score } from './score';
+import { ScoreFactory } from './score.factory';
 
-const defaultState: Array<Score> = [
-    new Score('John Doe', '--:--', 'easy'),
-    new Score('John Doe', '--:--', 'easy'),
-    new Score('John Doe', '--:--', 'easy')
-];
+const defaultState: Array<Score> = ScoreFactory.createDefaultReducerData();
 
 export const scoreReducer = (state: Array<Score> = defaultState, action: {type?: string, payload?: any} = {}) => {
 
     switch(action.type) {
-
-        case INIT_SCORES:
-            return [
-                ...action.payload
-            ];
 
         case ADD_SCORE:
             return [

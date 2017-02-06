@@ -1,23 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { ScoreService } from '../../../../src/app/scoreboard/score.service';
 import { ScoreRepository } from '../../../../src/app/scoreboard/score.repository';
 import { Score } from '../../../../src/app/scoreboard/score';
 import { ADD_SCORE, RESET_SCORES } from '../../../../src/app/scoreboard/actions';
 
 
 
-describe('ScoreService', () => {
+describe('ScoreRepository', () => {
 
-
-    class MockScoreRepository {
-
-        findAll(): any {
-            return new BehaviorSubject([]);
-        }
-    }
 
     class MockStore {
 
@@ -31,15 +22,14 @@ describe('ScoreService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                ScoreService,
-                {provide: ScoreRepository, useClass: MockScoreRepository},
+                ScoreRepository,
                 {provide: Store, useValue: mockStore}
             ]
         });
     });
 
     it ('should return scores',
-        inject([ScoreService], (scoreService: ScoreService) => {
+        inject([ScoreRepository], (scoreService: ScoreRepository) => {
 
             // given
             const reducer = 'score';
@@ -55,7 +45,7 @@ describe('ScoreService', () => {
     );
 
     it ('should add score',
-        inject([ScoreService], (scoreService: ScoreService) => {
+        inject([ScoreRepository], (scoreService: ScoreRepository) => {
 
             // given
             const givenScore = new Score('', '', ''),
@@ -72,7 +62,7 @@ describe('ScoreService', () => {
     );
 
     it ('should reset scores',
-        inject([ScoreService], (scoreService: ScoreService) => {
+        inject([ScoreRepository], (scoreService: ScoreRepository) => {
 
             // given
             const expectedAction = {type: RESET_SCORES};

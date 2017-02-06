@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ScoreboardComponent } from './scoreboard.component/scoreboard.component';
-import { ScoreService } from './score.service';
 import { ScoreRepository } from './score.repository';
 
 
@@ -14,8 +13,7 @@ import { ScoreRepository } from './score.repository';
         ScoreboardComponent
     ],
     providers: [
-        ScoreRepository,
-        ScoreService
+        ScoreRepository
     ],
     entryComponents: [
         ScoreboardComponent
