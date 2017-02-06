@@ -1,7 +1,8 @@
 import { CHANGE_LANGUAGE } from './actions';
 import { Options } from './options';
+import { OptionsFactory } from './options.factory';
 
-const defaultOptions = new Options('en');
+const defaultOptions = OptionsFactory.createDefaultReducerOptions();
 
 export const optionsReducer = (state: Options = defaultOptions, action: any = {type: undefined}) => {
     switch (action.type) {
