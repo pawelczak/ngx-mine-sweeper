@@ -67,30 +67,90 @@ export class Game {
                     }, 0);
     }
 
+    // TODO move to board
+    revealField(position: number): void {
+
+        if (this.fields[position].isRevelead()) {
+            return;
+        }
+
+
+        if (this.fields[position].isEmpty()) {
+            this.revealEmptyFields(position);
+        }
+
+        if (this.fields[position].isMine()) {
+
+        }
+
+        if (this.fields[position].hasMines()) {
+
+        }
+
+    }
+
+    revealEmptyFields(position: number): void {
+        this.fields[position].reveal();
+        this.revealSurroundingEmptyFields(position);
+    }
+
+    // TODO move to board
+    private revealSurroundingEmptyFields(position: number): void {
+
+        if (position % this.boardSize.cols !== 0) {
+            this.revealEmptyField(position - 1);
+            this.revealEmptyField(position - 1 - this.boardSize.cols);
+            this.revealEmptyField(position - 1 + this.boardSize.cols);
+        }
+
+        if (position % this.boardSize.cols !== this.boardSize.cols - 1) {
+            this.revealEmptyField(position + 1);
+            this.revealEmptyField(position + 1 - this.boardSize.cols);
+            this.revealEmptyField(position + 1 + this.boardSize.cols);
+        }
+
+        this.revealEmptyField(position - this.boardSize.cols);
+        this.revealEmptyField(position + this.boardSize.cols);
+    }
+
+    private revealEmptyField(position: number): void {
+        if (this.fields[position].isEmpty() && !this.fields[position].isRevelead()) {
+            this.fields[position].reveal();
+            this.revealSurroundingEmptyFields(position);
+        }
+    }
+
     private updateMinesCounters(): void {
 
         for (let i = 0, length = this.fields.length; i < length; i += 1) {
 
             if (this.fields[i].isMine()) {
-                this.checkAndIncMineCounter(i - 1);
-                this.checkAndIncMineCounter(i + 1);
+                if (i % this.boardSize.cols !== 0) {
+                    this.checkAndIncMineCounter(i - 1);
+                    this.checkAndIncMineCounter(i - 1 - this.boardSize.cols);
+                    this.checkAndIncMineCounter(i - 1 + this.boardSize.cols);
+                }
 
-                this.checkAndIncMineCounter(i - 1 - this.boardSize.cols);
+                if (i % this.boardSize.cols !== this.boardSize.cols -1) {
+                    this.checkAndIncMineCounter(i + 1);
+                    this.checkAndIncMineCounter(i + 1 - this.boardSize.cols);
+                    this.checkAndIncMineCounter(i + 1 + this.boardSize.cols);
+                }
+
                 this.checkAndIncMineCounter(i - this.boardSize.cols);
-                this.checkAndIncMineCounter(i + 1 - this.boardSize.cols);
-
-                this.checkAndIncMineCounter(i - 1 + this.boardSize.cols);
                 this.checkAndIncMineCounter(i + this.boardSize.cols);
-                this.checkAndIncMineCounter(i + 1 + this.boardSize.cols);
             }
-
         }
     }
 
     private checkAndIncMineCounter(position: number): void {
-        if (position >= 0 && position < this.fields.length && !this.fields[position].isMine()) {
+        if (this.isSurroundingField(position) && !this.fields[position].isMine()) {
             this.fields[position].incMinesCounter();
         }
+    }
+
+    private isSurroundingField(position: number): boolean {
+        return position >= 0 && position < this.fields.length;
     }
 
 

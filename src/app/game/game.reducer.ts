@@ -1,6 +1,6 @@
 import {
     GAME_INIT_BOARD, GAME_FINISH, GAME_MARK_FIELD, GAME_SHOW_MINES, GAME_SHOW_FIELDS,
-    GAME_REVEAL_FIELD
+    GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS
 } from './actions';
 import { Game } from './game';
 import { GameFactory } from './game.factory';
@@ -44,6 +44,9 @@ export const gameReducer = (state: Game = defaultState, action: any = {}) => {
 
         case GAME_FINISH:
             return state;
+
+        case GAME_UPDATE_FIELDS:
+            return Object.assign(GameFactory.createDefaultGame(), state, {fields: action.payload});
 
         default:
             return state;

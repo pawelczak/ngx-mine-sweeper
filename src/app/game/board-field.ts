@@ -35,7 +35,7 @@ export class BoardField {
         this.minesCounter += 1;
     }
 
-    revel(): void {
+    reveal(): void {
         this.revelead = true;
     }
 

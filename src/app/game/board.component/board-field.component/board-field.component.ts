@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { BoardField } from '../../board-field';
+import { GameRepository } from '../../game.repository';
 import { GameService } from '../../game.service';
 
 @Component({
@@ -33,7 +34,8 @@ export class BoardFieldComponent {
     position: number;
 
 
-    constructor(private gameService: GameService) {}
+    constructor(private gameRepository: GameRepository,
+                private gameService: GameService) {}
 
 
     showEmpty(): boolean {
@@ -54,10 +56,12 @@ export class BoardFieldComponent {
     }
 
     reveal(): void {
+
+        console.log(this.position);
         this.gameService.revealField(this.position);
     }
 
     mark(): void {
-        this.gameService.markField(this.position);
+        this.gameRepository.markField(this.position);
     }
 }

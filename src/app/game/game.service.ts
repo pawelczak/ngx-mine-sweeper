@@ -1,39 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
+import { GameRepository } from './game.repository';
 import { Game } from './game';
-import { GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD } from './actions';
+
 
 @Injectable()
 export class GameService {
 
-    constructor(private store: Store<any>) {}
+    private game: Game;
 
-    getGame(): Observable<Game> {
-        return this.store.select('game');
-    }
-
-    initBoard(): void {
-
-        this.store.select('game')
-            .take(1)
+    constructor(private gameRepository: GameRepository) {
+        this.gameRepository
+            .getGame()
             .subscribe((game: Game) => {
-                game.initBoardWithRandomMines();
-
-                this.store.dispatch({type: GAME_INIT_BOARD, payload: {size: game.getBoardSize(), fields: game.getFields()}});
+                this.game = game;
             });
     }
 
     revealField(position: number): void {
-        this.store.dispatch({type: GAME_REVEAL_FIELD, payload: position});
+        this.game.revealField(position);
+
+        this.gameRepository
+            .updateFields(this.game.fields);
     }
 
-    markField(position: number): void {
-        this.store.dispatch({type: GAME_MARK_FIELD, payload: position});
-    }
-
-    finishGame(): void {
-        this.store.dispatch({type: GAME_FINISH});
-    }
 }

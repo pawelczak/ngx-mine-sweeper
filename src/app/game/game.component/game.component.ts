@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../../scoreboard/score';
 import { ScoreRepository } from '../../scoreboard/score.repository';
-import { GameService } from '../game.service';
+import { GameRepository } from '../game.repository';
 import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
 import { Options } from '../../options/options';
@@ -30,11 +30,11 @@ export class GameComponent implements OnInit, OnDestroy {
     private optionsSubscriptions: Subscription;
 
     constructor(private scoreRepository: ScoreRepository,
-                private gameService: GameService,
+                private gameRepository: GameRepository,
                 private optionsStore: OptionsRepository) {
 
         this.gameSubscriptions =
-            this.gameService
+            this.gameRepository
                 .getGame()
                 .subscribe((game: Game) => {
                     this.fields = game.fields;
@@ -65,11 +65,11 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     finishGame(): void {
-        this.gameService.finishGame();
+        this.gameRepository.finishGame();
     }
 
     initBoard(): void {
-        this.gameService.initBoard();
+        this.gameRepository.initBoard();
     }
 
 }
