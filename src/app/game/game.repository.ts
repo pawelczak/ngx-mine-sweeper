@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Game } from './game';
-import { GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS } from './actions';
+import { GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS } from './game-store/actions';
 import { BoardField } from './board-field';
 
 @Injectable()

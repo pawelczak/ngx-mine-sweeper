@@ -61,7 +61,9 @@ export class BoardFieldComponent {
         this.gameService.revealField(this.position);
     }
 
-    mark(): void {
-        this.gameRepository.markField(this.position);
+    mark(): boolean {
+        this.gameService.markField(this.position);
+        return false;
     }
+
 }

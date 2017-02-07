@@ -1,7 +1,9 @@
-<div (click)="reveal()" class="field" >
+<div (click)="reveal()"
+     (contextmenu)="mark()"
+     class="field" >
 
     <span *ngIf="showEmpty()" class="empty">
-        e
+        &nbsp;
     </span>
 
     <span *ngIf="showMine()">

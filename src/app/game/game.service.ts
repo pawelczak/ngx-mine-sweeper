@@ -24,4 +24,11 @@ export class GameService {
             .updateFields(this.game.fields);
     }
 
+    markField(position: number): void {
+        this.game.markField(position);
+
+        this.gameRepository
+            .updateFields(this.game.fields);
+    }
+
 }

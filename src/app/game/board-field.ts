@@ -46,4 +46,8 @@ export class BoardField {
     isMarked(): boolean {
         return this.marked;
     }
+
+    mark(): void {
+        this.marked = true;
+    }
 }

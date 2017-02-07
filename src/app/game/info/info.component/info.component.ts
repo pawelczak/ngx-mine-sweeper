@@ -39,7 +39,8 @@ export class InfoComponent implements OnInit, OnDestroy {
     private formatTime(seconds: number): string {
 
         let time: string = '',
-            minutes: number = Math.floor(seconds / 60);
+            minutes: number = Math.floor(seconds / 60),
+            formatedSeconds = seconds % 60;
 
         if (minutes < 10) {
             time += '0';
@@ -49,11 +50,11 @@ export class InfoComponent implements OnInit, OnDestroy {
 
         time += ':';
 
-        if (seconds < 10) {
+        if (formatedSeconds < 10) {
             time += '0';
         }
 
-        time += seconds;
+        time += formatedSeconds;
 
         return time;
     }

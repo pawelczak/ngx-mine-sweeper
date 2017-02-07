@@ -12,7 +12,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 // reducers
 import { optionsReducer as options }  from './options/options.reducer';
 import { scoreReducer as score } from './scoreboard/score.reducer';
-import { gameReducer as game } from './game/game.reducer';
+import { gameReducer as game } from './game/game-store/game.reducer';
 
 
 @NgModule({

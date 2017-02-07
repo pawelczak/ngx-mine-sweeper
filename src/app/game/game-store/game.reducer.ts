@@ -2,8 +2,8 @@ import {
     GAME_INIT_BOARD, GAME_FINISH, GAME_MARK_FIELD, GAME_SHOW_MINES, GAME_SHOW_FIELDS,
     GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS
 } from './actions';
-import { Game } from './game';
-import { GameFactory } from './game.factory';
+import { Game } from '../game';
+import { GameFactory } from '../game.factory';
 
 
 const defaultState: Game = GameFactory.createDefaultGame();
