@@ -22,6 +22,10 @@ export class GameService {
 
         this.gameRepository
             .updateFields(this.game.fields);
+
+        if (this.game.isFinished()) {
+            this.gameRepository.finishGame();
+        }
     }
 
     markField(position: number): void {
@@ -29,6 +33,10 @@ export class GameService {
 
         this.gameRepository
             .updateFields(this.game.fields);
+
+        if (this.game.isFinished()) {
+            this.gameRepository.finishGame();
+        }
     }
 
 }

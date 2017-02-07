@@ -43,7 +43,8 @@ export const gameReducer = (state: Game = defaultState, action: any = {}) => {
             return state;
 
         case GAME_FINISH:
-            return state;
+
+            return Object.assign(GameFactory.createDefaultGame(), state, {finished: true});
 
         case GAME_UPDATE_FIELDS:
             return Object.assign(GameFactory.createDefaultGame(), state, {fields: action.payload});

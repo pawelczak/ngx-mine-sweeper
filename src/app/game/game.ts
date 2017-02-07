@@ -35,18 +35,22 @@ export class Game {
         return this.fields;
     }
 
+    isFinished(): boolean {
+        return this.finished;
+    }
+
     initBoardWithRandomMines(): void {
         this.setBoardSize(8, 8);
         this.resetFields();
 
-        for (let i = 0; i < 64; i += 1) {
+        for (let i = 0; i < this.boardSize.rows * this.boardSize.cols; i += 1) {
             let randomStatus = Math.random() > 1.9 ? BoardFieldStatus.MINE : BoardFieldStatus.EMPTY;
 
             this.fields.push(new BoardField(randomStatus));
         }
 
         while (this.countMines() !== this.MINES_NUMBER) {
-            const fieldIndex = Math.floor(Math.random() * 64);
+            const fieldIndex = Math.floor(Math.random() * this.boardSize.rows * this.boardSize.cols);
 
             if (this.fields[fieldIndex].isEmpty()) {
                 this.fields[fieldIndex].putMine();
@@ -70,9 +74,7 @@ export class Game {
     markField(position: number): void {
         this.fields[position].mark();
 
-        if (this.isGameFinished()) {
-            console.log('Game won');
-        }
+        this.checkIsGameFinished();
     }
 
     // TODO move to board
@@ -93,9 +95,7 @@ export class Game {
             this.finish();
         }
 
-        if (this.isGameFinished()) {
-            console.log('Game won');
-        }
+        this.checkIsGameFinished();
     }
 
     revealEmptyFields(position: number): void {
@@ -203,7 +203,7 @@ export class Game {
         console.log('GAME FINISHED');
     }
 
-    private isGameFinished(): boolean {
+    private checkIsGameFinished(): void {
 
         const untouchedFields =
             this.fields
@@ -219,6 +219,6 @@ export class Game {
                     return prev + current;
                 }, 0);
 
-        return untouchedFields === 0;
+        this.finished = untouchedFields === 0;
     }
 }

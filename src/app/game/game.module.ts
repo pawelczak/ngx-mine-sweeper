@@ -9,6 +9,7 @@ import { GameFactory } from './game.factory';
 import { InfoComponent } from './info/info.component/info.component';
 import { TimerService } from './info/timer.service';
 import { GameService } from './game.service';
+import { GameEndWindowComponent } from './game.component/game-end-window.component/game-end-window.component';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { GameService } from './game.service';
     ],
     declarations: [
         GameComponent,
+        GameEndWindowComponent,
         BoardComponent,
         BoardFieldComponent,
         InfoComponent

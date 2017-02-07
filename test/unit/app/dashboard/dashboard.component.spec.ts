@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DashboardComponent } from '../../../../src/app/dashboard/dashboard.component';
 
 
-describe('AppComponent', () => {
+describe('DashboardComponent', () => {
 
 
     beforeEach(() => {

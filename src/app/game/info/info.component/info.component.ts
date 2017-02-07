@@ -9,9 +9,8 @@ import { TimerService } from '../timer.service';
 })
 export class InfoComponent implements OnInit, OnDestroy {
 
-
     @Input()
-    mines: Number;
+    mines: number;
 
     time: string;
 

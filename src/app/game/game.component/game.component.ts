@@ -24,6 +24,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     mines: number = 0;
 
+    gameFinished: boolean = false;
+
     private options: Options;
 
     private gameSubscriptions: Subscription;
@@ -41,6 +43,7 @@ export class GameComponent implements OnInit, OnDestroy {
                     this.boardSize = game.boardSize;
                     this.boardReady = game.boardReady;
                     this.mines = game.countMines();
+                    this.gameFinished = game.isFinished();
                 });
 
         this.optionsSubscriptions =
