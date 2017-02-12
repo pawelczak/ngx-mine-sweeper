@@ -89,6 +89,50 @@ describe('ScoreboardComponent', () => {
         expect(element.querySelectorAll('li')[0].innerText).toEqual('No scores.');
     });
 
+    describe('empty list', () => {
+
+        const emptyScores: Array<Score> = [],
+            emptyStore = new ScoreboardStore(emptyScores, 'EASY');
+
+        class MockScoreboardEmptyRepository {
+            scoreboard$ = new ReplaySubject(1);
+
+            getScoreboardState(): Observable<ScoreboardStore> {
+                this.scoreboard$.next(emptyStore);
+
+                return this.scoreboard$.asObservable();
+            }
+        }
+
+        beforeEach(() => {
+            TestBed
+                .overrideComponent(ScoreboardComponent, {
+                    add: {
+                        providers: [
+                            {provide: ScoreboardRepository, useClass: MockScoreboardEmptyRepository}
+                        ]
+                    }
+                });
+        });
+
+        it ('should print empty list', () => {
+
+            // given
+            const fixture = TestBed.createComponent(ScoreboardComponent),
+                compInstance = fixture.componentInstance,
+                element = fixture.nativeElement,
+                givenScores = scoreboardStore.scores;
+
+            // when
+            fixture.detectChanges();
+
+            // then
+            expect(compInstance.scores.length).toEqual(0);
+            expect(element.querySelectorAll('li').length).toEqual(1);
+            expect(element.querySelectorAll('li')[0].innerText).toEqual(`No scores.`);
+        });
+    });
+
     describe('change difficulty', () => {
 
         const diffScores: Array<Score> = [
