@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../../scoreboard/score';
-import { ScoreRepository } from '../../scoreboard/score.repository';
+import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
 import { GameRepository } from '../game.repository';
 import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
@@ -34,7 +34,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameSubscriptions: Subscription;
     private optionsSubscriptions: Subscription;
 
-    constructor(private scoreRepository: ScoreRepository,
+    constructor(private scoreRepository: ScoreboardRepository,
                 private gameRepository: GameRepository,
                 private optionsStore: OptionsRepository) {
 

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { ScoreboardComponent } from '../../../../../src/app/scoreboard/scoreboard.component/scoreboard.component';
-import { ScoreRepository } from '../../../../../src/app/scoreboard/score.repository';
+import { ScoreboardRepository } from '../../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../../src/app/scoreboard/score';
 
 
@@ -39,7 +39,7 @@ describe('ScoreboardComponent', () => {
             .overrideComponent(ScoreboardComponent, {
                 add: {
                     providers: [
-                        {provide: ScoreRepository, useClass: MockScoreRepository}
+                        {provide: ScoreboardRepository, useClass: MockScoreRepository}
                     ]
                 }
             });

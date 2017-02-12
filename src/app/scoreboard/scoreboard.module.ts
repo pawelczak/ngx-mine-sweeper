@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { ScoreboardComponent } from './scoreboard.component/scoreboard.component';
-import { ScoreRepository } from './score.repository';
+import { ScoreboardRepository } from './scoreboard.repository';
+import { ScoreByDifficultyPipe } from './scoreboard.component/score-by-difficulty.pipe';
 
 
 @NgModule({
@@ -10,13 +11,14 @@ import { ScoreRepository } from './score.repository';
         BrowserModule
     ],
     declarations: [
-        ScoreboardComponent
+        ScoreboardComponent,
+        ScoreByDifficultyPipe
     ],
     providers: [
-        ScoreRepository
+        ScoreboardRepository
     ],
     entryComponents: [
         ScoreboardComponent
     ]
 })
-export class ScoreBoardModule {}
+export class ScoreboardModule {}

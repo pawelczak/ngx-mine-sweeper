@@ -1,20 +1,20 @@
-import { scoreReducer } from '../../../../src/app/scoreboard/score.reducer';
+import { scoreboardReducer } from '../../../../src/app/scoreboard/scoreboard.reducer';
 import { Score } from '../../../../src/app/scoreboard/score';
-import { ADD_SCORE, RESET_SCORES } from '../../../../src/app/scoreboard/actions';
-import { ScoresStore } from '../../../../src/app/scoreboard/scores-store';
+import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES } from '../../../../src/app/scoreboard/actions';
+import { ScoreboardStore } from '../../../../src/app/scoreboard/scoreboard-store';
 
 
-describe('scoreReducer - reducer', () => {
+describe('scoreboardReducer - reducer', () => {
 
     it ('should add score', () => {
 
         // given
         const score = new Score('Selena Kayle', '00:37', 'easy'),
-            scoresState: ScoresStore = new ScoresStore([score]),
-            expectedState: ScoresStore = Object.assign(new ScoresStore([]), scoresState);
+            scoresState: ScoreboardStore = new ScoreboardStore([score]),
+            expectedState: ScoreboardStore = Object.assign(new ScoreboardStore([]), scoresState);
 
         // when
-        const actualState: ScoresStore = scoreReducer(undefined, {type: ADD_SCORE, payload: score});
+        const actualState: ScoreboardStore = scoreboardReducer(undefined, {type: SCOREBOARD_ADD_SCORE, payload: score});
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -24,10 +24,10 @@ describe('scoreReducer - reducer', () => {
     it ('should reset state', () => {
 
         // given
-        const expectedState: ScoresStore = new ScoresStore([]);
+        const expectedState: ScoreboardStore = new ScoreboardStore([]);
 
         // when
-        const actualState: ScoresStore = scoreReducer(undefined, {type: RESET_SCORES});
+        const actualState: ScoreboardStore = scoreboardReducer(undefined, {type: SCOREBOARD_RESET_SCORES});
 
         // then
         expect(actualState).toEqual(expectedState);

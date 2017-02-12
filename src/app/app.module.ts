@@ -4,14 +4,14 @@ import { provideStore } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { ScoreBoardModule } from './scoreboard/scoreboard.module';
+import { ScoreboardModule } from './scoreboard/scoreboard.module';
 import { OptionsModule } from './options/options.module';
 import { GameModule } from './game/game.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 // reducers
 import { optionsReducer as options }  from './options/options.reducer';
-import { scoreReducer as score } from './scoreboard/score.reducer';
+import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
 
 
@@ -20,7 +20,7 @@ import { gameReducer as game } from './game/game-store/game.reducer';
         BrowserModule,
         routing,
         GameModule,
-        ScoreBoardModule,
+        ScoreboardModule,
         OptionsModule,
         DashboardModule
     ],
@@ -28,7 +28,7 @@ import { gameReducer as game } from './game/game-store/game.reducer';
         AppComponent
     ],
     providers: [
-        provideStore({ options, score, game})
+        provideStore({ options, scoreboard, game})
     ],
     entryComponents: [
         AppComponent

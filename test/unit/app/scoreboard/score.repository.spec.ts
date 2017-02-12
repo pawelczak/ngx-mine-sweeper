@@ -1,12 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 
-import { ScoreRepository } from '../../../../src/app/scoreboard/score.repository';
+import { ScoreboardRepository } from '../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../src/app/scoreboard/score';
-import { ADD_SCORE, RESET_SCORES } from '../../../../src/app/scoreboard/actions';
+import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES } from '../../../../src/app/scoreboard/actions';
 
 
-describe('ScoreRepository', () => {
+describe('ScoreboardRepository', () => {
 
 
     class MockStore {
@@ -25,14 +25,14 @@ describe('ScoreRepository', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                ScoreRepository,
+                ScoreboardRepository,
                 {provide: Store, useValue: mockStore}
             ]
         });
     });
 
     it ('should return scores',
-        inject([ScoreRepository], (scoreService: ScoreRepository) => {
+        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
 
             // given
             const reducer = 'score';
@@ -40,7 +40,7 @@ describe('ScoreRepository', () => {
             spyOn(mockStore, 'select').and.callThrough();
 
             // when
-            scoreService.getScores();
+            scoreService.getScoreboardState();
 
             // then
             expect(mockStore.select).toHaveBeenCalledWith(reducer);
@@ -48,11 +48,11 @@ describe('ScoreRepository', () => {
     );
 
     it ('should add score',
-        inject([ScoreRepository], (scoreService: ScoreRepository) => {
+        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
 
             // given
             const givenScore = new Score('', '', ''),
-                expectedAction = {type: ADD_SCORE, payload: givenScore};
+                expectedAction = {type: SCOREBOARD_ADD_SCORE, payload: givenScore};
 
             spyOn(mockStore, 'dispatch').and.callThrough();
 
@@ -65,10 +65,10 @@ describe('ScoreRepository', () => {
     );
 
     it ('should reset scores',
-        inject([ScoreRepository], (scoreService: ScoreRepository) => {
+        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
 
             // given
-            const expectedAction = {type: RESET_SCORES};
+            const expectedAction = {type: SCOREBOARD_RESET_SCORES};
 
             spyOn(mockStore, 'dispatch').and.callThrough();
 

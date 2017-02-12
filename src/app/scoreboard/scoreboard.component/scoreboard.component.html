@@ -2,12 +2,18 @@
 
     <h1>Scoreboard</h1>
 
+    <div>
+        <button (click)="setEasyDifficulty()" [class.btn-primary]="isDifficulty('EASY')" class="btn btn-default" >Easy</button>
+        <button (click)="setNormalDifficulty()" [class.btn-primary]="isDifficulty('NORMAL')" class="btn btn-default" >Normal</button>
+        <button (click)="setHardDifficulty()" [class.btn-primary]="isDifficulty('HARD')" class="btn btn-default" >Hard</button>
+    </div>
+
     <ul>
-        <li *ngIf="isScoresEmpty()" >
+        <li *ngIf="(scores | scoreByDifficulty:difficulty).length === 0" >
             No scores.
         </li>
-        <li *ngFor="let score of scores" >
-            {{score.name}} {{score.difficulty}} {{score.time}}
+        <li *ngFor="let score of scores | scoreByDifficulty:difficulty" >
+            {{score.name}} {{score.time}}
         </li>
     </ul>
 
