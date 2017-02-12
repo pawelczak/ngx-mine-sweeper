@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { ScoreboardRepository } from '../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../src/app/scoreboard/score';
-import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES } from '../../../../src/app/scoreboard/actions';
+import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES, SCOREBOARD_CHANGE_DIFFICULTY } from '../../../../src/app/scoreboard/actions';
 
 
 describe('ScoreboardRepository', () => {
@@ -31,8 +31,8 @@ describe('ScoreboardRepository', () => {
         });
     });
 
-    it ('should return scores',
-        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
+    it ('should return scoreboard',
+        inject([ScoreboardRepository], (scoreboardRepository: ScoreboardRepository) => {
 
             // given
             const reducer = 'scoreboard';
@@ -40,7 +40,7 @@ describe('ScoreboardRepository', () => {
             spyOn(mockStore, 'select').and.callThrough();
 
             // when
-            scoreService.getScoreboardState();
+            scoreboardRepository.getScoreboardState();
 
             // then
             expect(mockStore.select).toHaveBeenCalledWith(reducer);
@@ -48,7 +48,7 @@ describe('ScoreboardRepository', () => {
     );
 
     it ('should add score',
-        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
+        inject([ScoreboardRepository], (scoreboardRepository: ScoreboardRepository) => {
 
             // given
             const givenScore = new Score('', '', ''),
@@ -57,7 +57,7 @@ describe('ScoreboardRepository', () => {
             spyOn(mockStore, 'dispatch').and.callThrough();
 
             // when
-            scoreService.addScore(givenScore);
+            scoreboardRepository.addScore(givenScore);
 
             // then
             expect(mockStore.dispatch).toHaveBeenCalledWith(expectedAction);
@@ -65,7 +65,7 @@ describe('ScoreboardRepository', () => {
     );
 
     it ('should reset scores',
-        inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
+        inject([ScoreboardRepository], (scoreboardRepository: ScoreboardRepository) => {
 
             // given
             const expectedAction = {type: SCOREBOARD_RESET_SCORES};
@@ -73,7 +73,24 @@ describe('ScoreboardRepository', () => {
             spyOn(mockStore, 'dispatch').and.callThrough();
 
             // when
-            scoreService.resetScores();
+            scoreboardRepository.resetScores();
+
+            // then
+            expect(mockStore.dispatch).toHaveBeenCalledWith(expectedAction);
+        })
+    );
+
+    it ('should change difficulty',
+        inject([ScoreboardRepository], (scoreboardRepository: ScoreboardRepository) => {
+
+            // given
+            const difficulty = 'NORMAL',
+                expectedAction = {type: SCOREBOARD_CHANGE_DIFFICULTY, payload: difficulty};
+
+            spyOn(mockStore, 'dispatch').and.callThrough();
+
+            // when
+            scoreboardRepository.changeDifficulty(difficulty);
 
             // then
             expect(mockStore.dispatch).toHaveBeenCalledWith(expectedAction);

@@ -15,7 +15,6 @@ export class ScoreboardRepository {
         return this.store.select('scoreboard');
     }
 
-
     addScore(score: Score): void {
         this.store.dispatch({type: SCOREBOARD_ADD_SCORE, payload: score});
     }

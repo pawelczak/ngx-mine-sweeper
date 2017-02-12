@@ -3,12 +3,21 @@
     <h1>Scoreboard</h1>
 
     <div>
-        <button (click)="setEasyDifficulty()" [class.btn-primary]="isDifficulty('EASY')" class="btn btn-default" >Easy</button>
-        <button (click)="setNormalDifficulty()" [class.btn-primary]="isDifficulty('NORMAL')" class="btn btn-default" >Normal</button>
-        <button (click)="setHardDifficulty()" [class.btn-primary]="isDifficulty('HARD')" class="btn btn-default" >Hard</button>
+        <button (click)="setEasyDifficulty()"
+                [class.btn-primary]="isDifficulty('EASY')"
+                id="scoreboard-difficulty-easy"
+                class="btn btn-default" >Easy</button>
+        <button (click)="setNormalDifficulty()"
+                [class.btn-primary]="isDifficulty('NORMAL')"
+                id="scoreboard-difficulty-normal"
+                class="btn btn-default" >Normal</button>
+        <button (click)="setHardDifficulty()"
+                [class.btn-primary]="isDifficulty('HARD')"
+                id="scoreboard-difficulty-hard"
+                class="btn btn-default" >Hard</button>
     </div>
 
-    <ul>
+    <ul class="scores">
         <li *ngIf="(scores | scoreByDifficulty:difficulty).length === 0" >
             No scores.
         </li>
