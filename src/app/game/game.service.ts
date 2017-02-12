@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { GameRepository } from './game.repository';
 import { Game } from './game';
+import { TimerService } from './info/timer.service';
 
 
 @Injectable()
@@ -9,7 +10,8 @@ export class GameService {
 
     private game: Game;
 
-    constructor(private gameRepository: GameRepository) {
+    constructor(private gameRepository: GameRepository,
+                private timerService: TimerService) {
         this.gameRepository
             .getGame()
             .subscribe((game: Game) => {
@@ -24,7 +26,7 @@ export class GameService {
             .updateFields(this.game.fields);
 
         if (this.game.isFinished()) {
-            this.gameRepository.finishGame();
+            this.finishGame();
         }
     }
 
@@ -35,8 +37,13 @@ export class GameService {
             .updateFields(this.game.fields);
 
         if (this.game.isFinished()) {
-            this.gameRepository.finishGame();
+            this.finishGame();
         }
+    }
+
+    private finishGame(): void {
+        this.timerService.stop();
+        this.gameRepository.finishGame();
     }
 
 }

@@ -1,12 +1,16 @@
-<h1>Scoreboard</h1>
+<div class="scoreboard">
 
-<ul>
-    <li *ngIf="isScoresEmpty()" >
-        No scores.
-    </li>
-    <li *ngFor="let score of scores" >
-        {{score.name}} {{score.difficulty}} {{score.time}}
-    </li>
-</ul>
+    <h1>Scoreboard</h1>
 
-<button (click)="resetScores()">Reset scoreboard</button>
+    <ul>
+        <li *ngIf="isScoresEmpty()" >
+            No scores.
+        </li>
+        <li *ngFor="let score of scores" >
+            {{score.name}} {{score.difficulty}} {{score.time}}
+        </li>
+    </ul>
+
+    <button (click)="resetScores()">Reset scoreboard</button>
+
+</div>

@@ -7,6 +7,9 @@ import { ScoreRepository } from '../score.repository';
 @Component({
     selector: 'scoreboard',
     templateUrl: './scoreboard.component.html',
+    styleUrls: [
+        './scoreboard.component.ngx.scss'
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreboardComponent implements OnDestroy {

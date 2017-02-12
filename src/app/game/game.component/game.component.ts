@@ -12,7 +12,10 @@ import { BoardField } from '../board-field';
 
 @Component({
     selector: 'game',
-    templateUrl: './game.component.html'
+    templateUrl: './game.component.html',
+    styleUrls: [
+        './game.component.ngx.scss'
+    ]
 })
 export class GameComponent implements OnInit, OnDestroy {
 

@@ -7,7 +7,10 @@ import { Options } from '../options';
 
 @Component({
     selector: 'options',
-    templateUrl: './options.component.html'
+    templateUrl: './options.component.html',
+    styleUrls: [
+        './options.component.ngx.scss'
+    ],
 })
 export class OptionsComponent implements OnDestroy {
 

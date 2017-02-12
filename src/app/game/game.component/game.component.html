@@ -1,13 +1,13 @@
-<h1>Game</h1>
+<div class="game">
 
-<board [fields]="fields" [size]="boardSize" [ready]="boardReady" ></board>
+    <info [mines]="mines"></info>
 
-<info [mines]="mines"></info>
+    <board [fields]="fields" [size]="boardSize" [ready]="boardReady" ></board>
 
-<button (click)="initBoard()" class="btn btn-primary" >Init Board</button>
+    <button (click)="initBoard()" class="btn btn-primary" >Init Board</button>
 
-<button (click)="addScore()" class="btn btn-primary" >Add Score</button>
+    <button (click)="finishGame()" class="btn btn-primary" >Finish</button>
 
-<button (click)="finishGame()" class="btn btn-primary" >Finish</button>
+    <game-end-window *ngIf="gameFinished" ></game-end-window>
 
-<game-end-window *ngIf="gameFinished" ></game-end-window>
+</div>
