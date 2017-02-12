@@ -4,28 +4,32 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ScoreboardComponent } from '../../../../../src/app/scoreboard/scoreboard.component/scoreboard.component';
 import { ScoreboardRepository } from '../../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../../src/app/scoreboard/score';
+import { ScoreboardStore } from '../../../../../src/app/scoreboard/scoreboard-store';
+import { ScoreByDifficultyPipe } from '../../../../../src/app/scoreboard/scoreboard.component/score-by-difficulty.pipe';
 
 
 describe('ScoreboardComponent', () => {
 
-    const scores = [
-        new Score('Wow', '21.01.2017', 'easy'),
-        new Score('Great', '22.01.2017', 'easy'),
-        new Score('Awesome', '23.01.2017', 'easy')
-    ];
+    const scores: Array<Score> = [
+            new Score('Wow', '21.01.2017', 'EASY'),
+            new Score('Great', '22.01.2017', 'EASY'),
+            new Score('Awesome', '23.01.2017', 'EASY')
+        ],
+        scoreboardStore: ScoreboardStore = new ScoreboardStore(scores, 'EASY');
 
-    class MockScoreRepository {
+    class MockScoreboardRepository {
 
-        scores$ = new ReplaySubject(1);
+        scoreboard$ = new ReplaySubject(1);
 
-        getScores() {
-            this.scores$.next(scores);
+        getScoreboardState() {
+            this.scoreboard$.next(scoreboardStore);
 
-            return this.scores$.asObservable();
+            return this.scoreboard$.asObservable();
         }
 
         resetScores(): void {
-            this.scores$.next([]);
+            scoreboardStore.scores = [];
+            this.scoreboard$.next(scoreboardStore);
         }
     }
 
@@ -33,13 +37,14 @@ describe('ScoreboardComponent', () => {
         TestBed
             .configureTestingModule({
                 declarations: [
-                    ScoreboardComponent
+                    ScoreboardComponent,
+                    ScoreByDifficultyPipe
                 ]
             })
             .overrideComponent(ScoreboardComponent, {
                 add: {
                     providers: [
-                        {provide: ScoreboardRepository, useClass: MockScoreRepository}
+                        {provide: ScoreboardRepository, useClass: MockScoreboardRepository}
                     ]
                 }
             });
@@ -50,7 +55,8 @@ describe('ScoreboardComponent', () => {
         // given
         const fixture = TestBed.createComponent(ScoreboardComponent),
             compInstance = fixture.componentInstance,
-            element = fixture.nativeElement;
+            element = fixture.nativeElement,
+            givenScores = scoreboardStore.scores;
 
         // when
         fixture.detectChanges();
@@ -58,9 +64,9 @@ describe('ScoreboardComponent', () => {
         // then
         expect(compInstance.scores.length).toEqual(3);
         expect(element.querySelectorAll('li').length).toEqual(3);
-        expect(element.querySelectorAll('li')[0].innerText).toEqual(`${scores[0].name} ${scores[0].difficulty} ${scores[0].time}`);
-        expect(element.querySelectorAll('li')[1].innerText).toEqual(`${scores[1].name} ${scores[1].difficulty} ${scores[1].time}`);
-        expect(element.querySelectorAll('li')[2].innerText).toEqual(`${scores[2].name} ${scores[2].difficulty} ${scores[2].time}`);
+        expect(element.querySelectorAll('li')[0].innerText).toEqual(`${givenScores[0].name} ${givenScores[0].time}`);
+        expect(element.querySelectorAll('li')[1].innerText).toEqual(`${givenScores[1].name} ${givenScores[1].time}`);
+        expect(element.querySelectorAll('li')[2].innerText).toEqual(`${givenScores[2].name} ${givenScores[2].time}`);
     });
 
     it ('should have reset score feature', () => {
@@ -72,7 +78,7 @@ describe('ScoreboardComponent', () => {
 
         // when
         fixture.detectChanges();
-        fixture.nativeElement.querySelectorAll('button')[0].click();
+        fixture.nativeElement.querySelectorAll('button#scoreboard-reset')[0].click();
         fixture.detectChanges();
 
         // then

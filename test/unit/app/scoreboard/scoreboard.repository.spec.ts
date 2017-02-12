@@ -35,7 +35,7 @@ describe('ScoreboardRepository', () => {
         inject([ScoreboardRepository], (scoreService: ScoreboardRepository) => {
 
             // given
-            const reducer = 'score';
+            const reducer = 'scoreboard';
 
             spyOn(mockStore, 'select').and.callThrough();
 

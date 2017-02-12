@@ -21,8 +21,8 @@ export class ScoreboardComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private scoreRepository: ScoreboardRepository) {
-        this.subscription = this.scoreRepository
+    constructor(private scoreboardRepository: ScoreboardRepository) {
+        this.subscription = this.scoreboardRepository
                                 .getScoreboardState()
                                 .subscribe((scoreboard: ScoreboardStore) => {
                                     this.scores = scoreboard.scores;
@@ -39,19 +39,19 @@ export class ScoreboardComponent implements OnDestroy {
     }
 
     resetScores(): void {
-        this.scoreRepository.resetScores();
+        this.scoreboardRepository.resetScores();
     }
 
     setEasyDifficulty(): void {
-        this.scoreRepository.changeDifficulty('EASY');
+        this.scoreboardRepository.changeDifficulty('EASY');
     }
 
     setNormalDifficulty(): void {
-        this.scoreRepository.changeDifficulty('NORMAL');
+        this.scoreboardRepository.changeDifficulty('NORMAL');
     }
 
     setHardDifficulty(): void {
-        this.scoreRepository.changeDifficulty('HARD');
+        this.scoreboardRepository.changeDifficulty('HARD');
     }
 
 
