@@ -56,8 +56,6 @@ export class BoardFieldComponent {
     }
 
     reveal(): void {
-
-        console.log(this.position);
         this.gameService.revealField(this.position);
     }
 

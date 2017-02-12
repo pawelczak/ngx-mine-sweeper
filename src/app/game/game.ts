@@ -199,9 +199,7 @@ export class Game {
         this.fields = [];
     }
 
-    private finish(): void {
-        console.log('GAME FINISHED');
-    }
+    private finish(): void {}
 
     private checkIsGameFinished(): void {
 
