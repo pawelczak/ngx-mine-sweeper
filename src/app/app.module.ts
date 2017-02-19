@@ -13,6 +13,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { optionsReducer as options }  from './options/options.reducer';
 import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
+import { ModalModule } from './util/modal/modal.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { gameReducer as game } from './game/game-store/game.reducer';
         GameModule,
         ScoreboardModule,
         OptionsModule,
-        DashboardModule
+        DashboardModule,
+        ModalModule
     ],
     declarations: [
         AppComponent

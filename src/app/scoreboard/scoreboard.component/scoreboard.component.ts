@@ -1,17 +1,19 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
 import { ScoreboardRepository } from '../scoreboard.repository';
 import { ScoreboardStore } from '../scoreboard-store';
+import { ModalWindowService } from '../../util/modal/modal-window.service';
+import { ResetScoresWindowComponent } from './reset-scores-window.component/reset-scores-window.component';
+import { ModalConfiguration } from '../../util/modal/modal-configuration';
 
 @Component({
     selector: 'scoreboard',
     templateUrl: './scoreboard.component.html',
     styleUrls: [
         './scoreboard.component.ngx.scss'
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    ]
 })
 export class ScoreboardComponent implements OnDestroy {
 
@@ -21,13 +23,21 @@ export class ScoreboardComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private scoreboardRepository: ScoreboardRepository) {
+    private resetModalConfiguration: ModalConfiguration;
+
+    constructor(private changeDetectorRef: ChangeDetectorRef,
+                private scoreboardRepository: ScoreboardRepository,
+                private modalWindowService: ModalWindowService) {
+
         this.subscription = this.scoreboardRepository
                                 .getScoreboardState()
                                 .subscribe((scoreboard: ScoreboardStore) => {
                                     this.scores = scoreboard.scores;
                                     this.difficulty = scoreboard.difficulty;
+                                    this.changeDetectorRef.markForCheck();
                                 });
+
+        this.resetModalConfiguration = this.createResetScoreboardWindowConfig();
     }
 
     ngOnDestroy() {
@@ -39,20 +49,26 @@ export class ScoreboardComponent implements OnDestroy {
     }
 
     resetScores(): void {
-        this.scoreboardRepository.resetScores();
+
+        this.modalWindowService
+            .open(this.resetModalConfiguration, ResetScoresWindowComponent)
+            .subscribe((response: boolean) => {
+                if (response) {
+                    this.scoreboardRepository.resetScores();
+                }
+            });
     }
 
-    setEasyDifficulty(): void {
-        this.scoreboardRepository.changeDifficulty('EASY');
+    setDifficulty(difficulty: string): void {
+        this.scoreboardRepository.changeDifficulty(difficulty);
     }
 
-    setNormalDifficulty(): void {
-        this.scoreboardRepository.changeDifficulty('NORMAL');
-    }
+    private createResetScoreboardWindowConfig(): ModalConfiguration {
+        let modalConfiguration = <ModalConfiguration>Object.create(null);
 
-    setHardDifficulty(): void {
-        this.scoreboardRepository.changeDifficulty('HARD');
-    }
+        modalConfiguration.title = 'Reset scoreboard';
 
+        return modalConfiguration;
+    }
 
 }

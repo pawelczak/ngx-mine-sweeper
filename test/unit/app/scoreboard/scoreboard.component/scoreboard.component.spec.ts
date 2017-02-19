@@ -7,7 +7,7 @@ import { ScoreboardRepository } from '../../../../../src/app/scoreboard/scoreboa
 import { Score } from '../../../../../src/app/scoreboard/score';
 import { ScoreboardStore } from '../../../../../src/app/scoreboard/scoreboard-store';
 import { ScoreByDifficultyPipe } from '../../../../../src/app/scoreboard/scoreboard.component/score-by-difficulty.pipe';
-
+import { ModalWindowService } from '../../../../../src/app/util/modal/modal-window.service';
 
 
 describe('ScoreboardComponent', () => {
@@ -35,18 +35,29 @@ describe('ScoreboardComponent', () => {
         }
     }
 
+    class MockModalWindowService {
+
+        open(): Observable<boolean> {
+            return new Observable((observer) => {
+               observer.next(true);
+               observer.complete();
+            });
+        }
+    }
+
     beforeEach(() => {
         TestBed
             .configureTestingModule({
                 declarations: [
                     ScoreboardComponent,
-                    ScoreByDifficultyPipe
+                    ScoreByDifficultyPipe,
                 ]
             })
             .overrideComponent(ScoreboardComponent, {
                 add: {
                     providers: [
-                        {provide: ScoreboardRepository, useClass: MockScoreboardRepository}
+                        {provide: ScoreboardRepository, useClass: MockScoreboardRepository},
+                        {provide: ModalWindowService, useClass: MockModalWindowService}
                     ]
                 }
             });

@@ -3,15 +3,15 @@
     <h1>Scoreboard</h1>
 
     <div>
-        <button (click)="setEasyDifficulty()"
+        <button (click)="setDifficulty('EASY')"
                 [class.btn-primary]="isDifficulty('EASY')"
                 id="scoreboard-difficulty-easy"
                 class="btn btn-default" >Easy</button>
-        <button (click)="setNormalDifficulty()"
+        <button (click)="setDifficulty('NORMAL')"
                 [class.btn-primary]="isDifficulty('NORMAL')"
                 id="scoreboard-difficulty-normal"
                 class="btn btn-default" >Normal</button>
-        <button (click)="setHardDifficulty()"
+        <button (click)="setDifficulty('HARD')"
                 [class.btn-primary]="isDifficulty('HARD')"
                 id="scoreboard-difficulty-hard"
                 class="btn btn-default" >Hard</button>
