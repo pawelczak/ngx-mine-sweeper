@@ -5,7 +5,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ScoreboardComponent } from '../../../../../src/app/scoreboard/scoreboard.component/scoreboard.component';
 import { ScoreboardRepository } from '../../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../../src/app/scoreboard/score';
-import { ScoreboardStore } from '../../../../../src/app/scoreboard/scoreboard-store';
+import { ScoreboardState } from '../../../../../src/app/scoreboard/scoreboard-state';
 import { ScoreByDifficultyPipe } from '../../../../../src/app/scoreboard/scoreboard.component/score-by-difficulty.pipe';
 import { ModalWindowService } from '../../../../../src/app/util/modal/modal-window.service';
 
@@ -17,13 +17,13 @@ describe('ScoreboardComponent', () => {
             new Score('Great', '22.01.2017', 'EASY'),
             new Score('Awesome', '23.01.2017', 'EASY')
         ],
-        scoreboardStore: ScoreboardStore = new ScoreboardStore(scores, 'EASY');
+        scoreboardStore: ScoreboardState = new ScoreboardState(scores, 'EASY');
 
     class MockScoreboardRepository {
 
         scoreboard$ = new ReplaySubject(1);
 
-        getScoreboardState(): Observable<ScoreboardStore> {
+        getScoreboardState(): Observable<ScoreboardState> {
             this.scoreboard$.next(scoreboardStore);
 
             return this.scoreboard$.asObservable();
@@ -103,12 +103,12 @@ describe('ScoreboardComponent', () => {
     describe('empty list', () => {
 
         const emptyScores: Array<Score> = [],
-            emptyStore = new ScoreboardStore(emptyScores, 'EASY');
+            emptyStore = new ScoreboardState(emptyScores, 'EASY');
 
         class MockScoreboardEmptyRepository {
             scoreboard$ = new ReplaySubject(1);
 
-            getScoreboardState(): Observable<ScoreboardStore> {
+            getScoreboardState(): Observable<ScoreboardState> {
                 this.scoreboard$.next(emptyStore);
 
                 return this.scoreboard$.asObservable();
@@ -154,12 +154,12 @@ describe('ScoreboardComponent', () => {
                 new Score('Awesome', '23.01.2017', 'HARD'),
                 new Score('Awesome', '23.01.2017', 'HARD')
             ],
-            diffStore = new ScoreboardStore(diffScores, 'EASY');
+            diffStore = new ScoreboardState(diffScores, 'EASY');
 
         class MockScoreboardDifficultyRepository {
             scoreboard$ = new ReplaySubject(1);
 
-            getScoreboardState(): Observable<ScoreboardStore> {
+            getScoreboardState(): Observable<ScoreboardState> {
                 this.scoreboard$.next(diffStore);
 
                 return this.scoreboard$.asObservable();

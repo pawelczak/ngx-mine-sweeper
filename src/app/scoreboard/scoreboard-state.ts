@@ -1,6 +1,6 @@
 import { Score } from './score';
 
-export class ScoreboardStore {
+export class ScoreboardState {
 
     scores: Array<Score>;
 

@@ -1,7 +1,7 @@
 import { scoreboardReducer } from '../../../../src/app/scoreboard/scoreboard.reducer';
 import { Score } from '../../../../src/app/scoreboard/score';
 import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES, SCOREBOARD_CHANGE_DIFFICULTY } from '../../../../src/app/scoreboard/actions';
-import { ScoreboardStore } from '../../../../src/app/scoreboard/scoreboard-store';
+import { ScoreboardState } from '../../../../src/app/scoreboard/scoreboard-state';
 
 
 describe('scoreboardReducer - reducer', () => {
@@ -11,11 +11,11 @@ describe('scoreboardReducer - reducer', () => {
 
         // given
         const score = new Score('Selena Kayle', '00:37', 'easy'),
-            scoresState: ScoreboardStore = new ScoreboardStore([score], 'EASY'),
-            expectedState: ScoreboardStore = Object.assign(new ScoreboardStore([], 'EASY'), scoresState);
+            scoresState: ScoreboardState = new ScoreboardState([score], 'EASY'),
+            expectedState: ScoreboardState = Object.assign(new ScoreboardState([], 'EASY'), scoresState);
 
         // when
-        const actualState: ScoreboardStore = scoreboardReducer(undefined, {type: SCOREBOARD_ADD_SCORE, payload: score});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_ADD_SCORE, payload: score});
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -25,10 +25,10 @@ describe('scoreboardReducer - reducer', () => {
     it ('should reset scores', () => {
 
         // given
-        const expectedState: ScoreboardStore = new ScoreboardStore([], 'EASY');
+        const expectedState: ScoreboardState = new ScoreboardState([], 'EASY');
 
         // when
-        const actualState: ScoreboardStore = scoreboardReducer(undefined, {type: SCOREBOARD_RESET_SCORES});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_RESET_SCORES});
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -38,10 +38,10 @@ describe('scoreboardReducer - reducer', () => {
     it ('should change difficulty', () => {
 
         // given
-        const expectedState: ScoreboardStore = Object.assign(scoreboardReducer(), {difficulty: 'HARD'});
+        const expectedState: ScoreboardState = Object.assign(scoreboardReducer(), {difficulty: 'HARD'});
 
         // when
-        const actualState: ScoreboardStore = scoreboardReducer(undefined, {type: SCOREBOARD_CHANGE_DIFFICULTY, payload: 'HARD'});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_CHANGE_DIFFICULTY, payload: 'HARD'});
 
         // then
         expect(actualState).toEqual(expectedState);

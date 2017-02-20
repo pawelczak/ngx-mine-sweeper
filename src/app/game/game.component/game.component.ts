@@ -67,7 +67,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     addScore(): void {
-        this.scoreRepository.addScore(new Score('Johny Tester', '12:34', 'easy'));
+        this.scoreRepository.addScore(new Score('Johny Tester', '12:34', 'EASY'));
     }
 
     finishGame(): void {

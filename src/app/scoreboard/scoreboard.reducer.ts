@@ -1,27 +1,29 @@
-import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES, SCOREBOARD_CHANGE_DIFFICULTY } from './actions';
-import { ScoreboardStore } from './scoreboard-store';
-import { ScoreboardStoreFactory } from './scoreboard-store.factory';
+import { ScoreboardState } from './scoreboard-state';
+import { ScoreboardStateFactory } from './scoreboard-state.factory';
 import { Score } from './score';
+import * as scoreboard from './actions';
 
-const defaultState: ScoreboardStore = ScoreboardStoreFactory.createDefaultReducerData();
+const defaultState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
 
-export const scoreboardReducer = (state: ScoreboardStore = defaultState, action: {type?: string, payload?: any} = {}) => {
+export const scoreboardReducer = (state: ScoreboardState = defaultState, action: scoreboard.Actions) => {
 
     switch(action.type) {
 
-        case SCOREBOARD_ADD_SCORE:
-            const newScores: Array<Score> = [<Score>action.payload];
+        case scoreboard.ActionTypes.ADD_SCORE:
+            const newScores: Array<Score> = [(action.payload as Score)];
 
-            return Object.assign(ScoreboardStoreFactory.createEmptyStore(), state, {scores: newScores});
+            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {scores: newScores});
 
-        case SCOREBOARD_RESET_SCORES:
+        case scoreboard.ActionTypes.RESET_SCORES:
             const emptyScores: Array<Score> = [];
 
-            return Object.assign(ScoreboardStoreFactory.createEmptyStore(), state, {scores: emptyScores});
+            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {scores: emptyScores});
 
-        case SCOREBOARD_CHANGE_DIFFICULTY:
+        case scoreboard.ActionTypes.CHANGE_DIFFICULTY:
 
-            return Object.assign(ScoreboardStoreFactory.createEmptyStore(), state, {difficulty: action.payload});
+            const difficulty = action.payload;
+
+            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {difficulty: difficulty});
 
         default:
             return state;
