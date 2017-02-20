@@ -2,7 +2,7 @@ import { scoreboardReducer } from '../../../../src/app/scoreboard/scoreboard.red
 import { Score } from '../../../../src/app/scoreboard/score';
 import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES, SCOREBOARD_CHANGE_DIFFICULTY } from '../../../../src/app/scoreboard/actions';
 import { ScoreboardState } from '../../../../src/app/scoreboard/scoreboard-state';
-
+import * as ScoreboardActions from '../../../../src/app/scoreboard/actions';
 
 describe('scoreboardReducer - reducer', () => {
 
@@ -11,11 +11,12 @@ describe('scoreboardReducer - reducer', () => {
 
         // given
         const score = new Score('Selena Kayle', '00:37', 'easy'),
+            addScoreAction = new ScoreboardActions.AddScoreAction(score),
             scoresState: ScoreboardState = new ScoreboardState([score], 'EASY'),
             expectedState: ScoreboardState = Object.assign(new ScoreboardState([], 'EASY'), scoresState);
 
         // when
-        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_ADD_SCORE, payload: score});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, addScoreAction);
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -25,10 +26,11 @@ describe('scoreboardReducer - reducer', () => {
     it ('should reset scores', () => {
 
         // given
-        const expectedState: ScoreboardState = new ScoreboardState([], 'EASY');
+        const resetAction = new ScoreboardActions.ResetScoresAction(),
+            expectedState: ScoreboardState = new ScoreboardState([], 'EASY');
 
         // when
-        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_RESET_SCORES});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, resetAction);
 
         // then
         expect(actualState).toEqual(expectedState);
@@ -38,10 +40,12 @@ describe('scoreboardReducer - reducer', () => {
     it ('should change difficulty', () => {
 
         // given
-        const expectedState: ScoreboardState = Object.assign(scoreboardReducer(), {difficulty: 'HARD'});
+        const difficulty: string = 'HARD',
+            changeDifficultyAction = new ScoreboardActions.ChangeDifficultyAction(difficulty),
+            expectedState: ScoreboardState = Object.assign(new ScoreboardState([], 'EASY'), { difficulty: difficulty});
 
         // when
-        const actualState: ScoreboardState = scoreboardReducer(undefined, {type: SCOREBOARD_CHANGE_DIFFICULTY, payload: 'HARD'});
+        const actualState: ScoreboardState = scoreboardReducer(undefined, changeDifficultyAction);
 
         // then
         expect(actualState).toEqual(expectedState);
