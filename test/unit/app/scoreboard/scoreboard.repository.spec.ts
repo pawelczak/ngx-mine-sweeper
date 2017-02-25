@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { ScoreboardRepository } from '../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../src/app/scoreboard/score';
-import { SCOREBOARD_ADD_SCORE, SCOREBOARD_RESET_SCORES, SCOREBOARD_CHANGE_DIFFICULTY } from '../../../../src/app/scoreboard/actions';
+import * as ScoreboardActions from '../../../../src/app/scoreboard/actions';
 
 
 describe('ScoreboardRepository', () => {
@@ -52,7 +52,7 @@ describe('ScoreboardRepository', () => {
 
             // given
             const givenScore = new Score('', '', ''),
-                expectedAction = {type: SCOREBOARD_ADD_SCORE, payload: givenScore};
+                expectedAction = new ScoreboardActions.AddScoreAction(givenScore);
 
             spyOn(mockStore, 'dispatch').and.callThrough();
 
@@ -68,7 +68,7 @@ describe('ScoreboardRepository', () => {
         inject([ScoreboardRepository], (scoreboardRepository: ScoreboardRepository) => {
 
             // given
-            const expectedAction = {type: SCOREBOARD_RESET_SCORES};
+            const expectedAction = new ScoreboardActions.ResetScoresAction();
 
             spyOn(mockStore, 'dispatch').and.callThrough();
 
@@ -85,7 +85,7 @@ describe('ScoreboardRepository', () => {
 
             // given
             const difficulty = 'NORMAL',
-                expectedAction = {type: SCOREBOARD_CHANGE_DIFFICULTY, payload: difficulty};
+                expectedAction = new ScoreboardActions.ChangeDifficultyAction(difficulty);
 
             spyOn(mockStore, 'dispatch').and.callThrough();
 

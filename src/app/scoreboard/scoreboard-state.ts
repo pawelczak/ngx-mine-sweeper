@@ -10,4 +10,8 @@ export class ScoreboardState {
         this.scores = scores;
         this.difficulty = difficulty;
     }
+
+    static createFromState(state: ScoreboardState): ScoreboardState {
+        return new ScoreboardState(state.scores, state.difficulty);
+    }
 }

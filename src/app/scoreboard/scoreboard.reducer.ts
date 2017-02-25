@@ -3,27 +3,26 @@ import { ScoreboardStateFactory } from './scoreboard-state.factory';
 import { Score } from './score';
 import * as scoreboard from './actions';
 
-const defaultState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
+export const initialState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
 
-export const scoreboardReducer = (state: ScoreboardState = defaultState, action: scoreboard.Actions): ScoreboardState => {
+export const scoreboardReducer = (state: ScoreboardState = initialState, action: scoreboard.Actions): ScoreboardState => {
 
     switch(action.type) {
 
         case scoreboard.ActionTypes.ADD_SCORE:
-            const newScores: Array<Score> = [(action.payload as Score)];
+            const newScores: Array<Score> = [...state.scores, (action.payload as Score)];
 
-            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {scores: newScores});
+            return new ScoreboardState(newScores, state.difficulty);
 
         case scoreboard.ActionTypes.RESET_SCORES:
             const emptyScores: Array<Score> = [];
 
-            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {scores: emptyScores});
+            return new ScoreboardState(emptyScores, state.difficulty);
 
         case scoreboard.ActionTypes.CHANGE_DIFFICULTY:
-
             const difficulty = action.payload;
 
-            return Object.assign(ScoreboardStateFactory.createEmptyState(), state, {difficulty: difficulty});
+            return new ScoreboardState(state.scores, difficulty);
 
         default:
             return state;
