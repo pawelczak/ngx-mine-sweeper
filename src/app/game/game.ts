@@ -1,5 +1,7 @@
 import { BoardField } from './board-field';
 import { BoardFieldStatus } from './board-field-status';
+import { GameConfiguration } from './configuration/game-configuration';
+import { BoardSize } from './board/board-size';
 
 export class Game {
 
@@ -9,22 +11,26 @@ export class Game {
 
     finished: boolean = false;
 
-    boardSize: {
-        rows: number,
-        cols: number
-    } = {
-        rows: 1,
-        cols: 1
-    };
+    boardSize: BoardSize;
 
-    private MINES_NUMBER: number = 10;
+    private minesCount: number;
 
-    constructor(boardSize: any) {
-        this.boardSize = boardSize;
+    constructor(gameConfiguration: GameConfiguration) {
 
-        for (let i = 0, length = boardSize.cols * boardSize.rows; i < length; i += 1) {
+        this.minesCount = gameConfiguration.getMinesCount();
+
+        this.boardSize = gameConfiguration.getBoardSize();
+
+        for (let i = 0, length = this.boardSize.countFieldsNumber(); i < length; i += 1) {
             this.fields[i] = new BoardField(BoardFieldStatus.EMPTY);
         }
+
+    }
+
+    static createGame(game: Game): Game {
+        const configuration = new GameConfiguration(game.boardSize.getCols(), game.boardSize.getRows(), game.minesCount);
+
+        return new Game(configuration);
     }
 
     getBoardSize() {
@@ -40,17 +46,16 @@ export class Game {
     }
 
     initBoardWithRandomMines(): void {
-        this.setBoardSize(8, 8);
         this.resetFields();
 
-        for (let i = 0; i < this.boardSize.rows * this.boardSize.cols; i += 1) {
+        for (let i = 0; i < this.boardSize.countFieldsNumber(); i += 1) {
             let randomStatus = Math.random() > 1.9 ? BoardFieldStatus.MINE : BoardFieldStatus.EMPTY;
 
             this.fields.push(new BoardField(randomStatus));
         }
 
-        while (this.countMines() !== this.MINES_NUMBER) {
-            const fieldIndex = Math.floor(Math.random() * this.boardSize.rows * this.boardSize.cols);
+        while (this.countMines() !== this.minesCount) {
+            const fieldIndex = Math.floor(Math.random() * this.boardSize.countFieldsNumber());
 
             if (this.fields[fieldIndex].isEmpty()) {
                 this.fields[fieldIndex].putMine();
@@ -108,20 +113,20 @@ export class Game {
 
         this.revealSurroundingFieldsWithMines(position);
 
-        if (position % this.boardSize.cols !== 0) {
+        if (position % this.boardSize.getCols() !== 0) {
             this.revealEmptyField(position - 1);
             // this.revealEmptyField(position - 1 - this.boardSize.cols);
             // this.revealEmptyField(position - 1 + this.boardSize.cols);
         }
 
-        if (position % this.boardSize.cols !== this.boardSize.cols - 1) {
+        if (position % this.boardSize.getCols() !== this.boardSize.getCols() - 1) {
             this.revealEmptyField(position + 1);
             // this.revealEmptyField(position + 1 - this.boardSize.cols);
             // this.revealEmptyField(position + 1 + this.boardSize.cols);
         }
 
-        this.revealEmptyField(position - this.boardSize.cols);
-        this.revealEmptyField(position + this.boardSize.cols);
+        this.revealEmptyField(position - this.boardSize.getCols());
+        this.revealEmptyField(position + this.boardSize.getCols());
     }
 
     private revealEmptyField(position: number): void {
@@ -136,20 +141,20 @@ export class Game {
         for (let i = 0, length = this.fields.length; i < length; i += 1) {
 
             if (this.fields[i].isMine()) {
-                if (i % this.boardSize.cols !== 0) {
+                if (i % this.boardSize.getCols() !== 0) {
                     this.checkAndIncMineCounter(i - 1);
-                    this.checkAndIncMineCounter(i - 1 - this.boardSize.cols);
-                    this.checkAndIncMineCounter(i - 1 + this.boardSize.cols);
+                    this.checkAndIncMineCounter(i - 1 - this.boardSize.getCols());
+                    this.checkAndIncMineCounter(i - 1 + this.boardSize.getCols());
                 }
 
-                if (i % this.boardSize.cols !== this.boardSize.cols -1) {
+                if (i % this.boardSize.getCols() !== this.boardSize.getCols() -1) {
                     this.checkAndIncMineCounter(i + 1);
-                    this.checkAndIncMineCounter(i + 1 - this.boardSize.cols);
-                    this.checkAndIncMineCounter(i + 1 + this.boardSize.cols);
+                    this.checkAndIncMineCounter(i + 1 - this.boardSize.getCols());
+                    this.checkAndIncMineCounter(i + 1 + this.boardSize.getCols());
                 }
 
-                this.checkAndIncMineCounter(i - this.boardSize.cols);
-                this.checkAndIncMineCounter(i + this.boardSize.cols);
+                this.checkAndIncMineCounter(i - this.boardSize.getCols());
+                this.checkAndIncMineCounter(i + this.boardSize.getCols());
             }
         }
     }
@@ -166,33 +171,26 @@ export class Game {
     }
 
     private revealSurroundingFieldsWithMines(position: number): void {
-        if (position % this.boardSize.cols !== 0) {
+        if (position % this.boardSize.getCols() !== 0) {
             this.checkFieldForMinesAndReveal(position - 1);
-            this.checkFieldForMinesAndReveal(position - 1 - this.boardSize.cols);
-            this.checkFieldForMinesAndReveal(position - 1 + this.boardSize.cols);
+            this.checkFieldForMinesAndReveal(position - 1 - this.boardSize.getCols());
+            this.checkFieldForMinesAndReveal(position - 1 + this.boardSize.getCols());
         }
 
-        if (position % this.boardSize.cols !== this.boardSize.cols -1) {
+        if (position % this.boardSize.getCols() !== this.boardSize.getCols() -1) {
             this.checkFieldForMinesAndReveal(position + 1);
-            this.checkFieldForMinesAndReveal(position + 1 - this.boardSize.cols);
-            this.checkFieldForMinesAndReveal(position + 1 + this.boardSize.cols);
+            this.checkFieldForMinesAndReveal(position + 1 - this.boardSize.getCols());
+            this.checkFieldForMinesAndReveal(position + 1 + this.boardSize.getCols());
         }
 
-        this.checkFieldForMinesAndReveal(position - this.boardSize.cols);
-        this.checkFieldForMinesAndReveal(position + this.boardSize.cols);
+        this.checkFieldForMinesAndReveal(position - this.boardSize.getCols());
+        this.checkFieldForMinesAndReveal(position + this.boardSize.getCols());
     }
 
     private checkFieldForMinesAndReveal(position: number): void {
         if (this.isSurroundingField(position) && !this.fields[position].isRevelead() && this.fields[position].hasMines()) {
             this.fields[position].reveal();
         }
-    }
-
-    private setBoardSize(rows: number, cols: number): void {
-        this.boardSize = {
-            rows: rows,
-            cols: cols
-        };
     }
 
     private resetFields(): void {

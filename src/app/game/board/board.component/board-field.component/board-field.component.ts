@@ -1,34 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
-import { BoardField } from '../../board-field';
-import { GameRepository } from '../../game.repository';
-import { GameService } from '../../game.service';
+import { BoardField } from '../../../board-field';
+import { GameService } from '../../../game.service';
+
 
 @Component({
     selector: 'board-field',
     templateUrl: './board-field.component.html',
-    styles: [`
-    
-        .field {
-            background: #f5f5f5;
-            border: 1px solid #ccc;
-            color: #333;
-            display: inline-block;
-            height: 24px;
-            text-align: center;
-            width: 24px;
-        }
-        
-        .field.untouched {
-            background: #337ab7;
-        }
-        
-        .empty {
-            background: #f5f5f5;
-            color: #333;
-        }
-    
-    `]
+    styleUrls: [
+        './board-field.component.ngx.scss'
+    ]
 })
 export class BoardFieldComponent {
 
@@ -39,8 +20,7 @@ export class BoardFieldComponent {
     position: number;
 
 
-    constructor(private gameRepository: GameRepository,
-                private gameService: GameService) {}
+    constructor(private gameService: GameService) {}
 
 
     showEmpty(): boolean {

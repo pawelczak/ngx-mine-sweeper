@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { BoardField } from '../board-field';
+
+import { BoardSize } from '../board-size';
+
 
 @Component({
     selector: 'board',
@@ -11,7 +13,7 @@ export class BoardComponent {
     fields: any;
 
     @Input()
-    size: any;
+    size: BoardSize;
 
     @Input()
     ready: boolean;

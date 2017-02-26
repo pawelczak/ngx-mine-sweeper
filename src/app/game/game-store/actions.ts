@@ -1,3 +1,4 @@
+export const GAME_CREATE_NEW: string = 'GAME_CREATE_NEW';
 export const GAME_INIT_BOARD: string = 'GAME_INIT_BOARD';
 export const GAME_FINISH: string = 'GAME_FINISH';
 export const GAME_MARK_FIELD: string = 'GAME_MARK_FIELD';

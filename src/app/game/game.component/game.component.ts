@@ -8,6 +8,7 @@ import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
 import { Options } from '../../options/options';
 import { BoardField } from '../board-field';
+import { BoardSize } from '../board/board-size';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     fields: Array<BoardField> = [];
 
-    boardSize: any;
+    boardSize: BoardSize;
 
     boardReady: boolean;
 
@@ -58,7 +59,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.initBoard();
+        this.createNewGame();
     }
 
     ngOnDestroy() {
@@ -72,6 +73,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     finishGame(): void {
         this.gameRepository.finishGame();
+    }
+
+    createNewGame(): void {
+        this.gameRepository.createNewGame();
     }
 
     initBoard(): void {
