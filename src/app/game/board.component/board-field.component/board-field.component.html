@@ -1,22 +1,18 @@
 <div (click)="reveal()"
      (contextmenu)="mark()"
+     [ngClass]="{untouched: !showEmpty()}"
      class="field" >
 
-    <span *ngIf="showEmpty()" class="empty">
-        &nbsp;
-    </span>
-
-    <span *ngIf="showMine()">
-        M
-    </span>
 
     <span *ngIf="showMinesCounter()" >
         {{field.getMinesCounter()}}
     </span>
 
-    <span *ngIf="showMarked()" >
-        L
+    <span *ngIf="!showMinesCounter()"
+          [ngClass]="{mine: showMine(), 'fa-certificate': showMine(), marked: showMarked(), 'fa-flag': showMarked(), empty: showEmpty()}"
+          class="fa" >
     </span>
+
 
 </div>
 <ng-content></ng-content>

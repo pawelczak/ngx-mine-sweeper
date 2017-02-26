@@ -17,7 +17,7 @@ export class Game {
         cols: 1
     };
 
-    private MINES_NUMBER: number = 1;
+    private MINES_NUMBER: number = 10;
 
     constructor(boardSize: any) {
         this.boardSize = boardSize;

@@ -19,7 +19,12 @@ import { GameService } from '../../game.service';
             width: 24px;
         }
         
+        .field.untouched {
+            background: #337ab7;
+        }
+        
         .empty {
+            background: #f5f5f5;
             color: #333;
         }
     
@@ -48,7 +53,6 @@ export class BoardFieldComponent {
 
     showMinesCounter(): boolean {
         return this.field.hasMines() && this.field.isRevelead();
-        // return this.field.isMine() && this.field.isRevelead();
     }
 
     showMarked(): boolean {
