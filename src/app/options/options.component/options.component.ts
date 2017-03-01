@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { OptionsRepository } from '../options.repository';
-import { Options } from '../options';
+import { OptionsState } from '../store/options-state';
 
 
 @Component({
@@ -14,7 +14,9 @@ import { Options } from '../options';
 })
 export class OptionsComponent implements OnDestroy {
 
-    options: Options = null;
+    language: string;
+
+    difficulty: string;
 
     private subscription: Subscription;
 
@@ -22,8 +24,9 @@ export class OptionsComponent implements OnDestroy {
 
         this.subscription = this.optionsRepository
                                 .getOptions()
-                                .subscribe((options: Options) => {
-                                    this.options = options;
+                                .subscribe((options: OptionsState) => {
+                                    this.language = options.language;
+                                    this.difficulty = options.difficulty;
                                 });
     }
 

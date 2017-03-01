@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { Options } from '../../../../../src/app/options/options';
+import { OptionsState } from '../../../../../src/app/options/options';
 import { OptionsComponent } from '../../../../../src/app/options/options.component/options.component';
 import { OptionsRepository } from '../../../../../src/app/options/options.repository';
 
 
 describe('OptionsComponent', () => {
 
-    const options = new Options('polish');
+    const options = new OptionsState('polish');
 
     class MockOptionsRepository {
 
@@ -21,7 +21,7 @@ describe('OptionsComponent', () => {
         }
 
         changeLanguage(lang: string): void {
-            this.options$.next(new Options(lang));
+            this.options$.next(new OptionsState(lang));
         }
     }
 

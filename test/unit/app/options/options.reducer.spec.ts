@@ -1,6 +1,6 @@
-import { optionsReducer } from '../../../../src/app/options/options.reducer';
-import { Options } from '../../../../src/app/options/options';
-import { CHANGE_LANGUAGE } from '../../../../src/app/options/actions';
+import { optionsReducer } from '../../../../src/app/options/store/options.reducer';
+import { OptionsState } from '../../../../src/app/options/options';
+import { CHANGE_LANGUAGE } from '../../../../src/app/options/store/actions';
 
 describe('optionsReducer - reducer', () => {
 
@@ -8,7 +8,7 @@ describe('optionsReducer - reducer', () => {
     it ('should return default state', () => {
 
         // given
-        const expectedState = new Options('en');
+        const expectedState = new OptionsState('en');
 
         // when
         const actualState = optionsReducer(undefined);
@@ -16,14 +16,14 @@ describe('optionsReducer - reducer', () => {
         // then
         expect(actualState).toEqual(expectedState);
         expect(actualState).not.toBe(expectedState);
-        expect(actualState instanceof Options).toBe(true);
+        expect(actualState instanceof OptionsState).toBe(true);
     });
 
     it ('should be possible to change language', () => {
 
         // given
         const language = 'pl',
-            expectedState = new Options(language);
+            expectedState = new OptionsState(language);
 
         // when
         const actualState = optionsReducer(undefined, {type: CHANGE_LANGUAGE, payload: language});
@@ -31,7 +31,7 @@ describe('optionsReducer - reducer', () => {
         // then
         expect(actualState).toEqual(expectedState);
         expect(actualState).not.toBe(expectedState);
-        expect(actualState instanceof Options).toBe(true);
+        expect(actualState instanceof OptionsState).toBe(true);
     })
 
 });

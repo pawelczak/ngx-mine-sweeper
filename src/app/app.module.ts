@@ -10,7 +10,7 @@ import { GameModule } from './game/game.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 // reducers
-import { optionsReducer as options }  from './options/options.reducer';
+import { optionsReducer as options }  from './options/store/options.reducer';
 import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
 import { ModalModule } from './util/modal/modal.module';

@@ -4,19 +4,19 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Store } from '@ngrx/store';
 
 import { OptionsRepository } from '../../../../src/app/options/options.repository';
-import { Options } from '../../../../src/app/options/options';
-import { CHANGE_LANGUAGE } from '../../../../src/app/options/actions';
+import { OptionsState } from '../../../../src/app/options/options';
+import { CHANGE_LANGUAGE } from '../../../../src/app/options/store/actions';
 
 
 describe('OptionsRepository', () => {
 
-    const defaultOptions = new Options('Polish');
+    const defaultOptions = new OptionsState('Polish');
 
     class MockStore {
 
         private options$ = new BehaviorSubject(defaultOptions);
 
-        select(): Observable<Options> {
+        select(): Observable<OptionsState> {
             return this.options$.asObservable();
         }
 

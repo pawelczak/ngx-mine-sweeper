@@ -1,5 +1,5 @@
 import { OptionsFactory } from '../../../../src/app/options/options.factory';
-import { Options } from '../../../../src/app/options/options';
+import { OptionsState } from '../../../../src/app/options/options';
 
 describe('OptionsFactory', () => {
 
@@ -10,6 +10,6 @@ describe('OptionsFactory', () => {
 
         // then
         expect(expectedOptions).toBeDefined();
-        expect(expectedOptions instanceof Options).toBe(true);
+        expect(expectedOptions instanceof OptionsState).toBe(true);
     });
 });

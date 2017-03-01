@@ -6,7 +6,7 @@ import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
 import { GameRepository } from '../game.repository';
 import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
-import { Options } from '../../options/options';
+import { OptionsState } from '../../options/options';
 import { BoardField } from '../board-field';
 import { BoardSize } from '../board/board-size';
 
@@ -30,7 +30,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     gameFinished: boolean = false;
 
-    private options: Options;
+    private options: OptionsState;
 
     private gameSubscriptions: Subscription;
     private optionsSubscriptions: Subscription;
@@ -53,7 +53,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.optionsSubscriptions =
             this.optionsStore
                 .getOptions()
-                .subscribe((options: Options) => {
+                .subscribe((options: OptionsState) => {
                     this.options = options;
                 });
     }

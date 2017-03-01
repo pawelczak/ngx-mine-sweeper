@@ -26,5 +26,4 @@ export class ChangeDifficultyAction implements Action {
     constructor(public payload: string) {}
 }
 
-
 export type Actions = AddScoreAction | ResetScoresAction | ChangeDifficultyAction;

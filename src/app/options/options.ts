@@ -1,4 +1,4 @@
-export class Options {
+export class OptionsState {
 
     language: string;
 

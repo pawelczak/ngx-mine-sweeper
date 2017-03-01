@@ -1,8 +1,8 @@
-import { Options } from './options';
+import { OptionsState } from './options';
 
 export class OptionsFactory {
 
-    static createDefaultReducerOptions(): Options {
-        return new Options('en');
+    static createDefaultReducerOptions(): OptionsState {
+        return new OptionsState('en');
     }
 }

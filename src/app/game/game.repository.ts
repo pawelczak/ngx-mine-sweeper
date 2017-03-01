@@ -9,11 +9,13 @@ import {
 } from './game-store/actions';
 import { BoardField } from './board-field';
 import { GameFactory } from './game.factory';
+import { OptionsRepository } from '../options/options.repository';
 
 @Injectable()
 export class GameRepository {
 
-    constructor(private store: Store<any>) {}
+    constructor(private store: Store<any>,
+                private optionsRepository: OptionsRepository) {}
 
     getGame(): Observable<Game> {
         return this.store.select('game');
@@ -21,14 +23,16 @@ export class GameRepository {
 
     createNewGame(): void {
 
-        this.store.select('game')
+        this.optionsRepository
+            .getDifficulty()
             .take(1)
-            .subscribe((game: Game) => {
+            .subscribe((difficulty: string) => {
 
-                const newGame = GameFactory.createInitialGame('HARD');
+                const newGame = GameFactory.createInitialGame(difficulty);
                 newGame.initBoardWithRandomMines();
 
                 this.store.dispatch({type: GAME_CREATE_NEW, payload: newGame});
+
             });
 
     }
