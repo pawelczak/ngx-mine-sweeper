@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { OptionsState } from './store/options-state';
 import * as OptionsActions from './store/actions';

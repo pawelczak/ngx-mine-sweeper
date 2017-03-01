@@ -1,7 +1,7 @@
 import { OptionsState } from './options-state';
 import * as options from './actions';
 
-const initialOptionsState = new OptionsState('en', 'EASY');
+export const initialOptionsState = new OptionsState('en', 'EASY');
 
 export const optionsReducer = (state: OptionsState = initialOptionsState, action: options.Actions): OptionsState => {
 

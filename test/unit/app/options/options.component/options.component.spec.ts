@@ -1,14 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { OptionsState } from '../../../../../src/app/options/options';
 import { OptionsComponent } from '../../../../../src/app/options/options.component/options.component';
 import { OptionsRepository } from '../../../../../src/app/options/options.repository';
+import { OptionsState } from '../../../../../src/app/options/store/options-state';
 
 
 describe('OptionsComponent', () => {
 
-    const options = new OptionsState('polish');
+    const defaultLanguage = 'polish',
+        defaultDifficulty = 'EASY';
+
+    const options = new OptionsState(defaultLanguage, defaultDifficulty);
 
     class MockOptionsRepository {
 
@@ -21,7 +24,7 @@ describe('OptionsComponent', () => {
         }
 
         changeLanguage(lang: string): void {
-            this.options$.next(new OptionsState(lang));
+            this.options$.next(new OptionsState(lang, defaultDifficulty));
         }
     }
 
@@ -52,7 +55,7 @@ describe('OptionsComponent', () => {
         fixture.detectChanges();
 
         // then
-        expect(compInstance.options.language).toEqual(options.language);
+        expect(compInstance.language).toEqual(options.language);
         expect(element.querySelectorAll('li.language').length).toEqual(1);
         expect(element.querySelectorAll('li.language')[0].innerText).toEqual(`Language: ${options.language}`);
     });
@@ -70,7 +73,7 @@ describe('OptionsComponent', () => {
         fixture.detectChanges();
 
         // then
-        expect(compInstance.options.language).toEqual('pl');
+        expect(compInstance.language).toEqual('pl');
     });
 
 });

@@ -6,9 +6,9 @@ import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
 import { GameRepository } from '../game.repository';
 import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
-import { OptionsState } from '../../options/options';
 import { BoardField } from '../board-field';
 import { BoardSize } from '../board/board-size';
+import { OptionsState } from '../../options/store/options-state';
 
 
 @Component({
