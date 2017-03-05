@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { OptionsRepository } from '../options.repository';
@@ -20,7 +21,11 @@ export class OptionsComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private optionsRepository: OptionsRepository) {
+    constructor(private optionsRepository: OptionsRepository,
+                translateService: TranslateService) {
+
+        translateService.setDefaultLang('en');
+        translateService.use('en');
 
         this.subscription = this.optionsRepository
                                 .getOptions()

@@ -1,0 +1,25 @@
+{
+    "DASHBOARD": {
+        "TITLE": "Mine sweeper",
+        "NEW_GAME": "New game",
+        "SCOREBOARD": "Scoreboard",
+        "OPTIONS": "Options"
+    },
+    "GAME": {},
+    "OPTIONS": {
+        "TITLE": "Options",
+        "LANGUAGE": "Language",
+        "DIFFICULTY": "Difficulty",
+        "CHANGE_LANGUAGE": "Change Language"
+    },
+    "SCOREBOARD": {
+        "TITLE": "Scoreboard",
+        "NO_SCORE": "No scores.",
+        "RESET_SCOREBOARD": "Reset scoreboard",
+        "DIFFICULTY": {
+            "EASY": "Easy",
+            "NORMAL": "Normal",
+            "HARD": "Hard"
+        }
+    }
+}

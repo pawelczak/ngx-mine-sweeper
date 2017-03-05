@@ -1,11 +1,11 @@
 <div class="dashboard">
 
-    <h1>Mine Sweeper</h1>
+    <h1>{{ 'DASHBOARD.TITLE' | translate }}</h1>
 
     <ul>
-        <li><a [routerLink]="['game']" id="nav-new-game">New game</a></li>
-        <li><a [routerLink]="['scoreboard']" id="nav-scoreboard">Scoreboard</a></li>
-        <li><a [routerLink]="['options']" id="nav-options">Options</a></li>
+        <li><a [routerLink]="['game']" id="nav-new-game">{{ 'DASHBOARD.NEW_GAME' | translate }}</a></li>
+        <li><a [routerLink]="['scoreboard']" id="nav-scoreboard">{{ 'DASHBOARD.SCOREBOARD' | translate }}</a></li>
+        <li><a [routerLink]="['options']" id="nav-options">{{ 'DASHBOARD.OPTIONS' | translate }}</a></li>
     </ul>
 
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
@@ -27,7 +28,11 @@ export class ScoreboardComponent implements OnDestroy {
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
                 private scoreboardRepository: ScoreboardRepository,
-                private modalWindowService: ModalWindowService) {
+                private modalWindowService: ModalWindowService,
+                translateService: TranslateService) {
+
+        translateService.setDefaultLang('en');
+        translateService.use('en');
 
         this.subscription = this.scoreboardRepository
                                 .getScoreboardState()

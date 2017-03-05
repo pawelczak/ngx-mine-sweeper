@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -8,4 +9,11 @@ import { Component } from '@angular/core';
         './dashboard.component.ngx.scss'
     ]
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+
+    constructor(translateService: TranslateService) {
+        translateService.setDefaultLang('en');
+        translateService.use('en');
+    }
+
+}

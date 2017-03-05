@@ -1,25 +1,25 @@
 <div class="scoreboard">
 
-    <h1>Scoreboard</h1>
+    <h1>{{ SCOREBOARD.TITLE | translate }}</h1>
 
     <div>
         <button (click)="setDifficulty('EASY')"
                 [class.btn-primary]="isDifficulty('EASY')"
                 id="scoreboard-difficulty-easy"
-                class="btn btn-default" >Easy</button>
+                class="btn btn-default" >{{ SCOREBOARD.DIFFICULTY.EASY | translate }}</button>
         <button (click)="setDifficulty('NORMAL')"
                 [class.btn-primary]="isDifficulty('NORMAL')"
                 id="scoreboard-difficulty-normal"
-                class="btn btn-default" >Normal</button>
+                class="btn btn-default" >{{ SCOREBOARD.TITLE | translate }}</button>
         <button (click)="setDifficulty('HARD')"
                 [class.btn-primary]="isDifficulty('HARD')"
                 id="scoreboard-difficulty-hard"
-                class="btn btn-default" >Hard</button>
+                class="btn btn-default" >{{ SCOREBOARD.TITLE | translate }}</button>
     </div>
 
     <ul class="scores">
         <li *ngIf="(scores | scoreByDifficulty:difficulty).length === 0" >
-            No scores.
+            {{ SCOREBOARD.NO_SCORE | translate }}
         </li>
         <li *ngFor="let score of scores | scoreByDifficulty:difficulty" >
             {{score.name}} {{score.time}}
@@ -28,6 +28,6 @@
 
     <button (click)="resetScores()"
             id="scoreboard-reset"
-            class="btn btn-default" >Reset scoreboard</button>
+            class="btn btn-default" >{{ SCOREBOARD.RESET_SCOREBOARD | translate }}</button>
 
 </div>
