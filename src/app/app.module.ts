@@ -31,7 +31,15 @@ export function HttpLoaderFactory(http: Http) {
         ScoreboardModule,
         OptionsModule,
         DashboardModule,
-        ModalModule
+        ModalModule,
+        HttpModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [Http]
+            }
+        })
     ],
     declarations: [
         AppComponent

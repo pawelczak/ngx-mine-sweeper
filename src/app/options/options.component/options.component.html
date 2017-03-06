@@ -1,12 +1,21 @@
 <div class="options">
 
-    <h1>{{ DASHBOARD.TITLE | translate }}</h1>
+    <h1>Options</h1>
 
     <ul>
-        <li class="language" >{{ OPTIONS.LANGUAGE | translate }}: {{language}}</li>
-        <li class="difficulty" >{{ OPTIONS.DIFFICULTY | translate }}: {{difficulty}}</li>
+    <li class="language" >Language: {{language}}</li>
+    <li class="difficulty" >Difficulty: {{difficulty}}</li>
     </ul>
 
-    <button (click)="changeLanguage()">{{ OPTIONS.CHANGE_LANGUAGE | translate }}</button>
+    <button (click)="changeLanguage()">Change language</button>
+
+    <!--<h1>{{ DASHBOARD.TITLE | translate }}</h1>-->
+
+    <!--<ul>-->
+        <!--<li class="language" >{{ OPTIONS.LANGUAGE | translate }}: {{language}}</li>-->
+        <!--<li class="difficulty" >{{ OPTIONS.DIFFICULTY | translate }}: {{difficulty}}</li>-->
+    <!--</ul>-->
+
+    <!--<button (click)="changeLanguage()">{{ OPTIONS.CHANGE_LANGUAGE | translate }}</button>-->
 
 </div>
