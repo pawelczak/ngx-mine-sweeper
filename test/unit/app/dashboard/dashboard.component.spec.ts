@@ -1,17 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { DashboardComponent } from '../../../../src/app/dashboard/dashboard.component';
 
 
 describe('DashboardComponent', () => {
 
-
     beforeEach(() => {
         TestBed
             .configureTestingModule({
                 imports: [
-                    RouterTestingModule
+                    RouterTestingModule,
+                    TranslateModule.forRoot()
                 ],
                 declarations: [
                     DashboardComponent
@@ -29,6 +30,6 @@ describe('DashboardComponent', () => {
         fixture.detectChanges();
 
         // then
-        expect(element.querySelectorAll('h1')[0].innerText).toBe('Mine Sweeper');
+        expect(element.querySelectorAll('h1')[0].innerText).toBe('DASHBOARD.TITLE');
     });
 });
