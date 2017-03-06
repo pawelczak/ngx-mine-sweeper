@@ -28,11 +28,7 @@ export class ScoreboardComponent implements OnDestroy {
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
                 private scoreboardRepository: ScoreboardRepository,
-                private modalWindowService: ModalWindowService,
-                translateService: TranslateService) {
-
-        translateService.setDefaultLang('en');
-        translateService.use('en');
+                private modalWindowService: ModalWindowService) {
 
         this.subscription = this.scoreboardRepository
                                 .getScoreboardState()

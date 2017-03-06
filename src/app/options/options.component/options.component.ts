@@ -21,11 +21,7 @@ export class OptionsComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private optionsRepository: OptionsRepository,
-                translateService: TranslateService) {
-
-        translateService.setDefaultLang('en');
-        translateService.use('en');
+    constructor(private optionsRepository: OptionsRepository) {
 
         this.subscription = this.optionsRepository
                                 .getOptions()
