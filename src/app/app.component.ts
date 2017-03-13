@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+import { LanguageService } from './util/language/language.service';
+
 
 @Component({
     selector: 'app',
@@ -9,4 +11,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {}
+export class AppComponent {
+
+    constructor(languageService: LanguageService) {}
+
+}

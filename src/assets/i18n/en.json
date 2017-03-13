@@ -21,5 +21,14 @@
             "NORMAL": "Normal",
             "HARD": "Hard"
         }
+    },
+    "DIFFICULTY": {
+        "EASY": "Easy",
+        "NORMAL": "Normal",
+        "HARD": "Hard"
+    },
+    "LANGUAGE": {
+        "EN": "En",
+        "PL": "Pl"
     }
 }

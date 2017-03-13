@@ -1,0 +1,34 @@
+{
+    "DASHBOARD": {
+        "TITLE": "Mine sweeper",
+        "NEW_GAME": "Nowa gra",
+        "SCOREBOARD": "Wyniki",
+        "OPTIONS": "Ustawienia"
+    },
+    "GAME": {},
+    "OPTIONS": {
+        "TITLE": "Ustawienia",
+        "LANGUAGE": "Język",
+        "DIFFICULTY": "Poziom trudności",
+        "CHANGE_LANGUAGE": "Zmień język"
+    },
+    "SCOREBOARD": {
+        "TITLE": "Tablica wyników",
+        "NO_SCORE": "Brak wyników.",
+        "RESET_SCOREBOARD": "Wyczyść listę wyników",
+        "DIFFICULTY": {
+            "EASY": "Łatwy",
+            "NORMAL": "Normalny",
+            "HARD": "Trudny"
+        }
+    },
+    "DIFFICULTY": {
+        "EASY": "Łatwy",
+        "NORMAL": "Normalny",
+        "HARD": "Trudny"
+    },
+    "LANGUAGE": {
+        "EN": "En",
+        "PL": "Pl"
+    }
+}

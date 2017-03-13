@@ -34,4 +34,9 @@ export class OptionsRepository {
     changeLanguage(language: string): void {
         this.store.dispatch(new OptionsActions.ChangeLanguageAction(language));
     }
+
+    changeDifficulty(difficulty: string): void {
+        this.store.dispatch(new OptionsActions.ChangeDifficultyAction(difficulty));
+    }
+
 }

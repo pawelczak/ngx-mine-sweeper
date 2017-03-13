@@ -34,7 +34,19 @@ export class OptionsComponent implements OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    changeLanguage(): void {
-        this.optionsRepository.changeLanguage('pl');
+    changeLanguage(language: string): void {
+        this.optionsRepository.changeLanguage(language);
+    }
+
+    changeDifficulty(difficulty: string): void {
+        this.optionsRepository.changeDifficulty(difficulty);
+    }
+
+    isDifficulty(difficulty: string): boolean {
+        return difficulty === this.difficulty;
+    }
+
+    isLanguage(language: string): boolean {
+        return language === this.language;
     }
 }

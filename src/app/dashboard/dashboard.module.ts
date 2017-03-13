@@ -7,7 +7,6 @@ import { routing } from '../app.routing';
 import { DashboardComponent } from './dashboard.component';
 
 
-
 @NgModule({
     imports: [
         BrowserModule,

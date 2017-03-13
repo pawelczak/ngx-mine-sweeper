@@ -10,6 +10,9 @@ export const optionsReducer = (state: OptionsState = initialOptionsState, action
         case options.ActionTypes.CHANGE_LANGUAGE:
             return Object.assign(new OptionsState('en', 'EASY'), state, {language: action.payload});
 
+        case options.ActionTypes.CHANGE_DIFFICULTY:
+            return Object.assign(new OptionsState('en', 'EASY'), state, {difficulty: action.payload});
+
         default:
             return state;
     }

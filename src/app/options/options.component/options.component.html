@@ -3,8 +3,17 @@
     <h1>{{ 'OPTIONS.TITLE' | translate }}</h1>
 
     <ul>
-        <li class="language" >{{ 'OPTIONS.LANGUAGE' | translate }}: {{language}}</li>
-        <li class="difficulty" >{{ 'OPTIONS.DIFFICULTY' | translate }}: {{difficulty}}</li>
+        <li class="language" >
+            <p>{{ 'OPTIONS.LANGUAGE' | translate }}:</p>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage('en')}" (click)="changeLanguage('en')">{{ 'LANGUAGE.EN' | translate }}</button>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage('pl')}" (click)="changeLanguage('pl')">{{ 'LANGUAGE.PL' | translate }}</button>
+        </li>
+        <li class="difficulty" >
+            <p>{{ 'OPTIONS.DIFFICULTY' | translate }}:</p>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isDifficulty('EASY')}" (click)="changeDifficulty('EASY')">{{ 'DIFFICULTY.EASY' | translate }}</button>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isDifficulty('NORMAL')}" (click)="changeDifficulty('NORMAL')">{{ 'DIFFICULTY.NORMAL' | translate }}</button>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isDifficulty('HARD')}" (click)="changeDifficulty('HARD')">{{ 'DIFFICULTY.HARD' | translate }}</button>
+        </li>
     </ul>
 
     <button (click)="changeLanguage()">{{ 'OPTIONS.CHANGE_LANGUAGE' | translate }}</button>
