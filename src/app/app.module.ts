@@ -17,6 +17,7 @@ import { optionsReducer as options }  from './options/store/options.reducer';
 import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
 import { ModalModule } from './util/modal/modal.module';
+import { RouterModule } from '@angular/router';
 
 
 export function HttpLoaderFactory(http: Http) {
@@ -40,6 +41,9 @@ export function HttpLoaderFactory(http: Http) {
                 deps: [Http]
             }
         })
+    ],
+    exports: [
+        RouterModule
     ],
     declarations: [
         AppComponent

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ScoreboardComponent } from './scoreboard.component/scoreboard.component';
 import { ScoreboardRepository } from './scoreboard.repository';
@@ -9,7 +10,8 @@ import { ResetScoresWindowComponent } from './scoreboard.component/reset-scores-
 
 @NgModule({
     imports: [
-        BrowserModule
+        BrowserModule,
+        TranslateModule
     ],
     declarations: [
         ScoreboardComponent,

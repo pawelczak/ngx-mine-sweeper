@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { DashboardComponent } from './dashboard.component';
 import { routing } from '../app.routing';
+import { DashboardComponent } from './dashboard.component';
+
+
 
 @NgModule({
     imports: [

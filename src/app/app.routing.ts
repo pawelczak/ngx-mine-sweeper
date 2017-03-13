@@ -13,4 +13,4 @@ const routes: Routes = [
     { path: 'options', component: OptionsComponent }
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes, { useHash: true });
