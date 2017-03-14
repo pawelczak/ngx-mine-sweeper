@@ -3,8 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { Language } from '../util/language/language';
 import { OptionsState } from './store/options-state';
 import * as OptionsActions from './store/actions';
+
 
 @Injectable()
 export class OptionsRepository {
@@ -15,7 +17,7 @@ export class OptionsRepository {
         return this.store.select('options');
     }
 
-    getLanguage(): Observable<string> {
+    getLanguage(): Observable<Language> {
         return this.store
                     .select('options')
                     .map((options: OptionsState) => {
@@ -31,7 +33,7 @@ export class OptionsRepository {
                     });
     }
 
-    changeLanguage(language: string): void {
+    changeLanguage(language: Language): void {
         this.store.dispatch(new OptionsActions.ChangeLanguageAction(language));
     }
 

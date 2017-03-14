@@ -5,8 +5,8 @@
     <ul>
         <li class="language" >
             <p>{{ 'OPTIONS.LANGUAGE' | translate }}:</p>
-            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage('en')}" (click)="changeLanguage('en')">{{ 'LANGUAGE.EN' | translate }}</button>
-            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage('pl')}" (click)="changeLanguage('pl')">{{ 'LANGUAGE.PL' | translate }}</button>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage(languageEN)}" (click)="changeLanguage(languageEN)">{{ 'LANGUAGE.EN' | translate }}</button>
+            <button class="btn btn-default" [ngClass]="{'btn-primary': isLanguage(languagePL)}" (click)="changeLanguage(languagePL)">{{ 'LANGUAGE.PL' | translate }}</button>
         </li>
         <li class="difficulty" >
             <p>{{ 'OPTIONS.DIFFICULTY' | translate }}:</p>

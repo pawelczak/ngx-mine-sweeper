@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideStore } from '@ngrx/store';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -17,7 +18,6 @@ import { optionsReducer as options }  from './options/store/options.reducer';
 import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
 import { ModalModule } from './util/modal/modal.module';
-import { RouterModule } from '@angular/router';
 import { LanguageService } from './util/language/language.service';
 
 

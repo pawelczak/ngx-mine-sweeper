@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { OptionsRepository } from '../options.repository';
 import { OptionsState } from '../store/options-state';
+import { Language } from '../../util/language/language';
 
 
 @Component({
@@ -14,9 +15,12 @@ import { OptionsState } from '../store/options-state';
 })
 export class OptionsComponent implements OnDestroy {
 
-    language: string;
+    language: Language;
 
     difficulty: string;
+
+    languageEN = Language.EN;
+    languagePL = Language.PL;
 
     private subscription: Subscription;
 
@@ -34,7 +38,7 @@ export class OptionsComponent implements OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    changeLanguage(language: string): void {
+    changeLanguage(language: Language): void {
         this.optionsRepository.changeLanguage(language);
     }
 
@@ -46,7 +50,7 @@ export class OptionsComponent implements OnDestroy {
         return difficulty === this.difficulty;
     }
 
-    isLanguage(language: string): boolean {
+    isLanguage(language: Language): boolean {
         return language === this.language;
     }
 }
