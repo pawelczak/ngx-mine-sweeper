@@ -67,20 +67,12 @@ export class GameComponent implements OnInit, OnDestroy {
         this.optionsSubscriptions.unsubscribe();
     }
 
-    addScore(): void {
-        this.scoreRepository.addScore(new Score('Johny Tester', '12:34', 'EASY'));
-    }
-
     finishGame(): void {
         this.gameRepository.finishGame();
     }
 
     createNewGame(): void {
         this.gameRepository.createNewGame();
-    }
-
-    initBoard(): void {
-        this.gameRepository.initBoard();
     }
 
 }

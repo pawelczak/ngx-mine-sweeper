@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 
 import { OptionsRepository } from '../../../../src/app/options/options.repository';
 import { OptionsState } from '../../../../src/app/options/store/options-state';
+import { Language } from '../../../../src/app/util/language/language';
 import * as OptionsActions from '../../../../src/app/options/store/actions';
-
 
 
 describe('OptionsRepository', () => {
 
-    const defaultOptions = new OptionsState('Polish', 'EASY');
+    const defaultOptions = new OptionsState(Language.PL, 'EASY');
 
     class MockStore {
 
@@ -55,7 +55,7 @@ describe('OptionsRepository', () => {
         inject([OptionsRepository], (optionsRepository: OptionsRepository) => {
 
             // given
-            const givenLanguage = 'japanese',
+            const givenLanguage = Language.EN,
                 expectedAction = new OptionsActions.ChangeLanguageAction(givenLanguage);
 
             spyOn(mockStore, 'dispatch').and.callThrough();

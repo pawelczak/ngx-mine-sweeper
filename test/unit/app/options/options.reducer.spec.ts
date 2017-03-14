@@ -1,6 +1,8 @@
 import { optionsReducer, initialOptionsState } from '../../../../src/app/options/store/options.reducer';
 import { OptionsState } from '../../../../src/app/options/store/options-state';
+import { Language } from '../../../../src/app/util/language/language';
 import * as OptionsActions from '../../../../src/app/options/store/actions';
+
 
 describe('optionsReducer - reducer', () => {
 
@@ -22,7 +24,7 @@ describe('optionsReducer - reducer', () => {
     it ('should be possible to change language', () => {
 
         // given
-        const givenLanguage = 'pl',
+        const givenLanguage = Language.PL,
             givenDifficulty = 'EASY',
             givenChangeLanguageAction = new OptionsActions.ChangeLanguageAction(givenLanguage),
             expectedState = new OptionsState(givenLanguage, givenDifficulty);
