@@ -8,25 +8,31 @@ import Timer = NodeJS.Timer;
 @Injectable()
 export class TimerService {
 
-    private seconds: number = 0;
-    private timer$: Subject<number> = new BehaviorSubject(this.seconds);
+    private timer$: Subject<number> = new BehaviorSubject(0);
     private subscription: Timer;
 
-
     getTime(): Observable<number> {
-        return this.timer$.asObservable();
+        return this.timer$
+                    .asObservable()
+                    .startWith(0)
+                    .scan((acc, value) => {
+                        return acc + value;
+                    });
     }
 
     start(): void {
-        this.seconds = 0;
-        this.timer$.next(this.seconds);
+        this.reset();
+
         this.subscription = setInterval(() => {
-            this.seconds += 1;
-            this.timer$.next(this.seconds);
+            this.timer$.next(1);
         }, 1000);
     }
 
     stop(): void {
         clearInterval(this.subscription);
+    }
+
+    private reset(): void {
+        this.timer$.next(0);
     }
 }

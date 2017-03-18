@@ -197,7 +197,9 @@ export class Game {
         this.fields = [];
     }
 
-    private finish(): void {}
+    private finish(): void {
+        this.finished = true;
+    }
 
     private checkIsGameFinished(): void {
 
