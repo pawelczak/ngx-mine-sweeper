@@ -4,7 +4,7 @@ import * as options from './actions';
 
 export const initialOptionsState = OptionsStateFactory.createDefault();
 
-export const optionsReducer = (state: OptionsState = initialOptionsState, action: options.Actions): OptionsState => {
+export function optionsReducer(state: OptionsState = initialOptionsState, action: options.Actions): OptionsState {
 
     switch (action.type) {
 

@@ -5,7 +5,7 @@ import * as scoreboard from './actions';
 
 export const initialState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
 
-export const scoreboardReducer = (state: ScoreboardState = initialState, action: scoreboard.Actions): ScoreboardState => {
+export function scoreboardReducer(state: ScoreboardState = initialState, action: scoreboard.Actions): ScoreboardState {
 
     switch(action.type) {
 

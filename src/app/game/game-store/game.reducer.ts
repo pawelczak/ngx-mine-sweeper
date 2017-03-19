@@ -8,7 +8,7 @@ import { GameFactory } from '../game.factory';
 
 const defaultState: Game = GameFactory.createDefaultGame();
 
-export const gameReducer = (state: Game = defaultState, action: any = {}) => {
+export function gameReducer(state: Game = defaultState, action: any = {})  {
     switch(action.type) {
 
         case GAME_INIT_BOARD:
