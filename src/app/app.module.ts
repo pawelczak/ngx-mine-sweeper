@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideStore } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { RouterModule } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -41,6 +42,10 @@ export function HttpLoaderFactory(http: Http) {
                 useFactory: HttpLoaderFactory,
                 deps: [Http]
             }
+        }),
+        StoreModule.provideStore({ options, scoreboard, game}),
+        StoreDevtoolsModule.instrumentOnlyWithExtension({
+            maxAge: 10
         })
     ],
     exports: [
@@ -50,7 +55,6 @@ export function HttpLoaderFactory(http: Http) {
         AppComponent
     ],
     providers: [
-        provideStore({ options, scoreboard, game}),
         LanguageService
     ],
     entryComponents: [
