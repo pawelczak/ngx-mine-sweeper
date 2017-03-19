@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { RouterModule } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -18,6 +19,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ModalModule } from './util/modal/modal.module';
 import { LanguageService } from './util/language/language.service';
 import { reducer } from './app.reducers';
+import { PageNotFoundComponent } from './util/errors/page-not-found.component';
 
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -28,6 +30,7 @@ export function HttpLoaderFactory(http: Http) {
         CommonModule,
         BrowserModule,
         routing,
+        MaterialModule,
         GameModule,
         ScoreboardModule,
         OptionsModule,
@@ -50,7 +53,8 @@ export function HttpLoaderFactory(http: Http) {
         RouterModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        PageNotFoundComponent
     ],
     providers: [
         LanguageService

@@ -32,9 +32,9 @@ export class ScoreboardComponent implements OnDestroy {
 
         this.subscription = this.scoreboardRepository
                                 .getScoreboardState()
-                                .subscribe((scoreboard: ScoreboardState) => {
-                                    this.scores = scoreboard.scores;
-                                    this.difficulty = scoreboard.difficulty;
+                                .subscribe((state: ScoreboardState) => {
+                                    this.scores = state.scores;
+                                    this.difficulty = state.difficulty;
                                     this.changeDetectorRef.markForCheck();
                                 });
 
