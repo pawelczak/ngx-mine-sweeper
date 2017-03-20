@@ -18,8 +18,9 @@ import { GameModule } from './game/game.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ModalModule } from './util/modal/modal.module';
 import { LanguageService } from './util/language/language.service';
-import { reducer } from './app.reducers';
 import { PageNotFoundComponent } from './util/errors/page-not-found.component';
+import { LocalStorage } from './util/persist/local-storage';
+import { reducer } from './app.reducers';
 
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(http: Http) {
         PageNotFoundComponent
     ],
     providers: [
-        LanguageService
+        LanguageService,
+        LocalStorage
     ],
     entryComponents: [
         AppComponent

@@ -8,6 +8,9 @@ export function optionsReducer(state: OptionsState = initialOptionsState, action
 
     switch (action.type) {
 
+        case options.ActionTypes.INIT_STATE:
+            return Object.assign(OptionsStateFactory.createDefault(), action.payload);
+
         case options.ActionTypes.CHANGE_LANGUAGE:
             return Object.assign(OptionsStateFactory.createDefault(), state, {language: action.payload});
 

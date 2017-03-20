@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { OptionsRepository } from '../options.repository';
@@ -13,7 +13,7 @@ import { Language } from '../../util/language/language';
         './options.component.ngx.scss'
     ],
 })
-export class OptionsComponent implements OnDestroy {
+export class OptionsComponent implements OnInit, OnDestroy {
 
     language: Language;
 
@@ -32,6 +32,10 @@ export class OptionsComponent implements OnDestroy {
                                     this.language = options.language;
                                     this.difficulty = options.difficulty;
                                 });
+    }
+
+    ngOnInit() {
+
     }
 
     ngOnDestroy() {
