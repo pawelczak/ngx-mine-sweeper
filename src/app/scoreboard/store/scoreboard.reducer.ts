@@ -1,6 +1,6 @@
 import { ScoreboardState } from './scoreboard-state';
 import { ScoreboardStateFactory } from './scoreboard-state.factory';
-import { Score } from './score';
+import { Score } from '../score';
 import * as scoreboard from './actions';
 
 export const initialState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
@@ -8,6 +8,10 @@ export const initialState: ScoreboardState = ScoreboardStateFactory.createDefaul
 export function scoreboardReducer(state: ScoreboardState = initialState, action: scoreboard.Actions): ScoreboardState {
 
     switch(action.type) {
+
+        case scoreboard.ActionTypes.INIT_STATE:
+
+            return Object.assign(ScoreboardStateFactory.createDefaultReducerData(), action.payload);
 
         case scoreboard.ActionTypes.ADD_SCORE:
             const newScores: Array<Score> = [...state.scores, (action.payload as Score)];
@@ -28,4 +32,4 @@ export function scoreboardReducer(state: ScoreboardState = initialState, action:
             return state;
     }
 
-};
+}

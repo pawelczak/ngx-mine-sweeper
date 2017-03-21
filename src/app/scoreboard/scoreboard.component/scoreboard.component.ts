@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';
 import { ScoreboardRepository } from '../scoreboard.repository';
-import { ScoreboardState } from '../scoreboard-state';
+import { ScoreboardState } from '../store/scoreboard-state';
 import { ModalWindowService } from '../../util/modal/modal-window.service';
 import { ResetScoresWindowComponent } from './reset-scores-window.component/reset-scores-window.component';
 import { ModalConfiguration } from '../../util/modal/modal-configuration';

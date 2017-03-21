@@ -3,11 +3,11 @@ import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { optionsReducer as options }  from './options/store/options.reducer';
-import { scoreboardReducer as scoreboard } from './scoreboard/scoreboard.reducer';
+import { scoreboardReducer as scoreboard } from './scoreboard/store/scoreboard.reducer';
 import { gameReducer as game } from './game/game-store/game.reducer';
 
 import { OptionsState } from './options/store/options-state';
-import { ScoreboardState } from './scoreboard/scoreboard-state';
+import { ScoreboardState } from './scoreboard/store/scoreboard-state';
 import { Game } from './game/game';
 
 export interface AppState {

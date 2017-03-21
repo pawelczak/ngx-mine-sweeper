@@ -1,8 +1,8 @@
-import { scoreboardReducer } from '../../../../src/app/scoreboard/scoreboard.reducer';
+import { scoreboardReducer } from '../../../../src/app/scoreboard/store/scoreboard.reducer';
 import { Score } from '../../../../src/app/scoreboard/score';
-import { ScoreboardState } from '../../../../src/app/scoreboard/scoreboard-state';
-import { initialState } from '../../../../src/app/scoreboard/scoreboard.reducer';
-import * as ScoreboardActions from '../../../../src/app/scoreboard/actions';
+import { ScoreboardState } from '../../../../src/app/scoreboard/store/scoreboard-state';
+import { initialState } from '../../../../src/app/scoreboard/store/scoreboard.reducer';
+import * as ScoreboardActions from '../../../../src/app/scoreboard/store/actions';
 
 describe('scoreboardReducer - reducer', () => {
 

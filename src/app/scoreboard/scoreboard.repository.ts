@@ -4,18 +4,28 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState, getScoreboard } from '../app.reducers';
 import { Score } from './score';
-import { ScoreboardState } from './scoreboard-state';
-import * as ScoreboardActions from './actions';
+import { ScoreboardState } from './store/scoreboard-state';
 import { getScoreboardScores, getScoreboardDifficulty } from './selectors';
+import { LocalStorage } from '../util/persist/local-storage';
+import * as ScoreboardActions from './store/actions';
 
 
 @Injectable()
 export class ScoreboardRepository {
 
-    constructor(private store: Store<AppState>) {}
+    private SCOREBOARD_KEY = 'ngx-mine-sweaper-scoreboard';
+
+    constructor(private store: Store<AppState>,
+                private localStorage: LocalStorage) {
+        this.loadFromLocalStorage();
+    }
 
     getScoreboardState(): Observable<ScoreboardState> {
-        return this.store.select(getScoreboard);
+        return this.store
+                        .select(getScoreboard)
+                        .do((state: ScoreboardState) => {
+                            this.localStorage.setObject(this.SCOREBOARD_KEY, state);
+                        });
     }
 
     getScores(): Observable<Array<Score>> {
@@ -36,5 +46,13 @@ export class ScoreboardRepository {
 
     changeDifficulty(difficulty: string): void {
         this.store.dispatch(new ScoreboardActions.ChangeDifficultyAction(difficulty));
+    }
+
+    private loadFromLocalStorage(): void {
+        this.store.dispatch(new ScoreboardActions.InitStateAction(this.getScoreboardStateFromLocalStorage()));
+    }
+
+    private getScoreboardStateFromLocalStorage(): ScoreboardState {
+        return this.localStorage.getObject(this.SCOREBOARD_KEY) as ScoreboardState;
     }
 }

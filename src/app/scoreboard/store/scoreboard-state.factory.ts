@@ -1,6 +1,6 @@
 import { ScoreboardState } from './scoreboard-state';
-import { ScoreFactory } from './score.factory';
-import { Score } from './score';
+import { ScoreFactory } from '../score.factory';
+import { Score } from '../score';
 
 
 export class ScoreboardStateFactory {

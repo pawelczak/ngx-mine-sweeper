@@ -5,7 +5,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ScoreboardComponent } from '../../../../../src/app/scoreboard/scoreboard.component/scoreboard.component';
 import { ScoreboardRepository } from '../../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../../src/app/scoreboard/score';
-import { ScoreboardState } from '../../../../../src/app/scoreboard/scoreboard-state';
+import { ScoreboardState } from '../../../../../src/app/scoreboard/store/scoreboard-state';
 import { ScoreByDifficultyPipe } from '../../../../../src/app/scoreboard/scoreboard.component/score-by-difficulty.pipe';
 import { ModalWindowService } from '../../../../../src/app/util/modal/modal-window.service';
 

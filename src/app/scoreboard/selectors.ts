@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { ScoreboardState } from './scoreboard-state';
+import { ScoreboardState } from './store/scoreboard-state';
 import { getScoreboard } from '../app.reducers';
 
 const getScores = (state: ScoreboardState) => state.scores;

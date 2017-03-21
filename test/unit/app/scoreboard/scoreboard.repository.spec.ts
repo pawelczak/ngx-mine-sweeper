@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { ScoreboardRepository } from '../../../../src/app/scoreboard/scoreboard.repository';
 import { Score } from '../../../../src/app/scoreboard/score';
-import * as ScoreboardActions from '../../../../src/app/scoreboard/actions';
+import * as ScoreboardActions from '../../../../src/app/scoreboard/store/actions';
 
 
 describe('ScoreboardRepository', () => {
