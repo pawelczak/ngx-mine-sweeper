@@ -6,9 +6,10 @@ import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
 import { GameRepository } from '../game.repository';
 import { Game } from '../game';
 import { OptionsRepository } from '../../options/options.repository';
-import { BoardField } from '../board-field';
+import { BoardField } from '../board/board-field';
 import { BoardSize } from '../board/board-size';
 import { OptionsState } from '../../options/store/options-state';
+import { Board } from '../board/board';
 
 
 @Component({
@@ -20,9 +21,7 @@ import { OptionsState } from '../../options/store/options-state';
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-    fields: Array<BoardField> = [];
-
-    boardSize: BoardSize;
+    board: Board;
 
     boardReady: boolean;
 
@@ -43,8 +42,7 @@ export class GameComponent implements OnInit, OnDestroy {
             this.gameRepository
                 .getGame()
                 .subscribe((game: Game) => {
-                    this.fields = game.fields;
-                    this.boardSize = game.boardSize;
+                    this.board = game.board;
                     this.boardReady = game.boardReady;
                     this.mines = game.countMines();
                     this.gameFinished = game.isFinished();

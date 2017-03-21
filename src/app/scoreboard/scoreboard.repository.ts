@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppState, getScoreboard } from '../app.reducers';
 import { Score } from './score';
 import { ScoreboardState } from './store/scoreboard-state';
-import { getScoreboardScores, getScoreboardDifficulty } from './selectors';
+import { getScoreboardScores, getScoreboardDifficulty } from './store/selectors';
 import { LocalStorage } from '../util/persist/local-storage';
 import * as ScoreboardActions from './store/actions';
 

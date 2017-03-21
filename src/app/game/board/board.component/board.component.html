@@ -1,11 +1,11 @@
 <div *ngIf="isReady()" class="board">
 
-    <board-field *ngFor="let field of fields; let fieldIndex = index"
+    <board-field *ngFor="let field of board.getFields(); let fieldIndex = index"
                  [field]="field"
                  [position]="fieldIndex"
                 >
 
-        <div *ngIf="fieldIndex % 8 == 7" class="clearfix"></div>
+        <div *ngIf="fieldIndex % board.getBoardSize().getCols() == board.getBoardSize().getCols() - 1" class="clearfix"></div>
     </board-field>
 
 </div>

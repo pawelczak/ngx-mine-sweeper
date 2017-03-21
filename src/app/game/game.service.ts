@@ -23,7 +23,7 @@ export class GameService {
         this.game.revealField(position);
 
         this.gameRepository
-            .updateFields(this.game.fields);
+            .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
             this.finishGame();
@@ -34,7 +34,7 @@ export class GameService {
         this.game.markField(position);
 
         this.gameRepository
-            .updateFields(this.game.fields);
+            .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
             this.finishGame();

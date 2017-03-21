@@ -10,11 +10,11 @@ export class GameFactory {
 
 
     static createDefaultGame(): Game {
-        return new Game(new GameConfiguration(1, 1, 1));
+        return new Game(new GameConfiguration(new BoardSize(1, 1), 1));
     }
 
     static createEmptyBoardGame(boardSize: BoardSize): Game {
-        let game = new Game(new GameConfiguration(boardSize.getCols(), boardSize.getRows(), 1));
+        let game = new Game(new GameConfiguration(boardSize, 1));
 
         return game;
     }

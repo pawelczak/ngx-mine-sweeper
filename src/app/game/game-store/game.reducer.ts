@@ -30,7 +30,7 @@ export function gameReducer(state: Game = defaultState, action: any = {})  {
 
             const revBoard = state;
 
-            revBoard.fields[action.payload].revelead = true;
+            revBoard.board.getFields()[action.payload].revelead = true;
 
             return Object.assign(GameFactory.createDefaultGame(), state, revBoard);
 
@@ -38,7 +38,7 @@ export function gameReducer(state: Game = defaultState, action: any = {})  {
 
             const markBoard = state;
 
-            markBoard.fields[action.payload].marked = true;
+            markBoard.board.getFields()[action.payload].marked = true;
 
             return Object.assign(GameFactory.createDefaultGame(), state, markBoard);
 

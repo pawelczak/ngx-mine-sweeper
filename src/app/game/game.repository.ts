@@ -7,7 +7,7 @@ import {
     GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS,
     GAME_CREATE_NEW
 } from './game-store/actions';
-import { BoardField } from './board-field';
+import { BoardField } from './board/board-field';
 import { GameFactory } from './game.factory';
 import { OptionsRepository } from '../options/options.repository';
 

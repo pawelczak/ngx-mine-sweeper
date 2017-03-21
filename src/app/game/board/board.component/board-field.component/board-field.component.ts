@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 
-import { BoardField } from '../../../board-field';
+import { BoardField } from '../../board-field';
 import { GameService } from '../../../game.service';
 
 

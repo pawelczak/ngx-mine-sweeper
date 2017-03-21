@@ -1,17 +1,15 @@
-import { BoardField } from './board-field';
-import { BoardFieldStatus } from './board-field-status';
+import { BoardField } from './board/board-field';
 import { GameConfiguration } from './configuration/game-configuration';
 import { BoardSize } from './board/board-size';
+import { Board } from './board/board';
 
 export class Game {
 
-    fields: Array<BoardField> = [];
+    board: Board;
 
     boardReady: boolean = false;
 
     finished: boolean = false;
-
-    boardSize: BoardSize;
 
     private minesCount: number;
 
@@ -19,26 +17,21 @@ export class Game {
 
         this.minesCount = gameConfiguration.getMinesCount();
 
-        this.boardSize = gameConfiguration.getBoardSize();
-
-        for (let i = 0, length = this.boardSize.countFieldsNumber(); i < length; i += 1) {
-            this.fields[i] = new BoardField(BoardFieldStatus.EMPTY);
-        }
-
+        this.board = new Board(gameConfiguration.getBoardSize());
     }
 
     static createGame(game: Game): Game {
-        const configuration = new GameConfiguration(game.boardSize.getCols(), game.boardSize.getRows(), game.minesCount);
+        const configuration = new GameConfiguration(game.board.getBoardSize(), game.minesCount);
 
         return new Game(configuration);
     }
 
-    getBoardSize() {
-        return this.boardSize;
+    getBoardSize(): BoardSize {
+        return this.board.getBoardSize();
     }
 
-    getFields() {
-        return this.fields;
+    getFields(): Array<BoardField> {
+        return this.board.getFields();
     }
 
     isFinished(): boolean {
@@ -46,155 +39,40 @@ export class Game {
     }
 
     initBoardWithRandomMines(): void {
-        this.resetFields();
+        this.board.initBoardWithRandomMines(this.minesCount);
 
-        for (let i = 0; i < this.boardSize.countFieldsNumber(); i += 1) {
-            let randomStatus = Math.random() > 1.9 ? BoardFieldStatus.MINE : BoardFieldStatus.EMPTY;
-
-            this.fields.push(new BoardField(randomStatus));
-        }
-
-        while (this.countMines() !== this.minesCount) {
-            const fieldIndex = Math.floor(Math.random() * this.boardSize.countFieldsNumber());
-
-            if (this.fields[fieldIndex].isEmpty()) {
-                this.fields[fieldIndex].putMine();
-            }
-        }
-
-        this.updateMinesCounters();
+        this.board.updateMinesCounters();
         this.boardReady = true;
     }
 
     countMines(): number {
-        return this.fields
-                    .map((field) => {
-                        return +field.isMine();
-                    })
-                    .reduce((prev, current) => {
-                        return prev + current;
-                    }, 0);
+        return this.board.countMines();
     }
 
     markField(position: number): void {
-        this.fields[position].mark();
+        this.board.markField(position);
 
         this.checkIsGameFinished();
     }
 
-    // TODO move to board
     revealField(position: number): void {
 
-        if (this.fields[position].isRevelead()) {
+        if (this.board.getFields()[position].isRevelead()) {
             return;
         }
 
-        if (this.fields[position].isEmpty()) {
-            this.revealEmptyFields(position);
+        if (this.board.getFields()[position].isEmpty()) {
+            this.board.revealEmptyFields(position);
         }
 
-        if (this.fields[position].isMine()) {
+        if (this.board.getFields()[position].isMine()) {
 
-            this.fields[position].reveal();
+            this.board.getFields()[position].reveal();
 
             this.finish();
         }
 
         this.checkIsGameFinished();
-    }
-
-    revealEmptyFields(position: number): void {
-        this.fields[position].reveal();
-        this.revealSurroundingEmptyFields(position);
-    }
-
-    // TODO move to board
-    private revealSurroundingEmptyFields(position: number): void {
-
-        this.revealSurroundingFieldsWithMines(position);
-
-        if (position % this.boardSize.getCols() !== 0) {
-            this.revealEmptyField(position - 1);
-            // this.revealEmptyField(position - 1 - this.boardSize.cols);
-            // this.revealEmptyField(position - 1 + this.boardSize.cols);
-        }
-
-        if (position % this.boardSize.getCols() !== this.boardSize.getCols() - 1) {
-            this.revealEmptyField(position + 1);
-            // this.revealEmptyField(position + 1 - this.boardSize.cols);
-            // this.revealEmptyField(position + 1 + this.boardSize.cols);
-        }
-
-        this.revealEmptyField(position - this.boardSize.getCols());
-        this.revealEmptyField(position + this.boardSize.getCols());
-    }
-
-    private revealEmptyField(position: number): void {
-        if (this.isSurroundingField(position) && this.fields[position].isEmpty() && !this.fields[position].isRevelead() && !this.fields[position].hasMines()) {
-            this.fields[position].reveal();
-            this.revealSurroundingEmptyFields(position);
-        }
-    }
-
-    private updateMinesCounters(): void {
-
-        for (let i = 0, length = this.fields.length; i < length; i += 1) {
-
-            if (this.fields[i].isMine()) {
-                if (i % this.boardSize.getCols() !== 0) {
-                    this.checkAndIncMineCounter(i - 1);
-                    this.checkAndIncMineCounter(i - 1 - this.boardSize.getCols());
-                    this.checkAndIncMineCounter(i - 1 + this.boardSize.getCols());
-                }
-
-                if (i % this.boardSize.getCols() !== this.boardSize.getCols() -1) {
-                    this.checkAndIncMineCounter(i + 1);
-                    this.checkAndIncMineCounter(i + 1 - this.boardSize.getCols());
-                    this.checkAndIncMineCounter(i + 1 + this.boardSize.getCols());
-                }
-
-                this.checkAndIncMineCounter(i - this.boardSize.getCols());
-                this.checkAndIncMineCounter(i + this.boardSize.getCols());
-            }
-        }
-    }
-
-    private checkAndIncMineCounter(position: number): void {
-        if (this.isSurroundingField(position) && !this.fields[position].isMine()) {
-            this.fields[position].incMinesCounter();
-        }
-    }
-
-    private isSurroundingField(position: number): boolean {
-        return position >= 0
-            && position < this.fields.length;
-    }
-
-    private revealSurroundingFieldsWithMines(position: number): void {
-        if (position % this.boardSize.getCols() !== 0) {
-            this.checkFieldForMinesAndReveal(position - 1);
-            this.checkFieldForMinesAndReveal(position - 1 - this.boardSize.getCols());
-            this.checkFieldForMinesAndReveal(position - 1 + this.boardSize.getCols());
-        }
-
-        if (position % this.boardSize.getCols() !== this.boardSize.getCols() -1) {
-            this.checkFieldForMinesAndReveal(position + 1);
-            this.checkFieldForMinesAndReveal(position + 1 - this.boardSize.getCols());
-            this.checkFieldForMinesAndReveal(position + 1 + this.boardSize.getCols());
-        }
-
-        this.checkFieldForMinesAndReveal(position - this.boardSize.getCols());
-        this.checkFieldForMinesAndReveal(position + this.boardSize.getCols());
-    }
-
-    private checkFieldForMinesAndReveal(position: number): void {
-        if (this.isSurroundingField(position) && !this.fields[position].isRevelead() && this.fields[position].hasMines()) {
-            this.fields[position].reveal();
-        }
-    }
-
-    private resetFields(): void {
-        this.fields = [];
     }
 
     private finish(): void {
@@ -204,7 +82,8 @@ export class Game {
     private checkIsGameFinished(): void {
 
         const untouchedFields =
-            this.fields
+            this.board
+                .getFields()
                 .map((field) => {
                     if (!field.isRevelead()) {
                         if (!field.isMarked()) {
@@ -217,6 +96,6 @@ export class Game {
                     return prev + current;
                 }, 0);
 
-        this.finished = untouchedFields === 0;
+        this.finished = this.finished ? true : untouchedFields === 0;
     }
 }

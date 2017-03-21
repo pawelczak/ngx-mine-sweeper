@@ -6,8 +6,8 @@ export class GameConfiguration {
 
     private minesCount: number;
 
-    constructor(cols: number, rows: number, minesCount: number) {
-        this.boardSize = new BoardSize(rows, cols);
+    constructor(size: BoardSize, minesCount: number) {
+        this.boardSize = size;
         this.minesCount = minesCount;
     }
 
