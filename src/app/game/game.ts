@@ -2,6 +2,8 @@ import { BoardField } from './board/board-field';
 import { GameConfiguration } from './configuration/game-configuration';
 import { BoardSize } from './board/board-size';
 import { Board } from './board/board';
+import { GameEnd } from './game-end/game-end';
+import { GameResults } from './game-end/game-results';
 
 export class Game {
 
@@ -9,7 +11,7 @@ export class Game {
 
     boardReady: boolean = false;
 
-    finished: boolean = false;
+    gameEnd: GameEnd;
 
     private minesCount: number;
 
@@ -18,6 +20,8 @@ export class Game {
         this.minesCount = gameConfiguration.getMinesCount();
 
         this.board = new Board(gameConfiguration.getBoardSize());
+
+        this.gameEnd = new GameEnd(false);
     }
 
     static createGame(game: Game): Game {
@@ -35,7 +39,7 @@ export class Game {
     }
 
     isFinished(): boolean {
-        return this.finished;
+        return this.gameEnd.isFinished();
     }
 
     initBoardWithRandomMines(): void {
@@ -58,7 +62,6 @@ export class Game {
     revealField(position: number): void {
 
         if (this.board.getFields()[position].isRevelead()) {
-            return;
         }
 
         if (this.board.getFields()[position].isEmpty()) {
@@ -69,33 +72,17 @@ export class Game {
 
             this.board.getFields()[position].reveal();
 
-            this.finish();
+            this.gameEnd = this.gameEnd.endWithFailure(new GameResults('EASY', '12'));
         }
 
         this.checkIsGameFinished();
     }
 
-    private finish(): void {
-        this.finished = true;
-    }
-
     private checkIsGameFinished(): void {
 
-        const untouchedFields =
-            this.board
-                .getFields()
-                .map((field) => {
-                    if (!field.isRevelead()) {
-                        if (!field.isMarked()) {
-                            return 1;
-                        }
-                    }
-                    return 0;
-                })
-                .reduce((prev, current) => {
-                    return prev + current;
-                }, 0);
+        if (this.board.countUntouchedFields() === 0) {
+            this.gameEnd.endWithSuccess(new GameResults('EASY', '12'));
+        }
 
-        this.finished = this.finished ? true : untouchedFields === 0;
     }
 }

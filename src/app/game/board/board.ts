@@ -78,6 +78,21 @@ export class Board {
         this.revealEmptyField(position + this.boardSize.getCols());
     }
 
+    countUntouchedFields(): number {
+        return this.fields
+                    .map((field) => {
+                        if (!field.isRevelead()) {
+                            if (!field.isMarked()) {
+                                return 1;
+                            }
+                        }
+                        return 0;
+                    })
+                    .reduce((prev, current) => {
+                        return prev + current;
+                    }, 0);
+    }
+
     private revealEmptyField(position: number): void {
         if (this.isSurroundingField(position) && this.fields[position].isEmpty() && !this.fields[position].isRevelead() && !this.fields[position].hasMines()) {
             this.fields[position].reveal();

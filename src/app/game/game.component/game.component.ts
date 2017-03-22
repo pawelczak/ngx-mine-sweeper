@@ -10,6 +10,7 @@ import { BoardField } from '../board/board-field';
 import { BoardSize } from '../board/board-size';
 import { OptionsState } from '../../options/store/options-state';
 import { Board } from '../board/board';
+import { GameEnd } from '../game-end/game-end';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     gameFinished: boolean = false;
 
+    game: Game;
+
     private options: OptionsState;
 
     private gameSubscriptions: Subscription;
@@ -46,6 +49,7 @@ export class GameComponent implements OnInit, OnDestroy {
                     this.boardReady = game.boardReady;
                     this.mines = game.countMines();
                     this.gameFinished = game.isFinished();
+                    this.game = game;
                 });
 
         this.optionsSubscriptions =

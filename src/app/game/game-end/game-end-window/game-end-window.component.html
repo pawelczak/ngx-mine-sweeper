@@ -1,0 +1,27 @@
+<div *ngIf="gameEnd.isFinished()" >
+    <div id="game-end-modal" class="modal fade in" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <!-- SUCCESS -->
+                    <div *ngIf="gameEnd.isSuccessful()">
+                        <p>You won</p>
+
+                        <p>{{gameEnd.gameResults.difficulty}}</p>
+                        <p>You won</p>
+
+                    </div>
+
+                    <!-- FAILURE -->
+                    <div *ngIf="gameEnd.isFailure()">
+                        <p>You lost</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

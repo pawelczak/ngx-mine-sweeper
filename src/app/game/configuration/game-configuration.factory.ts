@@ -12,6 +12,6 @@ export class GameConfigurationFactory {
     }
 
     static createGameConfigurationHard(): GameConfiguration {
-        return new GameConfiguration(new BoardSize(16, 16), 10);
+        return new GameConfiguration(new BoardSize(16, 16), 1);
     }
 }
