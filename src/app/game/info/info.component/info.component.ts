@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TimerService } from '../timer.service';
+import { TimeFormatter } from '../time.formatter';
 
 @Component({
     selector: 'info',
@@ -19,13 +20,11 @@ export class InfoComponent implements OnInit, OnDestroy {
     constructor(private timerService: TimerService) {}
 
     ngOnInit() {
-        this.timerService.start();
-
         this.timerSubscription =
                 this.timerService
                     .getTime()
                     .subscribe((seconds: number) => {
-                        this.time = this.formatTime(seconds);
+                        this.time = TimeFormatter.formatFromSeconds(seconds);
                     });
     }
 
@@ -34,27 +33,4 @@ export class InfoComponent implements OnInit, OnDestroy {
         this.timerSubscription.unsubscribe();
     }
 
-
-    private formatTime(seconds: number): string {
-
-        let time: string = '',
-            minutes: number = Math.floor(seconds / 60),
-            formatedSeconds = seconds % 60;
-
-        if (minutes < 10) {
-            time += '0';
-        }
-
-        time += minutes;
-
-        time += ':';
-
-        if (formatedSeconds < 10) {
-            time += '0';
-        }
-
-        time += formatedSeconds;
-
-        return time;
-    }
 }

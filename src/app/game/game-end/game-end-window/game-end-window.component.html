@@ -10,13 +10,21 @@
                         <p>You won</p>
 
                         <p>{{gameEnd.gameResults.difficulty}}</p>
-                        <p>You won</p>
+                        <p></p>
+
+                        <button class="btn btn-default" (click)="playAgain()" >Play again</button>
+                        <button class="btn btn-default" (click)="saveResult()" >Save score</button>
+
+                        <a [routerLink]="['scoreboard']" >Go to scoreboard list</a>
 
                     </div>
 
                     <!-- FAILURE -->
                     <div *ngIf="gameEnd.isFailure()">
                         <p>You lost</p>
+
+                        <button class="btn btn-default" (click)="newGame()" >Retry new game</button>
+
                     </div>
 
                 </div>

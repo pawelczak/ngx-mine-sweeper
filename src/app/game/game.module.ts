@@ -10,10 +10,12 @@ import { InfoComponent } from './info/info.component/info.component';
 import { TimerService } from './info/timer.service';
 import { GameService } from './game.service';
 import { GameEndWindowComponent } from './game-end/game-end-window/game-end-window.component';
+import { routing } from '../app.routing';
 
 @NgModule({
     imports: [
-        BrowserModule
+        BrowserModule,
+        routing
     ],
     declarations: [
         GameComponent,

@@ -50,4 +50,8 @@ export class GameEnd {
         this.gameResults = new GameResults(difficulty, time);
     }
 
+    getGameResults(): GameResults {
+        return this.gameResults;
+    }
+
 }

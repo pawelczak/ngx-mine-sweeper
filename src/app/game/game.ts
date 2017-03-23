@@ -80,8 +80,8 @@ export class Game {
 
     private checkIsGameFinished(): void {
 
-        if (this.board.countUntouchedFields() === 0) {
-            this.gameEnd.endWithSuccess(new GameResults('EASY', '12'));
+        if (this.board.countUntouchedFields() === 0 && !this.gameEnd.isFinished()) {
+            this.gameEnd = this.gameEnd.endWithSuccess(new GameResults('EASY', '12'));
         }
 
     }

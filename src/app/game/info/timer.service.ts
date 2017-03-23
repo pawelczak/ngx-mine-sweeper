@@ -32,7 +32,7 @@ export class TimerService {
         clearInterval(this.subscription);
     }
 
-    private reset(): void {
+    reset(): void {
         this.timer$.next(0);
     }
 }

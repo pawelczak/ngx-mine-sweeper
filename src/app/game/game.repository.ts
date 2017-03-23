@@ -10,11 +10,13 @@ import {
 import { BoardField } from './board/board-field';
 import { GameFactory } from './game.factory';
 import { OptionsRepository } from '../options/options.repository';
+import { TimerService } from './info/timer.service';
 
 @Injectable()
 export class GameRepository {
 
     constructor(private store: Store<any>,
+                private timerService: TimerService,
                 private optionsRepository: OptionsRepository) {}
 
     getGame(): Observable<Game> {
@@ -33,6 +35,8 @@ export class GameRepository {
 
                 this.store.dispatch({type: GAME_CREATE_NEW, payload: newGame});
 
+                this.timerService.reset();
+                this.timerService.start();
             });
 
     }
@@ -43,7 +47,6 @@ export class GameRepository {
         this.store.select('game')
             .take(1)
             .subscribe((game: Game) => {
-
 
                 game.initBoardWithRandomMines();
 
