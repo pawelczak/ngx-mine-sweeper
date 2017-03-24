@@ -35,7 +35,6 @@ export class GameRepository {
 
                 this.store.dispatch({type: GAME_CREATE_NEW, payload: newGame});
 
-                this.timerService.reset();
                 this.timerService.start();
             });
 

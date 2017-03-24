@@ -1,14 +1,8 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { GameEnd } from '../game-end';
-import { GameRepository } from '../../game.repository';
-import { ScoreboardRepository } from '../../../scoreboard/scoreboard.repository';
-import { Score } from '../../../scoreboard/score';
-import { TimerService } from '../../info/timer.service';
-import { TimeFormatter } from '../../info/time.formatter';
-import { OptionsRepository } from '../../../options/options.repository';
+import { GameEndService } from '../game-end.service';
+import { GameService } from '../../game.service';
 
 
 @Component({
@@ -18,51 +12,29 @@ import { OptionsRepository } from '../../../options/options.repository';
         './game-end-window.component.ngx.scss'
     ]
 })
-export class GameEndWindowComponent implements OnInit, OnDestroy {
+export class GameEndWindowComponent implements OnInit {
 
     @Input()
     gameEnd: GameEnd;
 
-    time: any;
+    scoreSaved: boolean = false;
 
-    subscription: Subscription;
-
-    constructor(private gameRepository: GameRepository,
-                private scoreboardRepository: ScoreboardRepository,
-                private optionsRepository: OptionsRepository,
-                private timerService: TimerService) {
-
-        this.timerService.getTime().subscribe((t) => {
-            this.time = t;
-        });
+    constructor(private gameService: GameService,
+                private gameEndService: GameEndService) {
     }
 
     ngOnInit() {
         // $('#game-end-modal').modal({show: true});
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-
     newGame(): void {
-        this.gameRepository.createNewGame();
+        this.gameService.startNewGame();
     }
 
-    saveResult(): void {
-
-        this.subscription =
-            Observable.zip(
-                this.timerService.getTime(),
-                this.optionsRepository.getDifficulty()
-            )
-            .take(1)
-            .subscribe((results: Array<any>) => {
-
-                const time = TimeFormatter.formatFromSeconds(results[0]);
-                const difficulty = results[1];
-
-                this.scoreboardRepository.addScore(new Score('Lukasz', time, difficulty));
-            });
+    saveScore(): void {
+        this.scoreSaved = true;
+        this.gameEndService.saveScore();
     }
+
+
 }

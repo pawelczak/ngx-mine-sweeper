@@ -11,6 +11,12 @@ export class TimerService {
     private timer$: Subject<number> = new ReplaySubject(1);
     private subscription: Timer;
 
+    private time: number;
+
+    getSimpleTime(): number {
+        return this.time;
+    }
+
     getTime(): Observable<number> {
         return this.timer$
                     .asObservable()
@@ -23,6 +29,9 @@ export class TimerService {
                             return acc + value;
                         }
 
+                    })
+                    .do((val) => {
+                        this.time = val;
                     });
     }
 
@@ -38,8 +47,7 @@ export class TimerService {
         clearInterval(this.subscription);
     }
 
-    reset(): void {
-        console.log('reset');
+    private reset(): void {
         this.timer$.next(-1);
     }
 }

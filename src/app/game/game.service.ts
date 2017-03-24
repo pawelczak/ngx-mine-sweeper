@@ -19,6 +19,10 @@ export class GameService {
             });
     }
 
+    startNewGame(): void {
+        this.gameRepository.createNewGame();
+    }
+
     revealField(position: number): void {
         this.game.revealField(position);
 

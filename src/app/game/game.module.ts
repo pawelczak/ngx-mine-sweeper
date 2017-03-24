@@ -10,7 +10,9 @@ import { InfoComponent } from './info/info.component/info.component';
 import { TimerService } from './info/timer.service';
 import { GameService } from './game.service';
 import { GameEndWindowComponent } from './game-end/game-end-window/game-end-window.component';
+import { GameEndService } from './game-end/game-end.service';
 import { routing } from '../app.routing';
+
 
 @NgModule({
     imports: [
@@ -27,6 +29,7 @@ import { routing } from '../app.routing';
     providers: [
         GameRepository,
         GameService,
+        GameEndService,
         GameFactory,
         TimerService
     ],

@@ -10,7 +10,7 @@
                         <p>You won</p>
 
                         <button class="btn btn-default" (click)="newGame()" >Play again</button>
-                        <button class="btn btn-default" (click)="saveResult()" >Save score</button>
+                        <button class="btn btn-default" (click)="saveScore()" [disabled]="scoreSaved" >Save score</button>
 
                         <a routerLink="/scoreboard" >Go to scoreboard list</a>
 
