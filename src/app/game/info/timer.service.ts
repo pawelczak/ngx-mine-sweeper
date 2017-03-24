@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import Timer = NodeJS.Timer;
 
 
 @Injectable()
 export class TimerService {
 
-    private timer$: Subject<number> = new BehaviorSubject(0);
+    private timer$: Subject<number> = new ReplaySubject(1);
     private subscription: Timer;
 
     getTime(): Observable<number> {
@@ -16,7 +16,13 @@ export class TimerService {
                     .asObservable()
                     .startWith(0)
                     .scan((acc, value) => {
-                        return acc + value;
+
+                        if (value === -1) {
+                            return 0;
+                        } else {
+                            return acc + value;
+                        }
+
                     });
     }
 
@@ -33,6 +39,7 @@ export class TimerService {
     }
 
     reset(): void {
-        this.timer$.next(0);
+        console.log('reset');
+        this.timer$.next(-1);
     }
 }

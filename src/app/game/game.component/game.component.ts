@@ -37,8 +37,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameSubscriptions: Subscription;
     private optionsSubscriptions: Subscription;
 
-    constructor(private scoreRepository: ScoreboardRepository,
-                private gameRepository: GameRepository,
+    constructor(private gameRepository: GameRepository,
                 private optionsStore: OptionsRepository) {
 
         this.gameSubscriptions =
@@ -67,10 +66,6 @@ export class GameComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.gameSubscriptions.unsubscribe();
         this.optionsSubscriptions.unsubscribe();
-    }
-
-    finishGame(): void {
-        this.gameRepository.finishGame();
     }
 
     createNewGame(): void {
