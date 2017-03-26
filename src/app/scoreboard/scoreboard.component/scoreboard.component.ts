@@ -1,5 +1,4 @@
 import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Score } from '../score';

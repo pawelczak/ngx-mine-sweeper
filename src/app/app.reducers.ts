@@ -4,7 +4,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { optionsReducer as options }  from './options/store/options.reducer';
 import { scoreboardReducer as scoreboard } from './scoreboard/store/scoreboard.reducer';
-import { gameReducer as game } from './game/game-store/game.reducer';
+import { gameReducer as game } from './game/store/game.reducer';
 
 import { OptionsState } from './options/store/options-state';
 import { ScoreboardState } from './scoreboard/store/scoreboard-state';
