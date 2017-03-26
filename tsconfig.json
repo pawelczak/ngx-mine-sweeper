@@ -9,12 +9,14 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
     "typeRoots": [
         "node_modules/@types"
     ],
     "lib": [
         "dom",
-        "es6"
+        "es2015",
+        "es2015.iterable"
     ],
     "types": [
         "cucumber",
