@@ -16,6 +16,7 @@
         "TITLE": "Scoreboard",
         "NO_SCORE": "No scores.",
         "RESET_SCOREBOARD": "Reset scoreboard",
+        "RESET_SCOREBOARD_MESSAGE": "Do you want to reset your scoreboard?",
         "DIFFICULTY": {
             "EASY": "Easy",
             "NORMAL": "Normal",

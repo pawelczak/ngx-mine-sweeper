@@ -16,6 +16,7 @@
         "TITLE": "Tablica wyników",
         "NO_SCORE": "Brak wyników.",
         "RESET_SCOREBOARD": "Wyczyść listę wyników",
+        "RESET_SCOREBOARD_MESSAGE": "Czy chcesz usunąć listę wyników?",
         "DIFFICULTY": {
             "EASY": "Łatwy",
             "NORMAL": "Normalny",

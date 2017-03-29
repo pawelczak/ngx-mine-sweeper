@@ -7,6 +7,7 @@ import { ScoreboardState } from '../store/scoreboard-state';
 import { ModalWindowService } from '../../util/modal/modal-window.service';
 import { ResetScoresWindowComponent } from './reset-scores-window.component/reset-scores-window.component';
 import { ModalConfiguration } from '../../util/modal/modal-configuration';
+import { TimeFormatter } from '../../util/time/time.formatter';
 
 @Component({
     selector: 'scoreboard',
@@ -17,13 +18,21 @@ import { ModalConfiguration } from '../../util/modal/modal-configuration';
 })
 export class ScoreboardComponent implements OnDestroy {
 
-    scores: Array<Score> = [];
+    set scores(scores: Array<Score>) {
+        this.unSortedScores = scores.sort(this.sortScoresByTime);
+    }
+
+    get scores(): Array<Score> {
+        return this.unSortedScores;
+    }
 
     difficulty: string;
 
     private subscription: Subscription;
 
     private resetModalConfiguration: ModalConfiguration;
+
+    private unSortedScores: Array<Score> = [];
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
                 private scoreboardRepository: ScoreboardRepository,
@@ -69,6 +78,11 @@ export class ScoreboardComponent implements OnDestroy {
         modalConfiguration.title = 'Reset scoreboard';
 
         return modalConfiguration;
+    }
+
+    private sortScoresByTime(scoreOne: Score, scoreTwo: Score): number {
+
+        return TimeFormatter.formatToSeconds(scoreOne.time) - TimeFormatter.formatToSeconds(scoreTwo.time);
     }
 
 }

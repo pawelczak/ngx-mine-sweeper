@@ -22,4 +22,13 @@ export class TimeFormatter {
         return time;
     }
 
+    static formatToSeconds(time: string): number {
+        let splittedTime = time.split(':');
+
+        let minutes = +splittedTime[0],
+            seconds = +splittedTime[1];
+
+        return minutes * 60 + seconds;
+    }
+
 }

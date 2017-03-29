@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './util/errors/page-not-found.component';
 import { LocalStorage } from './util/persist/local-storage';
 import { reducer } from './app.reducers';
 
+
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }

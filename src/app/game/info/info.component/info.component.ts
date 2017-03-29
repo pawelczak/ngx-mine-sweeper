@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TimerService } from '../timer.service';
-import { TimeFormatter } from '../time.formatter';
+import { TimeFormatter } from '../../../util/time/time.formatter';
 
 @Component({
     selector: 'info',
