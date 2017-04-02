@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { OptionsComponent } from './options.component/options.component';
-import { OptionsRepository } from './options.repository';
+import { OptionsRepository } from './repositories/options.repository';
+import { DefaultOptionsRepository } from './repositories/default-options.repository';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { OptionsRepository } from './options.repository';
         OptionsComponent
     ],
     providers: [
-        OptionsRepository
+        {provide: OptionsRepository, useClass: DefaultOptionsRepository}
     ],
     entryComponents: [
         OptionsComponent

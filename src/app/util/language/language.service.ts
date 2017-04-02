@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { OptionsRepository } from '../../options/options.repository';
+import { OptionsRepository } from '../../options/repositories/options.repository';
 import { defaultLanguage, Language } from './language';
 
 @Injectable()

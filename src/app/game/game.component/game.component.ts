@@ -5,7 +5,7 @@ import { Score } from '../../scoreboard/score';
 import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
 import { GameRepository } from '../game.repository';
 import { Game } from '../game';
-import { OptionsRepository } from '../../options/options.repository';
+import { OptionsRepository } from '../../options/repositories/options.repository';
 import { BoardField } from '../board/board-field';
 import { BoardSize } from '../board/board-size';
 import { OptionsState } from '../../options/store/options-state';

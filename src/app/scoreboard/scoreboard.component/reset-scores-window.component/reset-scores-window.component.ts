@@ -7,7 +7,6 @@ import { LanguageService } from '../../../util/language/language.service';
     template: `
         <p>Do you want to reset your scoreboard?</p>
         <p>{{ 'SCOREBOARD.RESET_SCOREBOARD_MESSAGE' | translate }}</p>
-
     `
 })
 export class ResetScoresWindowComponent {

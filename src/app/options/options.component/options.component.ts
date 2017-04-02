@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { OptionsRepository } from '../options.repository';
+import { OptionsRepository } from '../repositories/options.repository';
 import { OptionsState } from '../store/options-state';
 import { Language } from '../../util/language/language';
 

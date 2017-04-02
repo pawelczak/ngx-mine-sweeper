@@ -3,31 +3,32 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { AppState, getOptions } from '../app.reducers';
-import { Language } from '../util/language/language';
-import { OptionsState } from './store/options-state';
-import { getOptionsLanguage, getOptionsDifficulty } from './store/selectors';
-import { LocalStorage } from '../util/persist/local-storage';
-import * as OptionsActions from './store/actions';
-
+import { OptionsRepository } from './options.repository';
+import { AppState, getOptions } from '../../app.reducers';
+import { Language } from '../../util/language/language';
+import { OptionsState } from '../store/options-state';
+import { getOptionsLanguage, getOptionsDifficulty } from '../store/selectors';
+import { LocalStorage } from '../../util/persist/local-storage';
+import * as OptionsActions from '../store/actions';
 
 
 @Injectable()
-export class OptionsRepository {
+export class DefaultOptionsRepository extends OptionsRepository {
 
     private OPTIONS_KEY = 'ngx-mine-sweaper-options';
 
     constructor(private store: Store<AppState>,
                 private localStorage: LocalStorage) {
+        super();
         this.loadFromLocalStorage();
     }
 
     getOptions(): Observable<OptionsState> {
         return this.store
-                    .select(getOptions)
-                    .do((options: OptionsState) => {
-                        this.localStorage.setObject(this.OPTIONS_KEY, options);
-                    });
+            .select(getOptions)
+            .do((options: OptionsState) => {
+                this.localStorage.setObject(this.OPTIONS_KEY, options);
+            });
     }
 
     getLanguage(): Observable<Language> {

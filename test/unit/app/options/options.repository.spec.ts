@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Store } from '@ngrx/store';
 
-import { OptionsRepository } from '../../../../src/app/options/options.repository';
+import { OptionsRepository } from '../../../../src/app/options/repositories/options.repository';
 import { OptionsState } from '../../../../src/app/options/store/options-state';
 import { Language } from '../../../../src/app/util/language/language';
 import * as OptionsActions from '../../../../src/app/options/store/actions';

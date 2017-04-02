@@ -9,7 +9,7 @@ import {
 } from './store/actions';
 import { BoardField } from './board/board-field';
 import { GameFactory } from './game.factory';
-import { OptionsRepository } from '../options/options.repository';
+import { OptionsRepository } from '../options/repositories/options.repository';
 import { TimerService } from './info/timer.service';
 
 @Injectable()

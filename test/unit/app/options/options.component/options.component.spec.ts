@@ -3,7 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { OptionsComponent } from '../../../../../src/app/options/options.component/options.component';
-import { OptionsRepository } from '../../../../../src/app/options/options.repository';
+import { OptionsRepository } from '../../../../../src/app/options/repositories/options.repository';
 import { OptionsState } from '../../../../../src/app/options/store/options-state';
 import { Language } from '../../../../../src/app/util/language/language';
 
