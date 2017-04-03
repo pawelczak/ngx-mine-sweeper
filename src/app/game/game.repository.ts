@@ -3,14 +3,15 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Game } from './game';
-import {
-    GAME_FINISH, GAME_INIT_BOARD, GAME_MARK_FIELD, GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS,
-    GAME_CREATE_NEW
-} from './store/actions';
 import { BoardField } from './board/board-field';
 import { GameFactory } from './game.factory';
 import { OptionsRepository } from '../options/repositories/options.repository';
 import { TimerService } from './info/timer.service';
+import { GameStateFactory } from 'src/app/game/store/game-state.factory';
+import { GameState } from 'src/app/game/store/game-state';
+import * as GameActions from 'store/actions';
+
+
 
 @Injectable()
 export class GameRepository {
@@ -19,7 +20,7 @@ export class GameRepository {
                 private timerService: TimerService,
                 private optionsRepository: OptionsRepository) {}
 
-    getGame(): Observable<Game> {
+    getGame(): Observable<GameState> {
         return this.store.select('game');
     }
 
@@ -33,39 +34,33 @@ export class GameRepository {
                 const newGame = GameFactory.createInitialGame(difficulty);
                 newGame.initBoardWithRandomMines();
 
-                this.store.dispatch({type: GAME_CREATE_NEW, payload: newGame});
+                this.store.dispatch(new GameActions.InitStateAction(GameStateFactory.createFromGame(newGame)));
 
                 this.timerService.start();
             });
 
     }
 
-    initBoard(): void {
+    initBoard(game: Game): void {
 
-        // TODO This should be done differently
-        this.store.select('game')
-            .take(1)
-            .subscribe((game: Game) => {
+        game.initBoardWithRandomMines();
 
-                game.initBoardWithRandomMines();
-
-                this.store.dispatch({type: GAME_INIT_BOARD, payload: {size: game.getBoardSize(), fields: game.getFields()}});
-            });
+        this.store.dispatch(new GameActions.InitBoardAction({size: game.getBoardSize(), fields: game.getFields()}));
     }
 
     revealField(position: number): void {
-        this.store.dispatch({type: GAME_REVEAL_FIELD, payload: position});
+        this.store.dispatch(new GameActions.RevealFieldAction(position));
     }
 
     markField(position: number): void {
-        this.store.dispatch({type: GAME_MARK_FIELD, payload: position});
+        this.store.dispatch(new GameActions.MarkFieldAction(position));
     }
 
     finishGame(): void {
-        this.store.dispatch({type: GAME_FINISH});
+        this.store.dispatch(new GameActions.FinishAction());
     }
 
     updateFields(fields: Array<BoardField>): void {
-        this.store.dispatch({type: GAME_UPDATE_FIELDS, payload: fields});
+        this.store.dispatch(new GameActions.UpdateFieldsAction(fields));
     }
 }

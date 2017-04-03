@@ -2,58 +2,68 @@ import {
     GAME_INIT_BOARD, GAME_FINISH, GAME_MARK_FIELD, GAME_SHOW_MINES, GAME_SHOW_FIELDS,
     GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS, GAME_CREATE_NEW
 } from './actions';
-import { Game } from '../game';
-import { GameFactory } from '../game.factory';
+import { GameState } from 'src/app/game/store/game-state';
+import { GameStateFactory } from 'src/app/game/store/game-state.factory';
+import * as game from './actions';
 
 
-const defaultState: Game = GameFactory.createDefaultGame();
+const defaultState: GameState = GameStateFactory.createDefaultState();
 
-export function gameReducer(state: Game = defaultState, action: any = {})  {
+export function gameReducer(state: GameState = defaultState, action: game.Actions): GameState  {
     switch(action.type) {
 
-        case GAME_INIT_BOARD:
+        case game.ActionTypes.INIT_BOARD:
 
             const board = {
-                boardSize: action.payload.size,
-                fields: action.payload.fields
+                board: {
+                    boardSize: action.payload.size,
+                    fields: action.payload.fields
+                }
             };
 
-            return Object.assign(GameFactory.createDefaultGame(), state, board);
+            return Object.assign({}, state, board);
 
-        case GAME_CREATE_NEW:
+        case game.ActionTypes.INIT_STATE:
 
             const newGame = action.payload;
 
-            return Object.assign(GameFactory.createDefaultGame(), state, newGame);
+            return Object.assign({}, state, newGame);
 
-        case GAME_REVEAL_FIELD:
+        case game.ActionTypes.REVEAL_FIELD:
 
             const revBoard = state;
 
-            revBoard.board.getFields()[action.payload].revelead = true;
+            revBoard.board.fields[action.payload].revelead = true;
 
-            return Object.assign(GameFactory.createDefaultGame(), state, revBoard);
+            return Object.assign({}, state, revBoard);
 
-        case GAME_MARK_FIELD:
+        case game.ActionTypes.MARK_FIELD:
 
             const markBoard = state;
 
-            markBoard.board.getFields()[action.payload].marked = true;
+            markBoard.board.fields[action.payload].marked = true;
 
-            return Object.assign(GameFactory.createDefaultGame(), state, markBoard);
+            return Object.assign({}, state, markBoard);
 
-        case GAME_SHOW_MINES:
+        case game.ActionTypes.SHOW_MINES:
             return state;
 
-        case GAME_SHOW_FIELDS:
+        case game.ActionTypes.SHOW_FIELDS:
             return state;
 
-        case GAME_FINISH:
+        case game.ActionTypes.FINISH:
 
-            return Object.assign(GameFactory.createDefaultGame(), state, {finished: true});
+            return Object.assign({}, state, {finished: true});
 
-        case GAME_UPDATE_FIELDS:
-            return Object.assign(GameFactory.createDefaultGame(), state, {fields: action.payload});
+        case game.ActionTypes.UPDATE_FIELDS:
+
+            const newFields = {
+                board: {
+                    fields: action.payload
+                }
+            };
+
+            return Object.assign({}, state, newFields);
 
         default:
             return state;

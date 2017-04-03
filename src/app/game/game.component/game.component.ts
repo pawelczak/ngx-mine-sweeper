@@ -11,6 +11,7 @@ import { BoardSize } from '../board/board-size';
 import { OptionsState } from '../../options/store/options-state';
 import { Board } from '../board/board';
 import { GameEnd } from '../game-end/game-end';
+import { GameState } from 'src/app/game/store/game-state';
 
 
 @Component({
@@ -22,15 +23,15 @@ import { GameEnd } from '../game-end/game-end';
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-    board: Board;
+    board: any;
 
-    boardReady: boolean;
+    boardReady: boolean = false;
 
     mines: number = 0;
 
     gameFinished: boolean = false;
 
-    game: Game;
+    game: GameState;
 
     private options: OptionsState;
 
@@ -43,12 +44,12 @@ export class GameComponent implements OnInit, OnDestroy {
         this.gameSubscriptions =
             this.gameRepository
                 .getGame()
-                .subscribe((game: Game) => {
-                    this.board = game.board;
-                    this.boardReady = game.boardReady;
-                    this.mines = game.countMines();
-                    this.gameFinished = game.isFinished();
-                    this.game = game;
+                .subscribe((state: GameState) => {
+                    this.board = state.board;
+                    this.boardReady = true;
+                    this.mines = state.minesCount;
+                    this.gameFinished = false;//game.isFinished();
+                    this.game = state;
                 });
 
         this.optionsSubscriptions =

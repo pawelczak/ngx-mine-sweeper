@@ -12,11 +12,13 @@ export class GameService {
 
     constructor(private gameRepository: GameRepository,
                 private timerService: TimerService) {
-        this.gameRepository
-            .getGame()
-            .subscribe((game: Game) => {
-                this.game = game;
-            });
+
+
+        // this.gameRepository
+        //     .getGame()
+        //     .subscribe((game: Game) => {
+        //         this.game = game;
+        //     });
     }
 
     startNewGame(): void {

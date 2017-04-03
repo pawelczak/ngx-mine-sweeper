@@ -19,9 +19,7 @@ export class BoardFieldComponent {
     @Input()
     position: number;
 
-
     constructor(private gameService: GameService) {}
-
 
     showEmpty(): boolean {
         return !this.field.isMine() && !this.field.hasMines() && this.field.isRevelead();
