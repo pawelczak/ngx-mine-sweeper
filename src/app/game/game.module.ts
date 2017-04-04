@@ -15,7 +15,6 @@ import { GameStateRepository } from './store/game-state.repository';
 import { routing } from '../app.routing';
 
 
-
 @NgModule({
     imports: [
         BrowserModule,

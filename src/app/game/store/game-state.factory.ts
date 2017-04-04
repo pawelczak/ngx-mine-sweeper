@@ -13,7 +13,9 @@ export class GameStateFactory {
     }
 
     static createFromGame(game: Game): GameState {
-        let state = new GameState(game.getBoardSize(), 1);
+        let state = new GameState(game.board, game.countMines());
+
+
 
         return state;
     }

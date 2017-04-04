@@ -8,6 +8,12 @@ const defaultState: GameState = GameStateFactory.createDefaultState();
 export function gameReducer(state: GameState = defaultState, action: game.Actions): GameState  {
     switch(action.type) {
 
+        case game.ActionTypes.INIT_STATE:
+
+            const newGame = action.payload;
+
+            return Object.assign({}, state, newGame);
+
         case game.ActionTypes.INIT_BOARD:
 
             const board = {
@@ -18,12 +24,6 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
             };
 
             return Object.assign({}, state, board);
-
-        case game.ActionTypes.INIT_STATE:
-
-            const newGame = action.payload;
-
-            return Object.assign({}, state, newGame);
 
         case game.ActionTypes.REVEAL_FIELD:
 

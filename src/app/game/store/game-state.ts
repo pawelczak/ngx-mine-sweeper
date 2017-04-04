@@ -1,3 +1,5 @@
+import { Game } from '../game';
+
 export class GameState {
 
     board: {

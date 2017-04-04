@@ -19,6 +19,7 @@ export class GameStateRepository {
     }
 
     initState(game: Game): void {
+
         this.store.dispatch(new GameActions.InitStateAction(GameStateFactory.createFromGame(game)));
     }
 

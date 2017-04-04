@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { GameRepository } from './game.repository';
 import { Game } from './game';
 import { TimerService } from './info/timer.service';
 import { GameStateRepository } from './store/game-state.repository';
@@ -15,16 +14,9 @@ export class GameService {
 
     private game: Game;
 
-    constructor(private gameRepository: GameRepository,
-                private gameStateRepository: GameStateRepository,
+    constructor(private gameStateRepository: GameStateRepository,
                 private optionsRepository: OptionsRepository,
                 private timerService: TimerService) {
-
-        // this.gameRepository
-        //     .getState()
-        //     .subscribe((game: Game) => {
-        //         this.game = game;
-        //     });
     }
 
     getState(): Observable<GameState> {
