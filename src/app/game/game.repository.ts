@@ -7,10 +7,9 @@ import { BoardField } from './board/board-field';
 import { GameFactory } from './game.factory';
 import { OptionsRepository } from '../options/repositories/options.repository';
 import { TimerService } from './info/timer.service';
-import { GameStateFactory } from 'src/app/game/store/game-state.factory';
-import { GameState } from 'src/app/game/store/game-state';
-import * as GameActions from 'store/actions';
-
+import { GameState } from './store/game-state';
+import { GameStateFactory } from './store/game-state.factory';
+import * as GameActions from './store/actions';
 
 
 @Injectable()

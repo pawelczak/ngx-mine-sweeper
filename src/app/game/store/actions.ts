@@ -1,15 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { GameState } from 'src/app/game/store/game-state';
-
-export const GAME_CREATE_NEW: string = 'GAME_CREATE_NEW';
-export const GAME_INIT_BOARD: string = 'GAME_INIT_BOARD';
-export const GAME_FINISH: string = 'GAME_FINISH';
-export const GAME_MARK_FIELD: string = 'GAME_MARK_FIELD';
-export const GAME_REVEAL_FIELD: string = 'GAME_REVEAL_FIELD';
-export const GAME_SHOW_MINES: string = 'GAME_SHOW_MINES';
-export const GAME_SHOW_FIELDS: string = 'GAME_SHOW_FIELDS';
-export const GAME_UPDATE_FIELDS: string = 'GAME_UPDATE_FIELDS';
+import { GameState } from './game-state';
 
 const GAME_PREFIX = '[Game]';
 export const ActionTypes = {
@@ -19,7 +10,7 @@ export const ActionTypes = {
     MARK_FIELD: `${GAME_PREFIX}MARK_FIELD`,
     REVEAL_FIELD: `${GAME_PREFIX}REVEAL_FIELD`,
     SHOW_MINES: `${GAME_PREFIX}SHOW_MINES`,
-    REVEAL_FIELD: `${GAME_PREFIX}REVEAL_FIELD`,
+    // REVEAL_FIELD: `${GAME_PREFIX}REVEAL_FIELD`,
     SHOW_FIELDS: `${GAME_PREFIX}SHOW_FIELDS`,
     UPDATE_FIELDS: `${GAME_PREFIX}UPDATE_FIELDS`
 };
@@ -39,7 +30,7 @@ export class InitBoardAction implements Action {
 export class FinishAction implements Action {
     type = ActionTypes.FINISH;
 
-    constructor() {}
+    constructor(public payload?: any) {}
 }
 
 export class MarkFieldAction implements Action {

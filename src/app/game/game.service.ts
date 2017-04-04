@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { GameRepository } from './game.repository';
 import { Game } from './game';
 import { TimerService } from './info/timer.service';
+import { GameStateRepository } from './store/game-state.repository';
+import { OptionsRepository } from '../options/repositories/options.repository';
+import { GameFactory } from './game.factory';
+import { GameState } from './store/game-state';
 
 
 @Injectable()
@@ -11,24 +16,37 @@ export class GameService {
     private game: Game;
 
     constructor(private gameRepository: GameRepository,
+                private gameStateRepository: GameStateRepository,
+                private optionsRepository: OptionsRepository,
                 private timerService: TimerService) {
 
-
         // this.gameRepository
-        //     .getGame()
+        //     .getState()
         //     .subscribe((game: Game) => {
         //         this.game = game;
         //     });
     }
 
+    getState(): Observable<GameState> {
+        return this.gameStateRepository.getState();
+    }
+
     startNewGame(): void {
-        this.gameRepository.createNewGame();
+
+        this.optionsRepository
+            .getDifficulty()
+            .subscribe((difficulty: string) => {
+
+                this.game = GameFactory.createInitialGame(difficulty);
+
+                this.gameStateRepository.initState(this.game);
+            });
     }
 
     revealField(position: number): void {
         this.game.revealField(position);
 
-        this.gameRepository
+        this.gameStateRepository
             .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
@@ -39,7 +57,7 @@ export class GameService {
     markField(position: number): void {
         this.game.markField(position);
 
-        this.gameRepository
+        this.gameStateRepository
             .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
@@ -49,7 +67,7 @@ export class GameService {
 
     private finishGame(): void {
         this.timerService.stop();
-        this.gameRepository.finishGame();
+        this.gameStateRepository.finishGame();
     }
 
 }

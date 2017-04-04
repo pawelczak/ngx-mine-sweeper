@@ -1,17 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Score } from '../../scoreboard/score';
-import { ScoreboardRepository } from '../../scoreboard/scoreboard.repository';
-import { GameRepository } from '../game.repository';
-import { Game } from '../game';
-import { OptionsRepository } from '../../options/repositories/options.repository';
-import { BoardField } from '../board/board-field';
-import { BoardSize } from '../board/board-size';
-import { OptionsState } from '../../options/store/options-state';
-import { Board } from '../board/board';
+import { GameState } from '../store/game-state';
+import { GameService } from '../game.service';
 import { GameEnd } from '../game-end/game-end';
-import { GameState } from 'src/app/game/store/game-state';
 
 
 @Component({
@@ -31,46 +23,33 @@ export class GameComponent implements OnInit, OnDestroy {
 
     gameFinished: boolean = false;
 
-    game: GameState;
-
-    private options: OptionsState;
+    gameEnd: any = new GameEnd(false);
 
     private gameSubscriptions: Subscription;
-    private optionsSubscriptions: Subscription;
 
-    constructor(private gameRepository: GameRepository,
-                private optionsStore: OptionsRepository) {
+    constructor(private gameService: GameService) {
 
         this.gameSubscriptions =
-            this.gameRepository
-                .getGame()
+            this.gameService
+                .getState()
                 .subscribe((state: GameState) => {
                     this.board = state.board;
                     this.boardReady = true;
                     this.mines = state.minesCount;
                     this.gameFinished = false;//game.isFinished();
-                    this.game = state;
-                });
-
-        this.optionsSubscriptions =
-            this.optionsStore
-                .getOptions()
-                .subscribe((options: OptionsState) => {
-                    this.options = options;
                 });
     }
 
     ngOnInit() {
-        this.createNewGame();
+        this.startNewGame();
     }
 
     ngOnDestroy() {
         this.gameSubscriptions.unsubscribe();
-        this.optionsSubscriptions.unsubscribe();
     }
 
-    createNewGame(): void {
-        this.gameRepository.createNewGame();
+    private startNewGame(): void {
+        this.gameService.startNewGame();
     }
 
 }

@@ -21,19 +21,29 @@ export class GameFactory {
 
     static createInitialGame(difficulty?: string): Game {
 
+        let newGame: Game;
+
         switch(difficulty) {
 
             case 'EASY':
-                return new Game(GameConfigurationFactory.createGameConfigurationEasy());
+                newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy())
+                newGame.initBoardWithRandomMines();
+                return newGame;
 
             case 'NORMAL':
-                return new Game(GameConfigurationFactory.createGameConfigurationNormal());
+                newGame = new Game(GameConfigurationFactory.createGameConfigurationNormal());
+                newGame.initBoardWithRandomMines();
+                return newGame;
 
             case 'HARD':
-                return new Game(GameConfigurationFactory.createGameConfigurationHard());
+                newGame = new Game(GameConfigurationFactory.createGameConfigurationHard());
+                newGame.initBoardWithRandomMines();
+                return newGame;
 
             default:
-                return new Game(GameConfigurationFactory.createGameConfigurationEasy());
+                newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy());
+                newGame.initBoardWithRandomMines();
+                return newGame;
         }
 
     }

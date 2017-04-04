@@ -11,7 +11,9 @@ import { TimerService } from './info/timer.service';
 import { GameService } from './game.service';
 import { GameEndWindowComponent } from './game-end/game-end-window/game-end-window.component';
 import { GameEndService } from './game-end/game-end.service';
+import { GameStateRepository } from './store/game-state.repository';
 import { routing } from '../app.routing';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { routing } from '../app.routing';
         GameService,
         GameEndService,
         GameFactory,
+        GameStateRepository,
         TimerService
     ],
     entryComponents: [

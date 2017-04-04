@@ -1,9 +1,5 @@
-import {
-    GAME_INIT_BOARD, GAME_FINISH, GAME_MARK_FIELD, GAME_SHOW_MINES, GAME_SHOW_FIELDS,
-    GAME_REVEAL_FIELD, GAME_UPDATE_FIELDS, GAME_CREATE_NEW
-} from './actions';
-import { GameState } from 'src/app/game/store/game-state';
-import { GameStateFactory } from 'src/app/game/store/game-state.factory';
+import { GameState } from './game-state';
+import { GameStateFactory } from './game-state.factory';
 import * as game from './actions';
 
 

@@ -1,5 +1,3 @@
-import { Board } from 'src/app/game/board/board';
-
 export class GameState {
 
     board: {

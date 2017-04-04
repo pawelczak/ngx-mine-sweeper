@@ -1,4 +1,4 @@
-import { GameState } from 'src/app/game/store/game-state';
+import { GameState } from './game-state';
 import { Game } from '../game';
 
 
@@ -19,5 +19,3 @@ export class GameStateFactory {
     }
 
 }
-
-
