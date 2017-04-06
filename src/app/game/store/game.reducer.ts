@@ -53,13 +53,10 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
 
         case game.ActionTypes.UPDATE_FIELDS:
 
-            const newFields = {
-                board: {
-                    fields: action.payload
-                }
-            };
+            state.board.fields = action.payload;
 
-            return Object.assign({}, state, newFields);
+
+            return Object.assign({}, state);
 
         default:
             return state;

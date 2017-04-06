@@ -15,7 +15,7 @@ export const ActionTypes = {
     UPDATE_FIELDS: `${GAME_PREFIX}UPDATE_FIELDS`
 };
 
-export class InitStateAction implements Action{
+export class InitStateAction implements Action {
     type = ActionTypes.INIT_STATE;
 
     constructor(public payload: GameState) {}
