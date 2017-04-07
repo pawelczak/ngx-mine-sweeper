@@ -7,6 +7,7 @@ import { GameStateRepository } from './store/game-state.repository';
 import { OptionsRepository } from '../options/repositories/options.repository';
 import { GameFactory } from './game.factory';
 import { GameState } from './store/game-state';
+import { GameEnd } from './game.component/game-end/game-end';
 
 
 @Injectable()
@@ -32,17 +33,20 @@ export class GameService {
                 this.game = GameFactory.createInitialGame(difficulty);
 
                 this.gameStateRepository.initState(this.game);
+
+                this.timerService.start();
             });
     }
 
     revealField(position: number): void {
+
         this.game.revealField(position);
 
         this.gameStateRepository
             .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
-            this.finishGame();
+            this.finishGame(this.game.gameEnd);
         }
     }
 
@@ -53,13 +57,13 @@ export class GameService {
             .updateFields(this.game.board.getFields());
 
         if (this.game.isFinished()) {
-            this.finishGame();
+            this.finishGame(this.game.gameEnd);
         }
     }
 
-    private finishGame(): void {
+    private finishGame(gameEnd: GameEnd): void {
         this.timerService.stop();
-        this.gameStateRepository.finishGame();
+        this.gameStateRepository.finishGame(gameEnd.isSuccessful());
     }
 
 }

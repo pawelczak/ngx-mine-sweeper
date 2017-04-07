@@ -30,7 +30,7 @@ export class InitBoardAction implements Action {
 export class FinishAction implements Action {
     type = ActionTypes.FINISH;
 
-    constructor(public payload?: any) {}
+    constructor(public payload: boolean) {}
 }
 
 export class MarkFieldAction implements Action {

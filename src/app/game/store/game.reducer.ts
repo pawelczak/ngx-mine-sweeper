@@ -49,7 +49,12 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
 
         case game.ActionTypes.FINISH:
 
-            return Object.assign({}, state, {finished: true});
+            const gameStatus = {
+                finished: true,
+                status: action.payload
+            };
+
+            return Object.assign({}, state, {finished: gameStatus});
 
         case game.ActionTypes.UPDATE_FIELDS:
 

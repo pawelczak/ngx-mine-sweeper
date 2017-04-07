@@ -1,3 +1,5 @@
+import { GameEnd } from '../game.component/game-end/game-end';
+
 export class GameState {
 
     board: {
@@ -8,11 +10,12 @@ export class GameState {
 
     minesCount: number;
 
-    finished: boolean = false;
+    finished: GameEnd;
 
     constructor(board: any, minesCount: number) {
         this.board = board;
         this.minesCount = minesCount;
+        this.finished = new GameEnd(false);
     }
 
 }

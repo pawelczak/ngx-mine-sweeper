@@ -2,14 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { GameEnd } from '../game-end';
 import { GameEndService } from '../game-end.service';
-import { GameService } from '../../game.service';
+import { GameService } from '../../../game.service';
 
 
 @Component({
     selector: 'game-end-window',
-    templateUrl: './game-end-window.component.html',
+    templateUrl: 'game-end-window.component.html',
     styleUrls: [
-        './game-end-window.component.ngx.scss'
+        'game-end-window.component.ngx.scss'
     ]
 })
 export class GameEndWindowComponent implements OnInit {

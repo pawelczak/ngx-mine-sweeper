@@ -1,4 +1,4 @@
-<div *ngIf="gameEnd.isFinished()" >
+<div *ngIf="gameEnd.finished" >
     <div id="game-end-modal" class="modal fade in" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -6,7 +6,7 @@
                 <div class="modal-body">
 
                     <!-- SUCCESS -->
-                    <div *ngIf="gameEnd.isSuccessful()">
+                    <div *ngIf="gameEnd.status">
                         <p>You won</p>
 
                         <button class="btn btn-default" (click)="newGame()" >Play again</button>
@@ -17,7 +17,7 @@
                     </div>
 
                     <!-- FAILURE -->
-                    <div *ngIf="gameEnd.isFailure()">
+                    <div *ngIf="!gameEnd.status">
                         <p>You lost</p>
 
                         <button class="btn btn-default" (click)="newGame()" >Retry new game</button>

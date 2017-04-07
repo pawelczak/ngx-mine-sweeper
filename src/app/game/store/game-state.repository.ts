@@ -35,8 +35,8 @@ export class GameStateRepository {
         this.store.dispatch(new GameActions.MarkFieldAction(position));
     }
 
-    finishGame(): void {
-        this.store.dispatch(new GameActions.FinishAction());
+    finishGame(status: boolean): void {
+        this.store.dispatch(new GameActions.FinishAction(status));
     }
 
     updateFields(fields: Array<BoardField>): void {

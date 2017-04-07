@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { GameState } from '../store/game-state';
 import { GameService } from '../game.service';
-import { GameEnd } from '../game-end/game-end';
+import { GameEnd } from './game-end/game-end';
 
 
 @Component({
@@ -34,9 +34,9 @@ export class GameComponent implements OnInit, OnDestroy {
                 .getState()
                 .subscribe((state: GameState) => {
                     this.board = state.board;
-                    this.boardReady = true;
                     this.mines = state.minesCount;
-                    this.gameFinished = false;//game.isFinished();
+                    this.gameEnd = state.finished;
+                    this.boardReady = true;
                 });
     }
 

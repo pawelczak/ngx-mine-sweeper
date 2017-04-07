@@ -9,8 +9,8 @@ import { GameFactory } from './game.factory';
 import { InfoComponent } from './info/info.component/info.component';
 import { TimerService } from './info/timer.service';
 import { GameService } from './game.service';
-import { GameEndWindowComponent } from './game-end/game-end-window/game-end-window.component';
-import { GameEndService } from './game-end/game-end.service';
+import { GameEndWindowComponent } from './game.component/game-end/game-end-window/game-end-window.component';
+import { GameEndService } from './game.component/game-end/game-end.service';
 import { GameStateRepository } from './store/game-state.repository';
 import { routing } from '../app.routing';
 

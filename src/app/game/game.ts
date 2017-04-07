@@ -2,8 +2,8 @@ import { BoardField } from './board/board-field';
 import { GameConfiguration } from './configuration/game-configuration';
 import { BoardSize } from './board/board-size';
 import { Board } from './board/board';
-import { GameEnd } from './game-end/game-end';
-import { GameResults } from './game-end/game-results';
+import { GameEnd } from './game.component/game-end/game-end';
+import { GameResults } from './game.component/game-end/game-results';
 
 export class Game {
 
