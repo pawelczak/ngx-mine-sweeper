@@ -20,4 +20,4 @@ export function optionsReducer(state: OptionsState = initialOptionsState, action
         default:
             return state;
     }
-};
+}

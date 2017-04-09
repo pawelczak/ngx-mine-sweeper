@@ -28,6 +28,7 @@ export class GameService {
 
         this.optionsRepository
             .getDifficulty()
+            .take(1)
             .subscribe((difficulty: string) => {
 
                 this.game = GameFactory.createInitialGame(difficulty);

@@ -37,6 +37,7 @@ export class BoardField {
 
     reveal(): void {
         this.revelead = true;
+        this.marked = false;
     }
 
     isRevelead(): boolean {
@@ -48,6 +49,8 @@ export class BoardField {
     }
 
     mark(): void {
-        this.marked = true;
+        if (!this.revelead) {
+            this.marked = !this.marked;
+        }
     }
 }

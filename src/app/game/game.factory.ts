@@ -26,7 +26,7 @@ export class GameFactory {
         switch(difficulty) {
 
             case 'EASY':
-                newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy())
+                newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy());
                 newGame.initBoardWithRandomMines();
                 return newGame;
 
