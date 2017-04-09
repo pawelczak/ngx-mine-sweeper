@@ -24,6 +24,10 @@ export class GameService {
         return this.gameStateRepository.getState();
     }
 
+    getMarkedMines(): Observable<number> {
+        return this.gameStateRepository.getMarkedMines();
+    }
+
     startNewGame(): void {
 
         this.optionsRepository
@@ -44,7 +48,7 @@ export class GameService {
         this.game.revealField(position);
 
         this.gameStateRepository
-            .updateFields(this.game.board.getFields());
+            .updateFields(this.game.board.getFields(), this.game.countMarkedMines());
 
         if (this.game.isFinished()) {
             this.finishGame(this.game.gameEnd);
@@ -55,7 +59,7 @@ export class GameService {
         this.game.markField(position);
 
         this.gameStateRepository
-            .updateFields(this.game.board.getFields());
+            .updateFields(this.game.board.getFields(), this.game.countMarkedMines());
 
         if (this.game.isFinished()) {
             this.finishGame(this.game.gameEnd);

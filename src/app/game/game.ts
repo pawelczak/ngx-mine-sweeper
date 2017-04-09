@@ -13,7 +13,9 @@ export class Game {
 
     gameEnd: GameEnd;
 
-    private minesCount: number;
+    markedMines: number;
+
+    minesCount: number;
 
     constructor(gameConfiguration: GameConfiguration) {
 
@@ -22,6 +24,8 @@ export class Game {
         this.board = new Board(gameConfiguration.getBoardSize());
 
         this.gameEnd = new GameEnd(false);
+
+        this.markedMines = 0;
     }
 
     static createGame(game: Game): Game {
@@ -53,10 +57,20 @@ export class Game {
         return this.board.countMines();
     }
 
-    markField(position: number): void {
-        this.board.markField(position);
+    countMarkedMines(): number {
+        return this.board.countMarkedMines();
+    }
 
-        this.checkIsGameFinished();
+    markField(position: number): void {
+
+        if (this.minesCount - this.markedMines > 0 ||
+            this.board.isFieldMarked(position)) {
+
+            this.markedMines += this.board.markField(position);
+
+            this.checkIsGameFinished();
+        }
+
     }
 
     revealField(position: number): void {
@@ -66,12 +80,14 @@ export class Game {
 
         if (this.board.getFields()[position].isEmpty()) {
             this.board.revealEmptyFields(position);
+            this.markedMines = this.board.countMarkedMines();
         }
 
         if (this.board.getFields()[position].isMine()) {
 
             this.board.getFields()[position].reveal();
 
+            this.board.revealAllMines();
             this.gameEnd = this.gameEnd.endWithFailure(new GameResults('EASY', '12'));
         }
 

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/scan';
+import 'rxjs/add/operator/do';
 import Timer = NodeJS.Timer;
 
 

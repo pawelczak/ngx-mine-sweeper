@@ -18,6 +18,13 @@ export class GameStateRepository {
         return this.store.select('game');
     }
 
+    getMarkedMines(): Observable<number> {
+        return this.store.select('game')
+                .map((state: GameState) => {
+                    return state.markedMines;
+                });
+    }
+
     initState(game: Game): void {
 
         this.store.dispatch(new GameActions.InitStateAction(GameStateFactory.createFromGame(game)));
@@ -39,7 +46,7 @@ export class GameStateRepository {
         this.store.dispatch(new GameActions.FinishAction(status));
     }
 
-    updateFields(fields: Array<BoardField>): void {
-        this.store.dispatch(new GameActions.UpdateFieldsAction(fields));
+    updateFields(fields: Array<BoardField>, markedMines: number): void {
+        this.store.dispatch(new GameActions.UpdateFieldsAction({fields: fields, markedMines: markedMines}));
     }
 }

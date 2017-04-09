@@ -48,9 +48,11 @@ export class BoardField {
         return this.marked;
     }
 
-    mark(): void {
+    mark(): number {
         if (!this.revelead) {
             this.marked = !this.marked;
+            return this.marked ? 1 : -1;
         }
+        return 0;
     }
 }

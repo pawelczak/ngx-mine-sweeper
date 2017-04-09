@@ -58,7 +58,12 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
 
         case game.ActionTypes.UPDATE_FIELDS:
 
-            state.board.fields = action.payload;
+            const fields = action.payload.fields,
+                markedMines = action.payload.markedMines;
+
+
+            state.board.fields = fields;
+            state.markedMines = markedMines;
 
 
             return Object.assign({}, state);

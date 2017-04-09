@@ -12,10 +12,13 @@ export class GameState {
 
     finished: GameEnd;
 
+    markedMines: number;
+
     constructor(board: any, minesCount: number) {
         this.board = board;
         this.minesCount = minesCount;
         this.finished = new GameEnd(false);
+        this.markedMines = 0;
     }
 
 }

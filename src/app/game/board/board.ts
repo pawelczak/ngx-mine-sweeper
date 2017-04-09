@@ -53,8 +53,22 @@ export class Board {
             }, 0);
     }
 
-    markField(position: number): void {
-        this.fields[position].mark();
+    countMarkedMines(): number {
+        return this.fields
+            .map((field) => {
+                return +field.isMarked();
+            })
+            .reduce((prev, current) => {
+                return prev + current;
+            }, 0);
+    }
+
+    isFieldMarked(position: number): boolean {
+        return this.fields[position].isMarked();
+    }
+
+    markField(position: number): number {
+        return this.fields[position].mark();
     }
 
     revealEmptyFields(position: number): void {
@@ -121,6 +135,14 @@ export class Board {
                 this.checkAndIncMineCounter(i + this.boardSize.getCols());
             }
         }
+    }
+
+    revealAllMines() {
+        this.fields.forEach((field: BoardField) => {
+            if (field.isMine()) {
+                field.reveal();
+            }
+        })
     }
 
     private checkAndIncMineCounter(position: number): void {
