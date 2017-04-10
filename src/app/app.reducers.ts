@@ -22,7 +22,8 @@ export const reducers = {
     game: game
 };
 
-export const reducer: ActionReducer<AppState> = compose(combineReducers)(reducers);
+export const reducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(reducers);
+// export const reducer: ActionReducer<AppState> = compose(combineReducers)(reducers);
 
 export const getOptions = (state: AppState) => state.options;
 

@@ -9,6 +9,8 @@ import { ResetScoresWindowComponent } from './reset-scores-window.component/rese
 import { ModalConfiguration } from '../../util/modal/modal-configuration';
 import { TimeFormatter } from '../../util/time/time.formatter';
 
+declare var _: any;
+
 @Component({
     selector: 'scoreboard',
     templateUrl: './scoreboard.component.html',
@@ -19,7 +21,8 @@ import { TimeFormatter } from '../../util/time/time.formatter';
 export class ScoreboardComponent implements OnDestroy {
 
     set scores(scores: Array<Score>) {
-        this.unSortedScores = scores.sort(this.sortScoresByTime);
+        this.unSortedScores = _.cloneDeep(scores);
+        this.unSortedScores.sort(this.sortScoresByTime);
     }
 
     get scores(): Array<Score> {
