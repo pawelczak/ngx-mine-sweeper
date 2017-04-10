@@ -22,14 +22,22 @@
         "cucumber",
         "es6-shim",
         "jasmine",
+        "lodash",
         "node",
         "selenium-webdriver"
       ]
   },
+  "include": [
+      "src/vendor.browser.ts",
+      "src/polyfills.browser.ts",
+      "src/main.browser.ts"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ],
   "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
     "useWebpackText": true
   },
   "compileOnSave": false,

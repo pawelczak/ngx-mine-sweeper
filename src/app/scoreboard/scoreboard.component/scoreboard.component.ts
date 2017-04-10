@@ -8,8 +8,7 @@ import { ModalWindowService } from '../../util/modal/modal-window.service';
 import { ResetScoresWindowComponent } from './reset-scores-window.component/reset-scores-window.component';
 import { ModalConfiguration } from '../../util/modal/modal-configuration';
 import { TimeFormatter } from '../../util/time/time.formatter';
-
-declare var _: any;
+import * as _ from 'lodash';
 
 @Component({
     selector: 'scoreboard',
