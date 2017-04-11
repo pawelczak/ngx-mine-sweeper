@@ -1,12 +1,10 @@
-import { Language } from '../../util/language/language';
-
 export class OptionsState {
 
-    language: Language;
+    language: any;
 
     difficulty: string;
 
-    constructor(language: Language, difficulty: string) {
+    constructor(language: any, difficulty: string) {
         this.language = language;
         this.difficulty = difficulty;
     }

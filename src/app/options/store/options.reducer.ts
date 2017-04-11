@@ -2,7 +2,7 @@ import { OptionsState } from './options-state';
 import { OptionsStateFactory } from './options-state.factory';
 import * as options from './actions';
 
-export const initialOptionsState = OptionsStateFactory.createDefault();
+const initialOptionsState = OptionsStateFactory.createDefault();
 
 export function optionsReducer(state: OptionsState = initialOptionsState, action: options.Actions): OptionsState {
 

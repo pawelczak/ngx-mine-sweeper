@@ -45,7 +45,7 @@ export class ScoreboardComponent implements OnDestroy {
                                 .subscribe((state: ScoreboardState) => {
                                     this.scores = state.scores;
                                     this.difficulty = state.difficulty;
-                                    this.changeDetectorRef.markForCheck();
+                                    this.changeDetectorRef.detectChanges();
                                 });
 
         this.resetModalConfiguration = this.createResetScoreboardWindowConfig();

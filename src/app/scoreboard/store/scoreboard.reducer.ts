@@ -3,7 +3,7 @@ import { ScoreboardStateFactory } from './scoreboard-state.factory';
 import { Score } from '../score';
 import * as scoreboard from './actions';
 
-export const initialState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
+const initialState: ScoreboardState = ScoreboardStateFactory.createDefaultReducerData();
 
 export function scoreboardReducer(state: ScoreboardState = initialState, action: scoreboard.Actions): ScoreboardState {
 
