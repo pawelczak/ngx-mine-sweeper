@@ -11,10 +11,14 @@ export function scoreboardReducer(state: ScoreboardState = initialState, action:
 
         case scoreboard.ActionTypes.INIT_STATE:
 
+            // action.payload.scores = action.payload.scores.sort(Score.sortScoresByTime);
+
             return Object.assign(ScoreboardStateFactory.createDefaultReducerData(), action.payload);
 
         case scoreboard.ActionTypes.ADD_SCORE:
-            const newScores: Array<Score> = [...state.scores, (action.payload as Score)];
+            let newScores: Array<Score> = [...state.scores, (action.payload as Score)];
+
+            newScores = newScores.sort(Score.sortScoresByTime);
 
             return new ScoreboardState(newScores, state.difficulty);
 
