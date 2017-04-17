@@ -33,7 +33,10 @@ const config = webpackMerge(commonConfig, {
 
     plugins: [
         new DefinePlugin({
-            'ENV': JSON.stringify(ENV)
+            'ENV': JSON.stringify(ENV),
+            'process.env': {
+                'ENV': JSON.stringify(ENV)
+            }
         }),
         new LoaderOptionsPlugin({
             debug: true,

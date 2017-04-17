@@ -10,6 +10,8 @@ import { OptionsState } from './options/store/options-state';
 import { ScoreboardState } from './scoreboard/store/scoreboard-state';
 import { Game } from './game/game';
 
+declare var process: any;
+
 export interface AppState {
     options: OptionsState,
     scoreboard: ScoreboardState,
@@ -22,8 +24,16 @@ export const reducers = {
     game: game
 };
 
-export const reducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(reducers);
-// export const reducer: ActionReducer<AppState> = compose(combineReducers)(reducers);
+const developmentReducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(reducers);
+const productionReducer: ActionReducer<AppState> = compose(combineReducers)(reducers);
+
+export function reducer(state: any, action: any) {
+    if (process.env.ENV === 'production') {
+        return productionReducer(state, action);
+    } else {
+        return developmentReducer(state, action);
+    }
+}
 
 export const getOptions = (state: AppState) => state.options;
 

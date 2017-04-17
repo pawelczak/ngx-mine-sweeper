@@ -11,8 +11,6 @@ const config = webpackMerge(commonConfig, {
     devtool: 'source-map',
 
     plugins: [
-        new webpack.NoErrorsPlugin(),
-
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             output: {
@@ -36,7 +34,10 @@ const config = webpackMerge(commonConfig, {
             }
         }),
         new DefinePlugin({
-            'ENV': JSON.stringify(ENV)
+            'ENV': JSON.stringify(ENV),
+            'process.env': {
+                'ENV': JSON.stringify(ENV)
+            }
         }),
         new LoaderOptionsPlugin({
             minimize: true,
