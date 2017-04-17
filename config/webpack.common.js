@@ -1,5 +1,6 @@
 const webpack = require('webpack'),
     path = require('path'),
+    rootDir = path.join(__dirname, '..'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     precss = require('precss'),
@@ -17,14 +18,14 @@ module.exports = {
 
     output: {
         filename: '[name].bundle.js',
-        path: path.join(__dirname, '../dist')
+        path: path.join(rootDir, 'dist')
     },
 
     resolve: {
         extensions: ['.js', '.ts', '.scss', '.css', '.json'],
         modules: [
-            path.join(__dirname, '../node_modules'),
-            path.join(__dirname, '../src')
+            path.join(rootDir, 'node_modules'),
+            path.join(rootDir, 'src')
         ]
     },
 
@@ -111,23 +112,11 @@ module.exports = {
         //     jquery: 'jquery'
         // }),
         new CopyWebpackPlugin([{
-            from: path.join(__dirname, '../src/assets'),
-            to: path.join(__dirname, '../dist/assets')
+            from: path.join(rootDir, 'src/assets'),
+            to: path.join(rootDir, 'dist/assets')
         }]),
         new LoaderOptionsPlugin({
             options: {
-
-                /**
-                 * Static analysis linter for TypeScript advanced options configuration
-                 * Description: An extensible linter for the TypeScript language.
-                 *
-                 * See: https://github.com/wbuchwalter/tslint-loader
-                 */
-                tslint: {
-                    emitErrors: false,
-                    failOnHint: false,
-                    resourcePath: 'src'
-                },
 
                 postcss: function () {
                     return [
