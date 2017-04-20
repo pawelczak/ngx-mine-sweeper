@@ -9,6 +9,7 @@ import { GameFactory } from './game.factory';
 import { GameState } from './store/game-state';
 import { GameEnd } from './game.component/game-end/game-end';
 
+declare var _: any;
 
 @Injectable()
 export class GameService {
@@ -37,7 +38,7 @@ export class GameService {
 
                 this.game = GameFactory.createInitialGame(difficulty);
 
-                this.gameStateRepository.initState(this.game);
+                this.gameStateRepository.initState(_.cloneDeep(this.game));
 
                 this.timerService.start();
             });
@@ -47,8 +48,10 @@ export class GameService {
 
         this.game.revealField(position);
 
+        let copiedGame = _.cloneDeep(this.game);
+
         this.gameStateRepository
-            .updateFields(this.game.board.getFields(), this.game.countMarkedMines());
+            .updateFields(copiedGame.board.getFields(), copiedGame.countMarkedMines());
 
         if (this.game.isFinished()) {
             this.finishGame(this.game.gameEnd);
@@ -58,8 +61,10 @@ export class GameService {
     markField(position: number): void {
         this.game.markField(position);
 
+        let copiedGame = _.cloneDeep(this.game);
+
         this.gameStateRepository
-            .updateFields(this.game.board.getFields(), this.game.countMarkedMines());
+            .updateFields(copiedGame.board.getFields(), copiedGame.countMarkedMines());
 
         if (this.game.isFinished()) {
             this.finishGame(this.game.gameEnd);

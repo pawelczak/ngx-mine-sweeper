@@ -14,9 +14,7 @@ export class GameFactory {
     }
 
     static createEmptyBoardGame(boardSize: BoardSize): Game {
-        let game = new Game(new GameConfiguration(boardSize, 1));
-
-        return game;
+        return new Game(new GameConfiguration(boardSize, 1));
     }
 
     static createInitialGame(difficulty?: string): Game {

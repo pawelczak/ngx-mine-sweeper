@@ -1,5 +1,6 @@
 import { GameState } from './game-state';
 import { Game } from '../game';
+import { GameFactory } from '../game.factory';
 
 
 export class GameStateFactory {
@@ -7,9 +8,9 @@ export class GameStateFactory {
 
     static createDefaultState(): GameState {
 
-        let state = new GameState({cols: 1, rows: 1}, 1);
+        const defaultGame = GameFactory.createDefaultGame();
 
-        return state;
+        return new GameState(defaultGame.board, defaultGame.countMines());
     }
 
     static createFromGame(game: Game): GameState {

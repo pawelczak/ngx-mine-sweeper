@@ -27,17 +27,20 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
 
         case game.ActionTypes.REVEAL_FIELD:
 
-            const revBoard = state;
-
-            revBoard.board.fields[action.payload].revelead = true;
-
-            return Object.assign({}, state, revBoard);
+            return state;
 
         case game.ActionTypes.MARK_FIELD:
 
-            const markBoard = state;
+            const markedFields = [...state.board.fields];
 
-            markBoard.board.fields[action.payload].marked = true;
+            markedFields[action.payload].marked = true;
+
+            const markBoard = {
+                board: {
+                    fields: markedFields,
+                    boardSize: state.board.boardSize
+                }
+            };
 
             return Object.assign({}, state, markBoard);
 
@@ -61,12 +64,16 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
             const fields = action.payload.fields,
                 markedMines = action.payload.markedMines;
 
+            const updatedState = {
+                board: {
+                    fields: fields,
+                    boardSize: state.board.boardSize
+                },
+                markedMines: markedMines
+            };
 
-            state.board.fields = fields;
-            state.markedMines = markedMines;
 
-
-            return Object.assign({}, state);
+            return Object.assign({}, state, updatedState);
 
         default:
             return state;
