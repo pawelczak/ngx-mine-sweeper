@@ -18,7 +18,7 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
 
             const board = {
                 board: {
-                    boardSize: action.payload.size,
+                    boardSize: state.board.boardSize,
                     fields: action.payload.fields
                 }
             };
@@ -72,10 +72,9 @@ export function gameReducer(state: GameState = defaultState, action: game.Action
                 markedMines: markedMines
             };
 
-
             return Object.assign({}, state, updatedState);
 
         default:
             return state;
     }
-};
+}

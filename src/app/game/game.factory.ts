@@ -25,22 +25,18 @@ export class GameFactory {
 
             case 'EASY':
                 newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy());
-                newGame.initBoardWithRandomMines();
                 return newGame;
 
             case 'NORMAL':
                 newGame = new Game(GameConfigurationFactory.createGameConfigurationNormal());
-                newGame.initBoardWithRandomMines();
                 return newGame;
 
             case 'HARD':
                 newGame = new Game(GameConfigurationFactory.createGameConfigurationHard());
-                newGame.initBoardWithRandomMines();
                 return newGame;
 
             default:
                 newGame = new Game(GameConfigurationFactory.createGameConfigurationEasy());
-                newGame.initBoardWithRandomMines();
                 return newGame;
         }
 

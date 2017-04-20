@@ -1,6 +1,7 @@
 import { BoardField } from './board-field';
 import { BoardFieldStatus } from './board-field-status';
 import { BoardSize } from './board-size';
+import { BoardInitializer } from './board-initializer';
 
 export class Board {
 
@@ -17,8 +18,12 @@ export class Board {
         return this.boardSize;
     }
 
-    getFields() {
+    getFields(): Array<BoardField> {
         return this.fields;
+    }
+
+    getField(position: number): BoardField {
+        return this.fields[position];
     }
 
     initializeWithEmptyFields() {
@@ -28,19 +33,8 @@ export class Board {
         }
     }
 
-    initBoardWithRandomMines(minesCount: number): void {
-        this.initializeWithEmptyFields();
-
-        let mines = 0;
-
-        while (mines !== minesCount) {
-            const fieldIndex = Math.floor(Math.random() * this.boardSize.countFieldsNumber());
-
-            if (this.fields[fieldIndex].isEmpty()) {
-                this.fields[fieldIndex].putMine();
-                mines++;
-            }
-        }
+    initBoardWithRandomMines(minesCount: number, position: number): void {
+        new BoardInitializer().initSmart(this, minesCount, position);
     }
 
     countMines(): number {

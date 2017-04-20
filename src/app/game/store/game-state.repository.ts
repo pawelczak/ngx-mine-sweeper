@@ -31,7 +31,7 @@ export class GameStateRepository {
     }
 
     initBoard(game: Game): void {
-        this.store.dispatch(new GameActions.InitBoardAction({size: game.getBoardSize(), fields: game.getFields()}));
+        this.store.dispatch(new GameActions.InitBoardAction({fields: game.getFields()}));
     }
 
     revealField(position: number): void {

@@ -46,8 +46,8 @@ export class Game {
         return this.gameEnd.isFinished();
     }
 
-    initBoardWithRandomMines(): void {
-        this.board.initBoardWithRandomMines(this.minesCount);
+    initBoardWithRandomMines(position: number): void {
+        this.board.initBoardWithRandomMines(this.minesCount, position);
 
         this.board.updateMinesCounters();
         this.boardReady = true;
@@ -74,6 +74,10 @@ export class Game {
     }
 
     revealField(position: number): void {
+
+        if (!this.boardReady) {
+            this.initBoardWithRandomMines(position);
+        }
 
         if (this.board.getFields()[position].isRevelead()) {
         }

@@ -20,4 +20,8 @@ export class BoardSize {
     countFieldsNumber(): number {
         return this.rows * this.cols;
     }
+
+    isPositionValid(position: number): boolean {
+        return position >= 0 && position < this.countFieldsNumber();
+    }
 }
