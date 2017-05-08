@@ -1,4 +1,3 @@
-import { BoardField } from './board-field';
 import { Board } from './board';
 import { BoardSize } from './board-size';
 
@@ -57,7 +56,7 @@ export class BoardInitializer {
         return positions;
     }
 
-    private checkAndPosition(boardSize, positions, newPosition): void {
+    private checkAndPosition(boardSize: BoardSize, positions: Array<number>, newPosition: number): void {
         if (boardSize.isPositionValid(newPosition)) {
             positions.push(newPosition);
         }
